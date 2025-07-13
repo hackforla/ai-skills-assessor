@@ -1,0 +1,67 @@
+import requests
+import json
+import os
+import sys
+import base64
+
+def load_labels():
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    filepath = os.path.join(script_dir, 'data', 'labels_data.json') 
+    with open(filepath, 'r') as f:
+        return json.load(f)
+
+def get_repo_metadata(owner, repo, token):
+    headers = {
+        "Authorization": f"token {token}",
+        "Accept": "application/vnd.github+json"
+    }
+    desc = requests.get(f"https://api.github.com/repos/{owner}/{repo}", headers=headers).json().get("description", "")
+    topics = requests.get(f"https://api.github.com/repos/{owner}/{repo}/topics", headers=headers).json().get("names", [])
+    langs = requests.get(f"https://api.github.com/repos/{owner}/{repo}/languages", headers=headers).json().keys()
+    readme_base64= requests.get(f"https://api.github.com/repos/{owner}/{repo}/readme", headers=headers).json().get('content', '')
+    readme_text = base64.b64decode(readme_base64).decode('utf-8')
+    
+    return " ".join([desc] + topics + list(langs) + [readme_text]).lower()
+
+
+def match_labels(repo_text, labels_data):
+    matched = []
+    for label in labels_data:
+        for kw in label["keywords"]:
+            if kw in repo_text:
+                matched.append(label)
+                break
+    return matched
+
+
+def create_labels(owner, repo, labels, token):
+    headers = {
+        "Authorization": f"token {token}",
+        "Accept": "application/vnd.github+json"
+    }
+    for label in labels:
+        requests.post(
+            f"https://api.github.com/repos/{owner}/{repo}/labels",
+            headers=headers,
+            json={
+                "name": label['label_name'],
+                "description": label['description'][:100],
+                "color": label['color']
+            }
+        )
+        
+        
+if __name__ == "__main__":
+    owner = os.environ.get("REPO_OWNER")
+    repo = os.environ.get("REPO_NAME")
+    token = os.environ.get("GH_TOKEN")
+
+    if not all([owner, repo, token]):
+        print("Missing required environment variables: REPO_OWNER, REPO_NAME, GH_TOKEN")
+        sys.exit(1)
+
+    labels_data = load_labels()
+    repo_text = get_repo_metadata(owner, repo, token)
+    matched_labels = match_labels(repo_text, labels_data)
+    
+    create_labels(owner, repo, matched_labels, token)

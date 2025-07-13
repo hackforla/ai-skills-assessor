@@ -1,0 +1,26 @@
+name: Auto Label Repo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Auto_Add_Labels_to_Repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: pip install requests pandas openpyxl
+
+      - name: Run Labeler Script
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: python API_repo_labels/repo_labeler.py
