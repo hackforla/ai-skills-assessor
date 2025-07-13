@@ -25,6 +25,13 @@ def get_repo_metadata(owner, repo, token):
     except Exception:
         readme_text = ""
     
+    
+    # 👇 Print each value to the GitHub Actions logs
+    print(f"Description: {desc}")
+    print(f"Topics: {topics}")
+    print(f"Languages: {langs}")
+    print(f"README Length: {len(readme_text)} characters")
+    
     return " ".join([desc] + topics + langs + [readme_text]).lower()
 
 
