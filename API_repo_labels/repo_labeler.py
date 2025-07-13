@@ -37,10 +37,9 @@ def match_labels(repo_text, labels_data):
     for label in labels_data:
         for kw in label["keywords"]:
             if kw.lower() in words_set:
+                print(f"Keyword matched: '{kw}' for label '{label['label_name']}'")
                 matched.append(label)
                 break
-            
-    print(matched)
     
     return matched
 
