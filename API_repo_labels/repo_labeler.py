@@ -30,7 +30,7 @@ def get_repo_metadata(owner, repo, token):
     print(f"Description: {desc}")
     print(f"Topics: {topics}")
     print(f"Languages: {langs}")
-    print(f"README Length: {len(readme_text)} characters")
+    print(f"README: {readme_text}")
     
     return " ".join([desc] + topics + langs + [readme_text]).lower()
 
@@ -50,6 +50,26 @@ def create_labels(owner, repo, labels, token):
         "Authorization": f"token {token}",
         "Accept": "application/vnd.github+json"
     }
+    
+    
+    # deleting previous labels
+    response = requests.get(
+        f"https://api.github.com/repos/{owner}/{repo}/labels",
+        headers=headers
+    )
+    existing_labels = response.json()
+
+    # deleting previous labels
+    for label in existing_labels:
+        label_name = label['name']
+        delete_url = f"https://api.github.com/repos/{owner}/{repo}/labels/{label_name}"
+        del_response = requests.delete(delete_url, headers=headers)
+
+        if del_response.status_code == 204:
+            print(f"Deleted label: {label_name}")
+        else:
+            print(f"Failed to delete label: {label_name} - {del_response.status_code}")
+            
     for label in labels:
         requests.post(
             f"https://api.github.com/repos/{owner}/{repo}/labels",
