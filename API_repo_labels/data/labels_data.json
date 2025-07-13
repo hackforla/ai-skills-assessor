@@ -135,8 +135,7 @@
     "description":"Open Source, Liability, Stakeholder Agreements",
     "label_series":"Approach",
     "keywords":[
-      "software",
-      "licensing"
+      "software licensing"
     ],
     "color":"1f77b4"
   },
@@ -156,8 +155,7 @@
     "description":"Comparative Analysis",
     "label_series":"Approach",
     "keywords":[
-      "comparative",
-      "analysis"
+      "comparative analysis"
     ],
     "color":"1f77b4"
   },
@@ -217,8 +215,7 @@
     "description":"Behavior-Driven Requirements with Given\/When\/Then",
     "label_series":"BDD",
     "keywords":[
-      "user",
-      "stories"
+      "user stories"
     ],
     "color":"9edae5"
   },
@@ -238,9 +235,7 @@
     "description":"Blocked Pending Stakeholder Input or Decision",
     "label_series":"BDD",
     "keywords":[
-      "waiting",
-      "on",
-      "stakeholder"
+      "waiting on stakeholder"
     ],
     "color":"9edae5"
   },
@@ -260,8 +255,7 @@
     "description":"Maintains Executable Specs as Current Documentation",
     "label_series":"BDD",
     "keywords":[
-      "living",
-      "documentation"
+      "living documentation"
     ],
     "color":"9edae5"
   },
@@ -281,8 +275,7 @@
     "description":"Integrates Ongoing Feedback from Tests and Users",
     "label_series":"BDD",
     "keywords":[
-      "continuous",
-      "feedback"
+      "continuous feedback"
     ],
     "color":"9edae5"
   },
@@ -402,9 +395,7 @@
     "description":"Shared Design Tools (Figma, Framer, Canva)",
     "label_series":"Documentation",
     "keywords":[
-      "shared",
-      "design",
-      "workspace"
+      "shared design workspace"
     ],
     "color":"e377c2"
   },
@@ -504,7 +495,7 @@
     "description":"Server API Development with Express.js",
     "label_series":"Framework",
     "keywords":[
-      "expressjs"
+      "express.js"
     ],
     "color":"ff7f0e"
   },
@@ -584,7 +575,7 @@
     "description":"Server-Side Logic Implementation with Node.js",
     "label_series":"Framework",
     "keywords":[
-      "nodejs"
+      "node.js"
     ],
     "color":"ff7f0e"
   },
@@ -664,7 +655,8 @@
     "description":"Continuous Integration and Deployment",
     "label_series":"Infrastructure",
     "keywords":[
-      "cicd"
+      "ci",
+      "cd"
     ],
     "color":"cccccc"
   },
@@ -684,8 +676,7 @@
     "description":"Cloud Hosting excluding Container Management",
     "label_series":"Infrastructure",
     "keywords":[
-      "cloud",
-      "hosting"
+      "cloud hosting"
     ],
     "color":"cccccc"
   },
@@ -705,9 +696,7 @@
     "description":"Deploying Containers to Hosting Environments",
     "label_series":"Infrastructure",
     "keywords":[
-      "container",
-      "hosting",
-      "deployment"
+      "container - hosting deployment"
     ],
     "color":"cccccc"
   },
@@ -727,9 +716,7 @@
     "description":"Container Deployment for Dev\/Testing",
     "label_series":"Infrastructure",
     "keywords":[
-      "container",
-      "local",
-      "deployment"
+      "container - local deployment"
     ],
     "color":"cccccc"
   },
@@ -829,8 +816,8 @@
     "description":"Integrates Forms With Data Collection in Spreadsheets",
     "label_series":"Infrastructure",
     "keywords":[
-      "formsresponse",
-      "spreadsheet"
+      "forms",
+      "response spreadsheet"
     ],
     "color":"cccccc"
   },
@@ -890,8 +877,7 @@
     "description":"Kubernetes",
     "label_series":"Infrastructure",
     "keywords":[
-      "ingress",
-      "controllers"
+      "ingress controllers"
     ],
     "color":"cccccc"
   },
@@ -911,8 +897,7 @@
     "description":"Balances Network Traffic Across Servers",
     "label_series":"Infrastructure",
     "keywords":[
-      "load",
-      "balancers"
+      "load balancers"
     ],
     "color":"cccccc"
   },
@@ -952,8 +937,7 @@
     "description":"Automated Environment Setup with Infrastructure as Code",
     "label_series":"Infrastructure",
     "keywords":[
-      "provisioning",
-      "tools"
+      "provisioning tools"
     ],
     "color":"cccccc"
   },
@@ -973,8 +957,7 @@
     "description":"Traffic Routing and Security via Proxy Servers",
     "label_series":"Infrastructure",
     "keywords":[
-      "reverse",
-      "proxies"
+      "reverse proxies"
     ],
     "color":"cccccc"
   },
@@ -994,8 +977,7 @@
     "description":"Script Hosting for Client and Server Use",
     "label_series":"Infrastructure",
     "keywords":[
-      "script",
-      "hosting"
+      "script hosting"
     ],
     "color":"cccccc"
   },
@@ -1015,8 +997,7 @@
     "description":"Automatic Service Registration and Discovery",
     "label_series":"Infrastructure",
     "keywords":[
-      "service",
-      "discovery"
+      "service discovery"
     ],
     "color":"cccccc"
   },
@@ -1076,9 +1057,7 @@
     "description":"Container Orchestration (Usually Kubernetes)",
     "label_series":"Infrastructure",
     "keywords":[
-      "container",
-      "orchestration",
-      "platform"
+      "container orchestration platform"
     ],
     "color":"cccccc"
   },
@@ -1098,8 +1077,7 @@
     "description":"Limiting Work in Progress",
     "label_series":"Kanban",
     "keywords":[
-      "limiting",
-      "wip"
+      "limiting wip"
     ],
     "color":"c49c94"
   },
@@ -1119,8 +1097,7 @@
     "description":"Task Movement and Board Rules",
     "label_series":"Kanban",
     "keywords":[
-      "workflow",
-      "policies"
+      "workflow policies"
     ],
     "color":"c49c94"
   },
@@ -1140,8 +1117,7 @@
     "description":"Live Task Status Updates",
     "label_series":"Kanban",
     "keywords":[
-      "realtime",
-      "updates"
+      "real-time updates"
     ],
     "color":"c49c94"
   },
@@ -1161,9 +1137,7 @@
     "description":"Measures Total Task Duration (Incl. Wait)",
     "label_series":"Kanban",
     "keywords":[
-      "lead",
-      "time",
-      "measurement"
+      "lead time measurement"
     ],
     "color":"c49c94"
   },
@@ -1203,8 +1177,7 @@
     "description":"Task Advancement Based on Capacity",
     "label_series":"Kanban",
     "keywords":[
-      "pullbased",
-      "system"
+      "pull-based system"
     ],
     "color":"c49c94"
   },
@@ -1224,9 +1197,8 @@
     "description":"Visual Boards to Track Task Progress",
     "label_series":"Kanban",
     "keywords":[
-      "visual",
-      "workflow",
-      "boardswimlanes"
+      "visual workflow board",
+      "swimlanes"
     ],
     "color":"c49c94"
   },
@@ -1326,7 +1298,8 @@
     "description":".ipynb File - Jupyter Interactive Notebook",
     "label_series":"Language & File Type",
     "keywords":[
-      "jupyteripynb"
+      "jupyter",
+      "ipynb"
     ],
     "color":"bcbd22"
   },
@@ -1346,8 +1319,7 @@
     "description":"Package Manager Files (e.g., package.json, Pipfile)",
     "label_series":"Language & File Type",
     "keywords":[
-      "package",
-      "managers"
+      "package managers"
     ],
     "color":"bcbd22"
   },
@@ -1787,8 +1759,7 @@
     "description":"Breaking Work Into Smaller Tasks",
     "label_series":"Lean",
     "keywords":[
-      "decomposing",
-      "issues"
+      "decomposing issues"
     ],
     "color":"dbdb8d"
   },
@@ -1848,8 +1819,7 @@
     "description":"Asynchronous Code Execution Management",
     "label_series":"Method",
     "keywords":[
-      "async",
-      "handling"
+      "async handling"
     ],
     "color":"98df8a"
   },
@@ -1889,8 +1859,7 @@
     "description":"Command-Line Script Automation",
     "label_series":"Method",
     "keywords":[
-      "commandline",
-      "scripting"
+      "command-line scripting"
     ],
     "color":"98df8a"
   },
@@ -1910,8 +1879,7 @@
     "description":"Program Logic with Branching and Loops",
     "label_series":"Method",
     "keywords":[
-      "control",
-      "flow"
+      "control flow"
     ],
     "color":"98df8a"
   },
@@ -1931,8 +1899,7 @@
     "description":"Dynamic Webpage Structure Changes via JavaScript",
     "label_series":"Method",
     "keywords":[
-      "dom",
-      "manipulation"
+      "dom manipulation"
     ],
     "color":"98df8a"
   },
@@ -1952,8 +1919,7 @@
     "description":"User and System Event Handling",
     "label_series":"Method",
     "keywords":[
-      "event",
-      "handling"
+      "event handling"
     ],
     "color":"98df8a"
   },
@@ -1993,8 +1959,7 @@
     "description":"Programmatic File Read\/Write",
     "label_series":"Method",
     "keywords":[
-      "file",
-      "handling"
+      "file handling"
     ],
     "color":"98df8a"
   },
@@ -2034,7 +1999,8 @@
     "description":"Google Forms and Sheets, Notion",
     "label_series":"Method",
     "keywords":[
-      "formsinput"
+      "forms",
+      "input"
     ],
     "color":"98df8a"
   },
@@ -2114,7 +2080,8 @@
     "description":"Site Navigation and Hyperlink Management",
     "label_series":"Method",
     "keywords":[
-      "linksnavigation"
+      "links",
+      "navigation"
     ],
     "color":"98df8a"
   },
@@ -2154,8 +2121,7 @@
     "description":"Arithmetic and Numeric Calculations",
     "label_series":"Method",
     "keywords":[
-      "math",
-      "operations"
+      "math operations"
     ],
     "color":"98df8a"
   },
@@ -2195,7 +2161,8 @@
     "description":"Code Organization with Modules and Imports",
     "label_series":"Method",
     "keywords":[
-      "modulesimports"
+      "modules",
+      "imports"
     ],
     "color":"98df8a"
   },
@@ -2255,8 +2222,7 @@
     "description":"Representational State Transfer APIs",
     "label_series":"Method",
     "keywords":[
-      "rest",
-      "apis"
+      "rest apis"
     ],
     "color":"98df8a"
   },
@@ -2276,8 +2242,7 @@
     "description":"Semantic HTML for Structure and Accessibility",
     "label_series":"Method",
     "keywords":[
-      "semantic",
-      "layout"
+      "semantic layout"
     ],
     "color":"98df8a"
   },
@@ -2297,8 +2262,7 @@
     "description":"Session Files",
     "label_series":"Method",
     "keywords":[
-      "local",
-      "storage"
+      "local storage"
     ],
     "color":"98df8a"
   },
@@ -2318,8 +2282,7 @@
     "description":"Text and Character Sequence Manipulation",
     "label_series":"Method",
     "keywords":[
-      "string",
-      "handling"
+      "string handling"
     ],
     "color":"98df8a"
   },
@@ -2359,8 +2322,7 @@
     "description":"Defining Sprint Goals and Backlog",
     "label_series":"Scrum",
     "keywords":[
-      "sprint",
-      "planning"
+      "sprint planning"
     ],
     "color":"f7b6d2"
   },
@@ -2380,7 +2342,7 @@
     "description":"Daily Team Status Meeting",
     "label_series":"Scrum",
     "keywords":[
-      "standup"
+      "stand-up"
     ],
     "color":"f7b6d2"
   },
@@ -2520,8 +2482,8 @@
     "description":"Network Access Controls",
     "label_series":"Security",
     "keywords":[
-      "firewallssecurity",
-      "groups"
+      "firewalls",
+      "security groups"
     ],
     "color":"8c564b"
   },
@@ -2581,7 +2543,8 @@
     "description":"SSL\/TLS Security Protocols",
     "label_series":"Security",
     "keywords":[
-      "ssltls"
+      "ssl",
+      "tls"
     ],
     "color":"8c564b"
   },
@@ -2641,8 +2604,7 @@
     "description":"Images, PDFs, External Links",
     "label_series":"Skill",
     "keywords":[
-      "adding",
-      "assets"
+      "adding assets"
     ],
     "color":"ffbb78"
   },
@@ -2782,8 +2744,7 @@
     "description":"Technical and Business Evaluation",
     "label_series":"Skill",
     "keywords":[
-      "feasibility",
-      "assessment"
+      "feasibility assessment"
     ],
     "color":"ffbb78"
   },
@@ -2823,9 +2784,8 @@
     "description":"Reviews Code Contributions and Mentors Collaborators",
     "label_series":"Skill",
     "keywords":[
-      "pr",
-      "reviewpr",
-      "coaching"
+      "pr review",
+      "pr coaching"
     ],
     "color":"ffbb78"
   },
@@ -2865,9 +2825,8 @@
     "description":"Task Estimation and Scoring",
     "label_series":"Skill",
     "keywords":[
-      "task",
-      "estimationscoring",
-      "issues"
+      "task estimation",
+      "scoring issues"
     ],
     "color":"ffbb78"
   },
@@ -2907,7 +2866,8 @@
     "description":"Sprint, Feature, and System Design Planning",
     "label_series":"Skill",
     "keywords":[
-      "planningarchitecting"
+      "planning",
+      "architecting"
     ],
     "color":"ffbb78"
   },
@@ -2987,8 +2947,8 @@
     "description":"Feature Documentation and Definition",
     "label_series":"Skill",
     "keywords":[
-      "feature",
-      "descriptiondefinition"
+      "feature description",
+      "definition"
     ],
     "color":"ffbb78"
   },
@@ -3008,8 +2968,7 @@
     "description":"Applies Probabilistic Methods for Inference and Prediction",
     "label_series":"Statistics",
     "keywords":[
-      "bayesian",
-      "statistics"
+      "bayesian statistics"
     ],
     "color":"aec7e8"
   },
@@ -3029,8 +2988,7 @@
     "description":"Mean, Median, Mode, Variance",
     "label_series":"Statistics",
     "keywords":[
-      "descriptive",
-      "statistics"
+      "descriptive statistics"
     ],
     "color":"aec7e8"
   },
@@ -3050,8 +3008,7 @@
     "description":"Plans Controlled Tests to Measure Effects and Outcomes",
     "label_series":"Statistics",
     "keywords":[
-      "experimental",
-      "design"
+      "experimental design"
     ],
     "color":"aec7e8"
   },
@@ -3091,8 +3048,7 @@
     "description":"Studies Relationships Among Multiple Variables",
     "label_series":"Statistics",
     "keywords":[
-      "multivariate",
-      "analysis"
+      "multivariate analysis"
     ],
     "color":"aec7e8"
   },
@@ -3112,8 +3068,7 @@
     "description":"Study of Random Events and Likelihoods",
     "label_series":"Statistics",
     "keywords":[
-      "probability",
-      "theory"
+      "probability theory"
     ],
     "color":"aec7e8"
   },
@@ -3133,8 +3088,7 @@
     "description":"Linear, Logistic",
     "label_series":"Statistics",
     "keywords":[
-      "regression",
-      "analysis"
+      "regression analysis"
     ],
     "color":"aec7e8"
   },
@@ -3154,8 +3108,7 @@
     "description":"Selects Representative Subsets From Populations or Datasets",
     "label_series":"Statistics",
     "keywords":[
-      "sampling",
-      "methods"
+      "sampling methods"
     ],
     "color":"aec7e8"
   },
@@ -3175,8 +3128,7 @@
     "description":"Builds Models to Explain or Predict Data Behaviors",
     "label_series":"Statistics",
     "keywords":[
-      "statistical",
-      "modeling"
+      "statistical modeling"
     ],
     "color":"aec7e8"
   },
@@ -3196,9 +3148,7 @@
     "description":"Analyzes Data Points Collected Over Time Intervals",
     "label_series":"Statistics",
     "keywords":[
-      "time",
-      "series",
-      "analysis"
+      "time series analysis"
     ],
     "color":"aec7e8"
   },
@@ -3218,8 +3168,7 @@
     "description":"Sets Visibility and Access Level of Code Elements",
     "label_series":"Syntax",
     "keywords":[
-      "access",
-      "modifiers"
+      "access modifiers"
     ],
     "color":"17becf"
   },
@@ -3239,7 +3188,8 @@
     "description":"Defines and Manipulates Ordered Collections of Values",
     "label_series":"Syntax",
     "keywords":[
-      "arrayslists"
+      "arrays",
+      "lists"
     ],
     "color":"17becf"
   },
@@ -3279,9 +3229,7 @@
     "description":"Syntax and Usage of Classes and Objects in Object-Oriented Programming",
     "label_series":"Syntax",
     "keywords":[
-      "classes",
-      "and",
-      "objects"
+      "classes and objects"
     ],
     "color":"17becf"
   },
@@ -3341,8 +3289,7 @@
     "description":"Uses Specialized Containers Like Stacks, Queues, Trees",
     "label_series":"Syntax",
     "keywords":[
-      "data",
-      "structures"
+      "data structures"
     ],
     "color":"17becf"
   },
@@ -3362,8 +3309,7 @@
     "description":"Declares and Converts Variable Types in Code",
     "label_series":"Syntax",
     "keywords":[
-      "data",
-      "types"
+      "data types"
     ],
     "color":"17becf"
   },
@@ -3383,8 +3329,7 @@
     "description":"Manages Exceptions and Error States in Code Execution",
     "label_series":"Syntax",
     "keywords":[
-      "error",
-      "handling"
+      "error handling"
     ],
     "color":"17becf"
   },
@@ -3404,7 +3349,8 @@
     "description":"Declares and Calls Reusable Procedural Code Blocks",
     "label_series":"Syntax",
     "keywords":[
-      "functionsmethods"
+      "functions",
+      "methods"
     ],
     "color":"17becf"
   },
@@ -3424,8 +3370,8 @@
     "description":"Uses Type Parameters for Reusable Code Definitions",
     "label_series":"Syntax",
     "keywords":[
-      "genericstemplate",
-      "types"
+      "generics",
+      "template types"
     ],
     "color":"17becf"
   },
@@ -3445,8 +3391,8 @@
     "description":"Shares Code Between Files or Packages via Imports and Exports",
     "label_series":"Syntax",
     "keywords":[
-      "importingexporting",
-      "modules"
+      "importing",
+      "exporting modules"
     ],
     "color":"17becf"
   },
@@ -3466,7 +3412,8 @@
     "description":"Uses Consistent Spacing to Enhance Code Readability",
     "label_series":"Syntax",
     "keywords":[
-      "indentationwhitespaces"
+      "indentation",
+      "whitespaces"
     ],
     "color":"17becf"
   },
@@ -3506,9 +3453,8 @@
     "description":"Defines Anonymous Functions With Concise Syntax",
     "label_series":"Syntax",
     "keywords":[
-      "lambda",
-      "functionsarrow",
-      "functions"
+      "lambda functions",
+      "arrow functions"
     ],
     "color":"17becf"
   },
@@ -3588,7 +3534,8 @@
     "description":"Implements Multi-Way Branching Based on Value Matching",
     "label_series":"Syntax",
     "keywords":[
-      "switchcase"
+      "switch",
+      "case"
     ],
     "color":"17becf"
   },
@@ -3608,7 +3555,8 @@
     "description":"Embeds Variables or Expressions Within Strings or Markup",
     "label_series":"Syntax",
     "keywords":[
-      "templatesinterpolation"
+      "templates",
+      "interpolation"
     ],
     "color":"17becf"
   },
@@ -3628,8 +3576,7 @@
     "description":"Uses Inline Conditional Expressions for Brevity",
     "label_series":"Syntax",
     "keywords":[
-      "ternary",
-      "operator"
+      "ternary operator"
     ],
     "color":"17becf"
   },
@@ -3649,8 +3596,8 @@
     "description":"Converts Values From One Data Type to Another",
     "label_series":"Syntax",
     "keywords":[
-      "type",
-      "castingconversion"
+      "type casting",
+      "conversion"
     ],
     "color":"17becf"
   },
@@ -3690,8 +3637,7 @@
     "description":"Unit Testing, E2E Testing, and Integration Testing",
     "label_series":"Testing & QA",
     "keywords":[
-      "automated",
-      "testing"
+      "automated testing"
     ],
     "color":"d62728"
   },
@@ -3731,8 +3677,7 @@
     "description":"Capturing Runtime Errors in Production",
     "label_series":"Testing & QA",
     "keywords":[
-      "error",
-      "monitoring"
+      "error monitoring"
     ],
     "color":"d62728"
   },
@@ -3772,8 +3717,8 @@
     "description":"Evaluating System Behavior Under Stress",
     "label_series":"Testing & QA",
     "keywords":[
-      "performanceload",
-      "testing"
+      "performance",
+      "load testing"
     ],
     "color":"d62728"
   },
@@ -3793,9 +3738,7 @@
     "description":"Acceptance Tests Based on User Requirements",
     "label_series":"Testing & QA",
     "keywords":[
-      "user",
-      "story",
-      "tests"
+      "user story tests"
     ],
     "color":"d62728"
   },
@@ -3815,8 +3758,7 @@
     "description":"Function Tests",
     "label_series":"Testing & QA",
     "keywords":[
-      "qa",
-      "testing"
+      "qa testing"
     ],
     "color":"d62728"
   },
@@ -3836,8 +3778,7 @@
     "description":"Centralizing Logs From Multiple Services",
     "label_series":"Testing & QA",
     "keywords":[
-      "log",
-      "aggregation"
+      "log aggregation"
     ],
     "color":"d62728"
   },
@@ -3857,9 +3798,7 @@
     "description":"Tools to Observe and Diagnose Network Issues",
     "label_series":"Testing & QA",
     "keywords":[
-      "network",
-      "monitoring",
-      "tools"
+      "network monitoring tools"
     ],
     "color":"d62728"
   },
@@ -3879,8 +3818,7 @@
     "description":"Distributed Request Tracking Across Services",
     "label_series":"Testing & QA",
     "keywords":[
-      "tracing",
-      "tools"
+      "tracing tools"
     ],
     "color":"d62728"
   },
@@ -3940,8 +3878,7 @@
     "description":"Resolving Overlapping Code Changes in Git",
     "label_series":"Workflow",
     "keywords":[
-      "merge",
-      "conflicts"
+      "merge conflicts"
     ],
     "color":"9467bd"
   },
@@ -3961,8 +3898,7 @@
     "description":"User Stories: Customer Need Descriptions (As a X, I Need to Do Y, for Z Reason)",
     "label_series":"XP",
     "keywords":[
-      "user",
-      "stories"
+      "user stories"
     ],
     "color":"7f7f7f"
   },
@@ -3982,8 +3918,7 @@
     "description":"Short User-Focused Descriptions of Needed Features",
     "label_series":"Scrum",
     "keywords":[
-      "user",
-      "stories"
+      "user stories"
     ],
     "color":"f7b6d2"
   },
@@ -4003,8 +3938,7 @@
     "description":"Feature-Based User Requirements",
     "label_series":"FDD",
     "keywords":[
-      "user",
-      "stories"
+      "user stories"
     ],
     "color":"c7c7c7"
   },
@@ -4024,8 +3958,7 @@
     "description":"Scaled Agile Work Items Aligned to Program Increments",
     "label_series":"SAFe",
     "keywords":[
-      "user",
-      "stories"
+      "user stories"
     ],
     "color":"ff9896"
   },
@@ -4045,8 +3978,7 @@
     "description":"Diagramming and Analyzing Relationships and Communication Between Bounded Context",
     "label_series":"DDD",
     "keywords":[
-      "context",
-      "mapping"
+      "context mapping"
     ],
     "color":"bcbd22"
   },
@@ -4086,8 +4018,7 @@
     "description":"A Collaborative Workshop Method to Explore Domain Processes Using Events and Sticky Notes",
     "label_series":"DDD",
     "keywords":[
-      "event",
-      "storming"
+      "event storming"
     ],
     "color":"bcbd22"
   },
@@ -4107,8 +4038,7 @@
     "description":"Using Events to Decouple Services and Ensure Responsiveness",
     "label_series":"DDD",
     "keywords":[
-      "eventdriven",
-      "architecture"
+      "event-driven architecture"
     ],
     "color":"bcbd22"
   },
@@ -4128,9 +4058,7 @@
     "description":"Separating Commands (Write) and Queries (Read) for Scalability and Clarity",
     "label_series":"DDD",
     "keywords":[
-      "ddd",
-      "with",
-      "cqrs"
+      "ddd with cqrs"
     ],
     "color":"bcbd22"
   },
@@ -4150,9 +4078,7 @@
     "description":"Establishing a Shared Model of the Domain With Stakeholders, Which Informs Feature Design",
     "label_series":"FDD",
     "keywords":[
-      "domain",
-      "object",
-      "modeling"
+      "domain object modeling"
     ],
     "color":"c7c7c7"
   },
@@ -4172,10 +4098,7 @@
     "description":"FDD Delivers in Small Feature Slices, Improving Adaptability and Client Feedback Loops",
     "label_series":"FDD",
     "keywords":[
-      "iterative",
-      "and",
-      "incremental",
-      "delivery"
+      "iterative and incremental delivery"
     ],
     "color":"c7c7c7"
   },
@@ -4195,8 +4118,7 @@
     "description":"Features Are Defined From the Client's Perspective and Prioritized Based on Business Value",
     "label_series":"FDD",
     "keywords":[
-      "clientcentric",
-      "development"
+      "client-centric development"
     ],
     "color":"c7c7c7"
   },
@@ -4216,8 +4138,8 @@
     "description":"Frequent Integration of Features to Ensure Software Stays in a Working State",
     "label_series":"FDD",
     "keywords":[
-      "regular",
-      "buildsintegration"
+      "regular builds",
+      "integration"
     ],
     "color":"c7c7c7"
   },
@@ -4237,9 +4159,8 @@
     "description":"Source Control and Ownership Ensure Consistency and Accountability in Code Changes",
     "label_series":"FDD",
     "keywords":[
-      "version",
-      "controlclass",
-      "ownership"
+      "version control",
+      "class ownership"
     ],
     "color":"c7c7c7"
   },
@@ -4259,8 +4180,7 @@
     "description":"The Core TDD Loop: Write a Failing Test (Red), Make It Pass (Green), and Improve the Code (Refactor)",
     "label_series":"TDD",
     "keywords":[
-      "redgreenrefactor",
-      "cycle"
+      "red-green-refactor cycle"
     ],
     "color":"1f77b4"
   },
@@ -4280,9 +4200,7 @@
     "description":"Clean Up the Code While Keeping Tests Green (Passing)",
     "label_series":"TDD",
     "keywords":[
-      "refactor",
-      "the",
-      "code"
+      "refactor the code"
     ],
     "color":"1f77b4"
   },
@@ -4302,8 +4220,7 @@
     "description":"Improving Code Design Without Changing Functionality - Supported by Tests",
     "label_series":"TDD",
     "keywords":[
-      "refactoring",
-      "safely"
+      "refactoring safely"
     ],
     "color":"1f77b4"
   },
@@ -4323,9 +4240,7 @@
     "description":"The Ability to Define Behavior Clearly by First Specifying Examples or Test Cases",
     "label_series":"TDD",
     "keywords":[
-      "thinking",
-      "in",
-      "examples"
+      "thinking in examples"
     ],
     "color":"1f77b4"
   },
@@ -4345,8 +4260,7 @@
     "description":"Teams Agree on Consistent Coding Style to Ensure Readability and Maintainability",
     "label_series":"XP",
     "keywords":[
-      "coding",
-      "standards"
+      "coding standards"
     ],
     "color":"7f7f7f"
   },
@@ -4366,8 +4280,7 @@
     "description":"Delivering Useful Software in Short, Repeatable Cycles",
     "label_series":"XP",
     "keywords":[
-      "incremental",
-      "delivery"
+      "incremental delivery"
     ],
     "color":"7f7f7f"
   }

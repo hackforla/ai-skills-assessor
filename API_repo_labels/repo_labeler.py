@@ -26,13 +26,6 @@ def get_repo_metadata(owner, repo, token):
     except Exception:
         readme_text = ""
     
-    
-    # 👇 Print each value to the GitHub Actions logs
-    print(f"Description: {desc}")
-    print(f"Topics: {topics}")
-    print(f"Languages: {langs}")
-    print(f"README: {readme_text}")
-    
     return " ".join([desc] + topics + langs + [readme_text]).lower()
 
 
@@ -46,6 +39,9 @@ def match_labels(repo_text, labels_data):
             if kw.lower() in words_set:
                 matched.append(label)
                 break
+            
+    print(matched)
+    
     return matched
 
 
