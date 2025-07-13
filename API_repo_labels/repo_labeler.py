@@ -15,13 +15,17 @@ def get_repo_metadata(owner, repo, token):
         "Authorization": f"token {token}",
         "Accept": "application/vnd.github+json"
     }
-    desc = requests.get(f"https://api.github.com/repos/{owner}/{repo}", headers=headers).json().get("description", "")
-    topics = requests.get(f"https://api.github.com/repos/{owner}/{repo}/topics", headers=headers).json().get("names", [])
-    langs = requests.get(f"https://api.github.com/repos/{owner}/{repo}/languages", headers=headers).json().keys()
-    readme_base64= requests.get(f"https://api.github.com/repos/{owner}/{repo}/readme", headers=headers).json().get('content', '')
-    readme_text = base64.b64decode(readme_base64).decode('utf-8')
+    desc = requests.get(f"https://api.github.com/repos/{owner}/{repo}", headers=headers).json().get("description") or ""
+    topics = requests.get(f"https://api.github.com/repos/{owner}/{repo}/topics", headers=headers).json().get("names") or []
+    langs = list(requests.get(f"https://api.github.com/repos/{owner}/{repo}/languages", headers=headers).json().keys())
+    readme_base64 = requests.get(f"https://api.github.com/repos/{owner}/{repo}/readme", headers=headers).json().get('content') or ""
+
+    try:
+        readme_text = base64.b64decode(readme_base64).decode('utf-8')
+    except Exception:
+        readme_text = ""
     
-    return " ".join([desc] + topics + list(langs) + [readme_text]).lower()
+    return " ".join([desc] + topics + langs + [readme_text]).lower()
 
 
 def match_labels(repo_text, labels_data):
