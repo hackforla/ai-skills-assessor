@@ -3,6 +3,7 @@ import json
 import os
 import sys
 import base64
+import re
 
 def load_labels():
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -37,9 +38,12 @@ def get_repo_metadata(owner, repo, token):
 
 def match_labels(repo_text, labels_data):
     matched = []
+    words = re.findall(r'\b\w+\b', repo_text)
+    words_set = set(words)
+    
     for label in labels_data:
         for kw in label["keywords"]:
-            if kw in repo_text:
+            if kw.lower() in words_set:
                 matched.append(label)
                 break
     return matched
