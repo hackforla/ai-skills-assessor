@@ -19,8 +19,12 @@ df['label_series'] = df['Label Series'].str.strip()
 
 # create key words using name and description -> used to assign labels
 df['keywords'] = (
-    df['Concept'].str.lower().fillna('')
-).str.replace(r'[^\w\s]', '', regex=True).str.split()
+    df['Concept']
+    .fillna('')
+    .str.lower()
+    .str.split(r'[/,]')   
+    .apply(lambda lst: [x.strip() for x in lst])  
+)
 
 # label colours
 series_colors = {
