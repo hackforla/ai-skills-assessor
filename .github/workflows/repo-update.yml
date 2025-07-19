@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          ref: mixin
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -58,7 +60,7 @@ jobs:
             git config user.email "github-actions@github.com"
             git add $JSON_FILE
             git commit -m "Update label status for target repos"
-            git push
+            git push origin mixin
           else
             echo "No repos needed labeling, nothing to commit."
           fi
