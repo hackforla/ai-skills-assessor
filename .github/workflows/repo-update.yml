@@ -1,11 +1,12 @@
-name: Auto Label Repo
+name: Auto Label Multiple Repos with Tracking
 
 on:
   workflow_dispatch:
 
 jobs:
-  Auto_Add_Labels_to_Repo:
+  Auto_Add_Labels_to_Target_Repos:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -16,11 +17,42 @@ jobs:
           python-version: '3.11'
 
       - name: Install Dependencies
-        run: pip install requests pandas openpyxl
+        run: pip install requests pandas openpyxl jq
 
-      - name: Run Labeler Script
+      - name: Process and label target repos
         env:
           GH_TOKEN: ${{ secrets.PAT }}
-          REPO_OWNER: ${{ github.repository_owner }}
-          REPO_NAME: ${{ github.event.repository.name }}
-        run: python API_repo_labels/repo_labeler.py
+        run: |
+          JSON_FILE=target_repos_status.json
+          TMP_FILE=target_repos_status.tmp.json
+          UPDATED=false
+
+          # Loop through all repos with labeled == false
+          jq -c '.repos | to_entries[] | select(.value.labeled == false)' $JSON_FILE | while read -r repo_entry; do
+            REPO_FULL=$(echo "$repo_entry" | jq -r '.key')
+            OWNER=$(echo "$REPO_FULL" | cut -d'/' -f1)
+            REPO=$(echo "$REPO_FULL" | cut -d'/' -f2)
+
+            echo "Processing repo: $REPO_FULL"
+
+            # Run your python labeler with repo-specific env vars
+            GH_TOKEN=${{ secrets.PAT }} REPO_OWNER=$OWNER REPO_NAME=$REPO python API_repo_labels/repo_labeler.py
+
+            # If labeling succeeded, update JSON with labeled=true and current date
+            NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            jq --arg r "$REPO_FULL" --arg time "$NOW" \
+              '.repos[$r].labeled = true | .repos[$r].date = $time' $JSON_FILE > $TMP_FILE && mv $TMP_FILE $JSON_FILE
+
+            UPDATED=true
+          done
+
+          # Commit if any updates
+          if [ "$UPDATED" = true ]; then
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git add $JSON_FILE
+            git commit -m "Update label status for target repos"
+            git push
+          else
+            echo "No repos needed labeling, nothing to commit."
+          fi

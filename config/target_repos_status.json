@@ -7,6 +7,10 @@
     "sandy3w/HfLA-label-test": {
       "labeled": false,
       "date": ""
+    },
+    "username2/repo2": {
+      "labeled": true,
+      "date": "2025-07-18T14:00:00Z"
     }
   }
 }
