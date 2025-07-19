@@ -4,6 +4,7 @@ import os
 import sys
 import base64
 import re
+import time
 
 def load_labels():
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -102,9 +103,14 @@ def create_labels(owner, repo, labels, token):
         if create_resp.status_code == 201:
             print(f"Created label: {label_name}")
             existing_label_names.add(normalized_label_name)  # Update set
+        elif create_resp.status_code == 403 and "rate limit" in create_resp.text.lower():
+            print("Rate limit hit, sleeping for 30 seconds...")
+            time.sleep(30)
+            continue
         else:
             print(f"Failed to create label: {label_name} - {create_resp.status_code} - {create_resp.text}")
             failed = True
+
         
     if failed:
         sys.exit(1)
