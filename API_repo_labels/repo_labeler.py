@@ -11,7 +11,7 @@ def load_labels():
     with open(filepath, 'r') as f:
         return json.load(f)
 
-def get_repo_metadata(owner, repo, token):
+""" def get_repo_metadata(owner, repo, token):
     headers = {
         "Authorization": f"token {token}",
         "Accept": "application/vnd.github+json"
@@ -42,7 +42,7 @@ def match_labels(repo_text, labels_data):
                 break
     
     return matched
-
+ """
 
 def create_labels(owner, repo, labels, token):
     headers = {
@@ -91,7 +91,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     labels_data = load_labels()
-    repo_text = get_repo_metadata(owner, repo, token)
-    matched_labels = match_labels(repo_text, labels_data)
-    
-    create_labels(owner, repo, matched_labels, token)
+    # repo_text = get_repo_metadata(owner, repo, token)
+    # matched_labels = match_labels(repo_text, labels_data)
+    # create_labels(owner, repo, matched_labels, token)
+    create_labels(owner, repo, labels_data, token)
