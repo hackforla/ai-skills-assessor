@@ -32,7 +32,8 @@ jobs:
           TMP_FILE=config/target_repos_status.tmp.json
           UPDATED=false
 
-          jq -c '.repos | to_entries[] | select(.value.labeled == false)' $JSON_FILE | while read -r repo_entry; do
+          # Use input redirection < <(...) to avoid subshell
+          while read -r repo_entry; do
             REPO_FULL=$(echo "$repo_entry" | jq -r '.key')
             OWNER=$(echo "$REPO_FULL" | cut -d'/' -f1)
             REPO=$(echo "$REPO_FULL" | cut -d'/' -f2)
@@ -53,15 +54,18 @@ jobs:
 
             sleep 5
 
-          done
+          done < <(jq -c '.repos | to_entries[] | select(.value.labeled == false)' $JSON_FILE)
 
           if [ "$UPDATED" = true ]; then
+            echo "Changes detected, committing..."
             git config user.name "github-actions"
             git config user.email "github-actions@github.com"
+            git status
+            git diff
             git add $JSON_FILE
             git commit -m "Update label status for target repos"
-            git push origin mixin
+            git log -1
+            git push origin mixin --verbose
           else
             echo "No repos needed labeling, nothing to commit."
           fi
-
