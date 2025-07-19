@@ -20,7 +20,7 @@ jobs:
 
       - name: Run Labeler Script
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT }}
           REPO_OWNER: ${{ github.repository_owner }}
           REPO_NAME: ${{ github.event.repository.name }}
         run: python API_repo_labels/repo_labeler.py
