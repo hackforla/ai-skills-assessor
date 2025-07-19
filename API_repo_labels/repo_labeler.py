@@ -82,12 +82,13 @@ def create_labels(owner, repo, labels, token):
     failed = False
     for label in labels:
         label_name = label['label_name'].strip()
-        label_name_lower = label_name.lower()
+        normalized_label_name = label_name.lower()
 
-        if label_name_lower in existing_label_names:
+        if normalized_label_name in existing_label_names:
             print(f"Label '{label_name}' already exists, skipping creation.")
             continue
 
+        # Attempt to create the label
         create_resp = requests.post(
             f"https://api.github.com/repos/{owner}/{repo}/labels",
             headers=headers,
@@ -100,12 +101,10 @@ def create_labels(owner, repo, labels, token):
 
         if create_resp.status_code == 201:
             print(f"Created label: {label_name}")
-            # Add the new label to existing_label_names set so no duplicate creates
-            existing_label_names.add(label_name_lower)
+            existing_label_names.add(normalized_label_name)  # Update set
         else:
             print(f"Failed to create label: {label_name} - {create_resp.status_code} - {create_resp.text}")
             failed = True
-
         
     if failed:
         sys.exit(1)

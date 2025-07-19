@@ -39,7 +39,7 @@ def delete_labels(owner, repo, token):
 
 if __name__ == "__main__":
     owner = "sandy3w"
-    repo = "HfLA-label-test"
+    repo = "keeping-sandy-on-track"
     token = ""
 
     if not all([owner, repo, token]):
