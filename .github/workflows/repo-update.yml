@@ -49,8 +49,8 @@ jobs:
               echo "Labeling failed for $REPO_FULL, skipping JSON update."
             fi
 
-            sleep 2
-            
+            sleep 5
+
           done
 
           if [ "$UPDATED" = true ]; then
