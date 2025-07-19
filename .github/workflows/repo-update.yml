@@ -22,11 +22,11 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
-
       - name: Process and label target repos
         env:
           GH_TOKEN: ${{ secrets.PAT }}
         run: |
+          set -e
           JSON_FILE=config/target_repos_status.json
           TMP_FILE=config/target_repos_status.tmp.json
           UPDATED=false
@@ -39,12 +39,16 @@ jobs:
             echo "Processing repo: $REPO_FULL"
 
             GH_TOKEN=${{ secrets.PAT }} REPO_OWNER=$OWNER REPO_NAME=$REPO python API_repo_labels/repo_labeler.py
+            EXIT_CODE=$?
 
-            NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-            jq --arg r "$REPO_FULL" --arg time "$NOW" \
-              '.repos[$r].labeled = true | .repos[$r].date = $time' $JSON_FILE > $TMP_FILE && mv $TMP_FILE $JSON_FILE
-
-            UPDATED=true
+            if [ $EXIT_CODE -eq 0 ]; then
+              NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+              jq --arg r "$REPO_FULL" --arg time "$NOW" \
+                '.repos[$r].labeled = true | .repos[$r].date = $time' $JSON_FILE > $TMP_FILE && mv $TMP_FILE $JSON_FILE
+              UPDATED=true
+            else
+              echo "Labeling failed for $REPO_FULL, skipping JSON update."
+            fi
           done
 
           if [ "$UPDATED" = true ]; then
@@ -56,3 +60,4 @@ jobs:
           else
             echo "No repos needed labeling, nothing to commit."
           fi
+

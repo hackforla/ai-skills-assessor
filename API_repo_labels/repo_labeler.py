@@ -51,7 +51,7 @@ def create_labels(owner, repo, labels, token):
     }
     
     
-    # deleting previous labels
+    """ # deleting previous labels
     response = requests.get(
         f"https://api.github.com/repos/{owner}/{repo}/labels",
         headers=headers
@@ -68,22 +68,43 @@ def create_labels(owner, repo, labels, token):
             print(f"Deleted label: {label_name}")
         else:
             print(f"Failed to delete label: {label_name} - {del_response.status_code}")
-            
+             """
+             
+    response = requests.get(
+        f"https://api.github.com/repos/{owner}/{repo}/labels",
+        headers=headers
+    )
+    existing_labels = response.json()
+
+    # Make a set of existing label names for quick lookup
+    existing_label_names = {label['name'] for label in existing_labels}
+
+    failed = False
     for label in labels:
-        requests.post(
+        label_name = label['label_name']
+
+        if label_name in existing_label_names:
+            print(f"Label '{label_name}' already exists, skipping creation.")
+            continue
+
+        create_resp = requests.post(
             f"https://api.github.com/repos/{owner}/{repo}/labels",
             headers=headers,
             json={
-                "name": label['label_name'],
+                "name": label_name,
                 "description": label['description'][:100],
                 "color": label['color']
             }
         )
-        if response.status_code == 201:
-            print(f"Created label: {label['label_name']}")
-        else:
-            print(f"Failed to create label: {label['label_name']} - {response.status_code} - {response.text}")
         
+        if create_resp.status_code != 201:
+            print(f"Failed to create label: {label_name} - {create_resp.status_code} - {create_resp.text}")
+            failed = True
+        
+    if failed:
+        sys.exit(1)
+    else:
+        sys.exit(0)
         
 if __name__ == "__main__":
     owner = os.environ.get("REPO_OWNER")
