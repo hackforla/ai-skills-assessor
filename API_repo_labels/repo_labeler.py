@@ -79,6 +79,10 @@ def create_labels(owner, repo, labels, token):
                 "color": label['color']
             }
         )
+        if response.status_code == 201:
+            print(f"Created label: {label['label_name']}")
+        else:
+            print(f"Failed to create label: {label['label_name']} - {response.status_code} - {response.text}")
         
         
 if __name__ == "__main__":
