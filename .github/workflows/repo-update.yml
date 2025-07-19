@@ -26,7 +26,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PAT }}
         run: |
-          set -e
           JSON_FILE=config/target_repos_status.json
           TMP_FILE=config/target_repos_status.tmp.json
           UPDATED=false
@@ -49,6 +48,9 @@ jobs:
             else
               echo "Labeling failed for $REPO_FULL, skipping JSON update."
             fi
+
+            sleep 2
+            
           done
 
           if [ "$UPDATED" = true ]; then
