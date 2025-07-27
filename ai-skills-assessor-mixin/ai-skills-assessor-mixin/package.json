@@ -1,0 +1,32 @@
+{
+  "name": "true-github-contributors",
+  "version": "1.0.5",
+  "description": "Module to assists with GitHub contributor data using octokit/rest.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/100Automations/true-github-contributors.git"
+  },
+  "author": "Kian Badie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/100Automations/true-github-contributors/issues"
+  },
+  "homepage": "https://github.com/100Automations/true-github-contributors#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@octokit/rest": "^18.0.3",
+    "dotenv": "^8.2.0",
+    "jest": "^26.4.2",
+    "sinon": "^9.0.3"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "html"
+    ]
+  }
+}
