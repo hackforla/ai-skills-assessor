@@ -81,15 +81,17 @@ def create_labels(owner, repo, labels, token):
     existing_label_names = {label['name'].strip().lower() for label in existing_labels}
 
     failed = False
-    for label in labels:
+    i = 0
+    while i < len(labels):
+        label = labels[i]
         label_name = label['label_name'].strip()
         normalized_label_name = label_name.lower()
 
         if normalized_label_name in existing_label_names:
             print(f"Label '{label_name}' already exists, skipping creation.")
+            i += 1
             continue
 
-        # Attempt to create the label
         create_resp = requests.post(
             f"https://api.github.com/repos/{owner}/{repo}/labels",
             headers=headers,
@@ -103,19 +105,21 @@ def create_labels(owner, repo, labels, token):
         if create_resp.status_code == 201:
             print(f"Created label: {label_name}")
             existing_label_names.add(normalized_label_name)  # Update set
+            i += 1  # move to next label
         elif create_resp.status_code == 403 and "rate limit" in create_resp.text.lower():
-            print("Rate limit hit, sleeping for 30 seconds...")
-            time.sleep(30)
-            continue
+            print("Rate limit hit, sleeping for 15 seconds...")
+            time.sleep(15)
+            # Do NOT increment i, retry same label after sleep
         else:
             print(f"Failed to create label: {label_name} - {create_resp.status_code} - {create_resp.text}")
             failed = True
+            i += 1  # skip this label, move on
 
-        
     if failed:
         sys.exit(1)
     else:
         sys.exit(0)
+
         
 if __name__ == "__main__":
     owner = os.environ.get("REPO_OWNER")

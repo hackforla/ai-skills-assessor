@@ -62,7 +62,7 @@ def delete_labels(owner, repo, token):
 
 if __name__ == "__main__":
     owner = "sandy3w"
-    repo = "HfLA-label-test"
+    repo = "ai-skills-assessor"
     token = os.environ.get("GH_TOKEN")
 
     if not all([owner, repo, token]):
