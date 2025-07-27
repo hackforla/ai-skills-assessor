@@ -8,7 +8,20 @@ def get_all_labels(owner, repo, headers):
     page = 1
     while True:
         url = f"https://api.github.com/repos/{owner}/{repo}/labels?per_page=100&page={page}"
-        response = requests.get(url, headers=headers)
+        print(f"Fetching labels from: {url}")
+        try:
+            response = requests.get(url, headers=headers, timeout=10)
+        except requests.exceptions.RequestException as e:
+            print(f"Request failed: {e}")
+            sys.exit(1)
+
+        print(f"Status code: {response.status_code}")
+        print(f"Response preview: {response.text[:200]}")
+
+        if response.status_code != 200:
+            print(f"Failed to get labels. HTTP {response.status_code}: {response.text}")
+            sys.exit(1)
+
         batch = response.json()
 
         if not batch:
@@ -25,21 +38,31 @@ def delete_labels(owner, repo, token):
         "Accept": "application/vnd.github+json"
     }
 
+    print(f"Using token: {'yes' if token else 'no'}")
+    print(f"Target repo: {owner}/{repo}")
+
     existing_labels = get_all_labels(owner, repo, headers)
+    print("Found labels:", [label['name'] for label in existing_labels])
 
     for label in existing_labels:
         label_name = label['name']
         delete_url = f"https://api.github.com/repos/{owner}/{repo}/labels/{quote(label_name)}"
-        del_response = requests.delete(delete_url, headers=headers)
+        print(f"Deleting label: {label_name} -> {delete_url}")
+        try:
+            del_response = requests.delete(delete_url, headers=headers, timeout=10)
+        except requests.exceptions.RequestException as e:
+            print(f"Request failed: {e}")
+            continue
 
         if del_response.status_code == 204:
             print(f"Deleted label: {label_name}")
         else:
-            print(f"Failed to delete label: {label_name} - {del_response.status_code}")
+            print(f"Failed to delete label: {label_name} - HTTP {del_response.status_code}: {del_response.text}")
+
 
 if __name__ == "__main__":
     owner = "sandy3w"
-    repo = "ai-skill-assessor"
+    repo = "HfLA-label-test"
     token = os.environ.get("GH_TOKEN")
 
     if not all([owner, repo, token]):
@@ -47,3 +70,4 @@ if __name__ == "__main__":
         sys.exit(1)
 
     delete_labels(owner, repo, token)
+
