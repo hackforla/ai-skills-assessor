@@ -40,7 +40,7 @@ def delete_labels(owner, repo, token):
 if __name__ == "__main__":
     owner = "sandy3w"
     repo = "ai-skill-assessor"
-    token = ""
+    token = os.environ.get("GH_TOKEN")
 
     if not all([owner, repo, token]):
         print("Missing required environment variables: REPO_OWNER, REPO_NAME, GH_TOKEN")
