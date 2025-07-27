@@ -71,14 +71,24 @@ def create_labels(owner, repo, labels, token):
             print(f"Failed to delete label: {label_name} - {del_response.status_code}")
              """
              
-    response = requests.get(
-        f"https://api.github.com/repos/{owner}/{repo}/labels",
-        headers=headers
-    )
-    existing_labels = response.json()
+    existing_label_names = set()
+    page = 1
+    while True:
+        response = requests.get(
+            f"https://api.github.com/repos/{owner}/{repo}/labels",
+            headers=headers,
+            params={"per_page": 100, "page": page}
+        )
+        if response.status_code != 200:
+            print(f"Failed to fetch labels: {response.status_code} - {response.text}")
+            sys.exit(1)
 
-    # Make a set of existing label names for quick lookup
-    existing_label_names = {label['name'].strip().lower() for label in existing_labels}
+        labels_page = response.json()
+        if not labels_page:
+            break  # no more pages
+
+        existing_label_names.update(label['name'].strip().lower() for label in labels_page)
+        page += 1
 
     failed = False
     i = 0
