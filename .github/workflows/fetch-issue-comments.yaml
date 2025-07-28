@@ -1,3 +1,5 @@
+# YAML file to trigger the fetching of issue comments using the py file below
+
 name: Fetch Issue Comments
 
 on:
