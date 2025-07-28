@@ -1,0 +1,39 @@
+name: Fetch Issue Comments
+
+on:
+  workflow_dispatch: # manual trigger for the GitHub UI
+    # inputs:
+    #   handle:
+    #     description: 'GitHub handle to filter comments by'
+    #     required: true
+    #     default: 'jasonuranta'
+    #   issue_number:
+    #     description: 'Issue number to fetch comments from'
+    #     required: false
+  issue_comment:
+    types: [created]
+
+
+jobs:
+  fetch-comments:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          pip install requests
+          pip install os
+          pip install json
+        
+      - name: Run comment fetcher
+        run: python ../../scripts/fetch_comments.py
+        env:
+          # "GH_TOKEN" is the "personal access token" needed to authenticate from GitHub
+          GH_TOKEN: ${{ secrets.GH_TOKEN }} 
