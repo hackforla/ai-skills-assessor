@@ -58,10 +58,9 @@ final_df = df[['label_name', 'description', 'keywords', 'label_series', 'color']
 
 json_data = df.to_json(orient='records', indent=2)
 
+# writes to labels_data.json
 with open(output_path, 'w') as f:
     f.write(json_data)
 
 
-# run script from AI-SKILLS-ASSESSOR 
-# python API_repo_labels\data\excel_to_json.py
     

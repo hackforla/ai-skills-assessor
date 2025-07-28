@@ -6,73 +6,24 @@ import base64
 import re
 import time
 
+# load in labels from labels_data.json
 def load_labels():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     filepath = os.path.join(script_dir, 'data', 'labels_data.json') 
     with open(filepath, 'r') as f:
         return json.load(f)
 
-""" def get_repo_metadata(owner, repo, token):
-    headers = {
-        "Authorization": f"token {token}",
-        "Accept": "application/vnd.github+json"
-    }
-    desc = requests.get(f"https://api.github.com/repos/{owner}/{repo}", headers=headers).json().get("description") or ""
-    topics = requests.get(f"https://api.github.com/repos/{owner}/{repo}/topics", headers=headers).json().get("names") or []
-    langs = list(requests.get(f"https://api.github.com/repos/{owner}/{repo}/languages", headers=headers).json().keys())
-    readme_base64 = requests.get(f"https://api.github.com/repos/{owner}/{repo}/readme", headers=headers).json().get('content') or ""
-
-    try:
-        readme_text = base64.b64decode(readme_base64).decode('utf-8')
-    except Exception:
-        readme_text = ""
-    
-    return " ".join([desc] + topics + langs + [readme_text]).lower()
-
-
-def match_labels(repo_text, labels_data):
-    matched = []
-    words = re.findall(r'\b\w+\b', repo_text)
-    words_set = set(words)
-    
-    for label in labels_data:
-        for kw in label["keywords"]:
-            if kw.lower() in words_set:
-                print(f"Keyword matched: '{kw}' for label '{label['label_name']}'")
-                matched.append(label)
-                break
-    
-    return matched
- """
 
 def create_labels(owner, repo, labels, token):
     headers = {
         "Authorization": f"token {token}",
         "Accept": "application/vnd.github+json"
     }
-    
-    
-    """ # deleting previous labels
-    response = requests.get(
-        f"https://api.github.com/repos/{owner}/{repo}/labels",
-        headers=headers
-    )
-    existing_labels = response.json()
-
-    # deleting previous labels
-    for label in existing_labels:
-        label_name = label['name']
-        delete_url = f"https://api.github.com/repos/{owner}/{repo}/labels/{label_name}"
-        del_response = requests.delete(delete_url, headers=headers)
-
-        if del_response.status_code == 204:
-            print(f"Deleted label: {label_name}")
-        else:
-            print(f"Failed to delete label: {label_name} - {del_response.status_code}")
-             """
              
     existing_label_names = set()
     page = 1
+
+    # fetches all existing labels from target repo
     while True:
         response = requests.get(
             f"https://api.github.com/repos/{owner}/{repo}/labels",
@@ -86,22 +37,26 @@ def create_labels(owner, repo, labels, token):
         labels_page = response.json()
         if not labels_page:
             break  # no more pages
-
+        
+        # for every page of label, update existing label set and flips page
         existing_label_names.update(label['name'].strip().lower() for label in labels_page)
         page += 1
 
     failed = False
     i = 0
     while i < len(labels):
+        # retrives name of the label to be created (from list)
         label = labels[i]
         label_name = label['label_name'].strip()
         normalized_label_name = label_name.lower()
 
+        # if label to be created exists, skip
         if normalized_label_name in existing_label_names:
             print(f"Label '{label_name}' already exists, skipping creation.")
             i += 1
             continue
-
+        
+        # POST endpoint to create label
         create_resp = requests.post(
             f"https://api.github.com/repos/{owner}/{repo}/labels",
             headers=headers,
@@ -117,6 +72,7 @@ def create_labels(owner, repo, labels, token):
             existing_label_names.add(normalized_label_name)  # Update set
             i += 1  # move to next label
         elif create_resp.status_code == 403 and "rate limit" in create_resp.text.lower():
+            # rest if GitHub API rate limit is reached
             print("Rate limit hit, sleeping for 15 seconds...")
             time.sleep(15)
             # Do NOT increment i, retry same label after sleep
@@ -141,7 +97,4 @@ if __name__ == "__main__":
         sys.exit(1)
 
     labels_data = load_labels()
-    # repo_text = get_repo_metadata(owner, repo, token)
-    # matched_labels = match_labels(repo_text, labels_data)
-    # create_labels(owner, repo, matched_labels, token)
     create_labels(owner, repo, labels_data, token)
