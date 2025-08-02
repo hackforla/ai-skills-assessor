@@ -27,7 +27,7 @@ def create_labels(owner, repo, labels, token):
              
     existing_label_names = set()
     page = 1
-    retires = 3
+    retries = 3
     backoff = 5
 
     while True:
