@@ -3,8 +3,8 @@ import pandas as pd
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-input_path = os.path.join(script_dir, 'excel_labels_data.xlsx')
-output_path = os.path.join(script_dir, 'labels_data.json')
+input_path = os.path.join(script_dir, '..', 'data', 'excel_labels_data.xlsx')
+output_path = os.path.join(script_dir, '..', 'data', 'labels_data.json')
 
 df = pd.read_excel(input_path, sheet_name='all labels')
 df = df.fillna('')
@@ -56,7 +56,7 @@ df['color'] = df['label_series'].map(series_colors).fillna("cccccc")
 
 final_df = df[['label_name', 'description', 'keywords', 'label_series', 'color']]
 
-json_data = df.to_json(orient='records', indent=2)
+json_data = final_df.to_json(orient='records', indent=2)
 
 # writes to labels_data.json
 with open(output_path, 'w') as f:
