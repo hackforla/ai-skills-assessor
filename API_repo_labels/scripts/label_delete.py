@@ -2,6 +2,11 @@ from urllib.parse import quote
 import requests
 import os
 import sys
+import logging
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(message)s')
+
 
 def get_all_labels(owner, repo, headers):
     labels = []
@@ -12,20 +17,20 @@ def get_all_labels(owner, repo, headers):
 
         # API endpoint to specified repo label
         url = f"https://api.github.com/repos/{owner}/{repo}/labels?per_page=100&page={page}"
-        print(f"Fetching labels from: {url}")
+        logging.info(f"Fetching labels from: {url}")
 
         # error check while attempting to fetch labels
         try:
             response = requests.get(url, headers=headers, timeout=10)
         except requests.exceptions.RequestException as e:
-            print(f"Request failed: {e}")
+            logging.error(f"Request failed: {e}")
             sys.exit(1)
 
-        print(f"Status code: {response.status_code}")
-        print(f"Response preview: {response.text[:200]}")
+        logging.info(f"Status code: {response.status_code}")
+        logging.info(f"Response preview: {response.text[:200]}")
 
         if response.status_code != 200:
-            print(f"Failed to get labels. HTTP {response.status_code}: {response.text}")
+            logging.error(f"Failed to get labels. HTTP {response.status_code}: {response.text}")
             sys.exit(1)
 
         batch = response.json()
@@ -45,11 +50,11 @@ def delete_labels(owner, repo, token):
         "Accept": "application/vnd.github+json"
     }
 
-    print(f"Using token: {'yes' if token else 'no'}")
-    print(f"Target repo: {owner}/{repo}")
+    logging.info(f"Using token: {'yes' if token else 'no'}")
+    logging.info(f"Target repo: {owner}/{repo}")
 
     existing_labels = get_all_labels(owner, repo, headers)
-    print("Found labels:", [label['name'] for label in existing_labels])
+    logging.info("Found labels:", [label['name'] for label in existing_labels])
 
     # deletes all labels found
     for label in existing_labels:
@@ -61,24 +66,24 @@ def delete_labels(owner, repo, token):
         try:
             del_response = requests.delete(delete_url, headers=headers, timeout=10)
         except requests.exceptions.RequestException as e:
-            print(f"Request failed: {e}")
+            logging.error(f"Request failed: {e}")
             continue
 
         if del_response.status_code == 204:
-            print(f"Deleted label: {label_name}")
+            logging.info(f"Deleted label: {label_name}")
         else:
-            print(f"Failed to delete label: {label_name} - HTTP {del_response.status_code}: {del_response.text}")
+            logging.error(f"Failed to delete label: {label_name} - HTTP {del_response.status_code}: {del_response.text}")
 
 
 if __name__ == "__main__":
     # configure all three to use this file
     # hard code owner and repo and set GH_TOKEN
-    owner = ""
-    repo = ""
+    owner = "sandy3w"
+    repo = "HfLA-label-test"
     token = os.environ.get("GH_TOKEN")
 
     if not all([owner, repo, token]):
-        print("Missing required environment variables: REPO_OWNER, REPO_NAME, GH_TOKEN")
+        logging.error("Missing required environment variables: REPO_OWNER, REPO_NAME, GH_TOKEN")
         sys.exit(1)
 
     delete_labels(owner, repo, token)
