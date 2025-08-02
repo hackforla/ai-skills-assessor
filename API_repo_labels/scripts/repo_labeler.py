@@ -5,6 +5,11 @@ import sys
 import base64
 import re
 import time
+import logging
+import requests
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(message)s')
 
 # load in labels from labels_data.json
 def load_labels():
@@ -22,25 +27,34 @@ def create_labels(owner, repo, labels, token):
              
     existing_label_names = set()
     page = 1
+    retires = 3
+    backoff = 5
 
-    # fetches all existing labels from target repo
     while True:
-        response = requests.get(
-            f"https://api.github.com/repos/{owner}/{repo}/labels",
-            headers=headers,
-            params={"per_page": 100, "page": page}
-        )
-        if response.status_code != 200:
-            print(f"Failed to fetch labels: {response.status_code} - {response.text}")
+        for attempt in range(retries):
+            try:
+                response = requests.get(
+                    f"https://api.github.com/repos/{owner}/{repo}/labels",
+                    headers=headers,
+                    params={"per_page": 100, "page": page},
+                    timeout=10
+                )
+                response.raise_for_status()
+                labels_page = response.json()
+                break  # success
+            except requests.exceptions.RequestException as e:
+                logging.warning(f"Attempt {attempt + 1}/{retries} failed for page {page}: {e}")
+                time.sleep(backoff * (2 ** attempt))
+        else:
+            logging.error("Exceeded retry limit fetching labels.")
             sys.exit(1)
 
-        labels_page = response.json()
         if not labels_page:
-            break  # no more pages
-        
-        # for every page of label, update existing label set and flips page
+            break
+
         existing_label_names.update(label['name'].strip().lower() for label in labels_page)
         page += 1
+
 
     failed = False
     i = 0
@@ -52,7 +66,7 @@ def create_labels(owner, repo, labels, token):
 
         # if label to be created exists, skip
         if normalized_label_name in existing_label_names:
-            print(f"Label '{label_name}' already exists, skipping creation.")
+            logging.info(f"Label '{label_name}' already exists, skipping creation.")
             i += 1
             continue
         
@@ -68,16 +82,22 @@ def create_labels(owner, repo, labels, token):
         )
 
         if create_resp.status_code == 201:
-            print(f"Created label: {label_name}")
+            logging.info(f"Created label: {label_name}")
             existing_label_names.add(normalized_label_name)  # Update set
             i += 1  # move to next label
-        elif create_resp.status_code == 403 and "rate limit" in create_resp.text.lower():
-            # rest if GitHub API rate limit is reached
-            print("Rate limit hit, sleeping for 15 seconds...")
-            time.sleep(15)
-            # Do NOT increment i, retry same label after sleep
+        elif create_resp.status_code == 403:
+            if create_resp.headers.get("X-RateLimit-Remaining") == "0":
+                reset_time = int(create_resp.headers.get("X-RateLimit-Reset", str(int(time.time()) + 60)))
+                sleep_duration = max(reset_time - int(time.time()) + 5, 5)
+                logging.warning(f"Rate limit reached, sleeping for {sleep_duration}s...")
+                time.sleep(sleep_duration)
+                continue  # retry same label after sleeping
+            else:
+                logging.error(f"Access forbidden: {create_resp.text}")
+                failed = True
+                i += 1
         else:
-            print(f"Failed to create label: {label_name} - {create_resp.status_code} - {create_resp.text}")
+            logging.error(f"Failed to create label: {label_name} - {create_resp.status_code} - {create_resp.text}")
             failed = True
             i += 1  # skip this label, move on
 
@@ -93,7 +113,7 @@ if __name__ == "__main__":
     token = os.environ.get("GH_TOKEN")
 
     if not all([owner, repo, token]):
-        print("Missing required environment variables: REPO_OWNER, REPO_NAME, GH_TOKEN")
+        logging.error("Missing required environment variables: REPO_OWNER, REPO_NAME, GH_TOKEN")
         sys.exit(1)
 
     labels_data = load_labels()
