@@ -1,12 +1,8 @@
 {
   "repos": {
-    "sandy3w/HfLA-label-test": {
-      "labeled": true,
-      "date": "2025-08-02T18:56:12Z"
-    },
-    "sandy3w/ai-skills-assessor": {
-      "labeled": true,
-      "date": "2025-07-27T23:48:58Z"
+    "hackforla/ai-skills-assessor": {
+      "labeled": false,
+      "date": ""
     }
   }
 }
