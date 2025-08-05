@@ -1,0 +1,71 @@
+name: Auto Label Multiple Repos with Tracking
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Auto_Add_Labels_to_Target_Repos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          ref: mixin
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies
+        run: pip install requests pandas openpyxl
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Process and label target repos
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          JSON_FILE=config/target_repos_status.json
+          TMP_FILE=config/target_repos_status.tmp.json
+          UPDATED=false
+
+          # Use input redirection < <(...) to avoid subshell
+          while read -r repo_entry; do
+            REPO_FULL=$(echo "$repo_entry" | jq -r '.key')
+            OWNER=$(echo "$REPO_FULL" | cut -d'/' -f1)
+            REPO=$(echo "$REPO_FULL" | cut -d'/' -f2)
+
+            echo "Processing repo: $REPO_FULL"
+
+            GH_TOKEN=${{ secrets.PAT }} REPO_OWNER=$OWNER REPO_NAME=$REPO python API_repo_labels/scripts/repo_labeler.py
+            EXIT_CODE=$?
+
+            if [ $EXIT_CODE -eq 0 ]; then
+              NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+              jq --arg r "$REPO_FULL" --arg time "$NOW" \
+                '.repos[$r].labeled = true | .repos[$r].date = $time' $JSON_FILE > $TMP_FILE && mv $TMP_FILE $JSON_FILE
+              UPDATED=true
+            else
+              echo "Labeling failed for $REPO_FULL, skipping JSON update."
+            fi
+
+            sleep 5
+
+          done < <(jq -c '.repos | to_entries[] | select(.value.labeled == false)' $JSON_FILE)
+
+          if [ "$UPDATED" = true ]; then
+            echo "Changes detected, committing..."
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git status
+            git diff
+            git add $JSON_FILE
+            git commit -m "Update label status for target repos"
+            git log -1
+            git push origin mixin --verbose
+          else
+            echo "No repos needed labeling, nothing to commit."
+          fi
