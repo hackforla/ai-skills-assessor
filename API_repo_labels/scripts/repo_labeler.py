@@ -11,6 +11,38 @@ import requests
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s')
 
+# checks if PAT has access to specified repo
+def check_repo_access(owner, repo, token):
+    headers = {
+        "Authorization": f"token {token}",
+        "Accept": "application/vnd.github+json"
+    }
+
+    url = f"https://api.github.com/repos/{owner}/{repo}"
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        repo_data = response.json()
+        perms = repo_data.get("permissions", {})
+
+        if perms.get("admin") or perms.get("push"):
+            logging.info(f"Access confirmed to {owner}/{repo} with sufficient rights.")
+            return True
+        else:
+            logging.error(f"No write/admin access to {owner}/{repo}. "
+                          "You need push access to create labels.")
+            return False
+
+    elif response.status_code == 404:
+        logging.error(f"Repository {owner}/{repo} not found or access denied (404).")
+    elif response.status_code == 403:
+        logging.error(f"Access forbidden for {owner}/{repo} (403). Check repo permissions or token.")
+    else:
+        logging.error(f"Unexpected error checking repo access: {response.status_code} - {response.text}")
+
+    return False
+
+
 # load in labels from labels_data.json
 def load_labels():
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -20,6 +52,10 @@ def load_labels():
 
 
 def create_labels(owner, repo, labels, token):
+    if not check_repo_access(owner, repo, token):
+        logging.error(f"Stopping label creation for '{owner}/{repo}' due to repo access error.")
+        sys.exit(1)
+        
     headers = {
         "Authorization": f"token {token}",
         "Accept": "application/vnd.github+json"
