@@ -4,14 +4,21 @@ name: Fetch Issue Comments
 
 on:
   workflow_dispatch: # manual trigger for the GitHub UI
-    # inputs:
-    #   handle:
-    #     description: 'GitHub handle to filter comments by'
-    #     required: true
-    #     default: 'jasonuranta'
-    #   issue_number:
-    #     description: 'Issue number to fetch comments from'
-    #     required: false
+    inputs:
+      owner:
+        description: "Repository owner (organization or user) "
+        required: true
+        default: "hackforla"
+      repo:
+        description: "Repository name"
+        required: true
+        default: "website"
+      users:
+        description: "Comma-separated list of GitHub usernames to keep"
+        required: true
+        default: "JasonUranta,JackRichman,mgodoy2023,Zak234,anonymousanemone"
+
+
   issue_comment:
     types: [created]
 
@@ -20,7 +27,7 @@ jobs:
   fetch-comments:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout codebase
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -29,13 +36,13 @@ jobs:
           python-version: '3.13'
 
       - name: Install dependencies
-        run: |
-          pip install requests
-          pip install os
-          pip install json
+        run: pip install requests
         
       - name: Run comment fetcher
-        run: python ../../scripts/fetch_comments.py
         env:
-          # "GH_TOKEN" is the "personal access token" needed to authenticate from GitHub
+          # "GH_TOKEN" is the personal access token needed to authenticate from GitHub
           GH_TOKEN: ${{ secrets.GH_TOKEN }} 
+          INPUT_OWNER: ${{ github.event.inputs.owner || 'hackforla' }}
+          INPUT_REPO:  ${{ github.event.inputs.repo  || 'website' }}
+          INPUT_USERS: ${{ github.event.inputs.users || 'JasonUranta,JackRichman,mgodoy2023,Zak234,anonymousanemone' }}
+        run: python scripts/fetch-issue-comments.py
