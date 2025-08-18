@@ -94,6 +94,8 @@ def create_labels(owner, repo, labels, token):
 
     failed = False
     i = 0
+    success_count = 0
+    
     while i < len(labels):
         # retrives name of the label to be created (from list)
         label = labels[i]
@@ -119,8 +121,15 @@ def create_labels(owner, repo, labels, token):
 
         if create_resp.status_code == 201:
             logging.info(f"Created label: {label_name}")
-            existing_label_names.add(normalized_label_name)  # Update set
-            i += 1  # move to next label
+            existing_label_names.add(normalized_label_name)
+            success_count += 1
+            i += 1
+
+            # Add a rest every 10 successful creations
+            if success_count % 10 == 0:
+                logging.info("Batch limit reached. Resting for 5 seconds...")
+                time.sleep(5)
+                
         elif create_resp.status_code == 403:
             if create_resp.headers.get("X-RateLimit-Remaining") == "0":
                 reset_time = int(create_resp.headers.get("X-RateLimit-Reset", str(int(time.time()) + 60)))
@@ -128,6 +137,11 @@ def create_labels(owner, repo, labels, token):
                 logging.warning(f"Rate limit reached, sleeping for {sleep_duration}s...")
                 time.sleep(sleep_duration)
                 continue  # retry same label after sleeping
+            
+            elif "secondary rate limit" in create_resp.text.lower():
+                logging.error("Secondary rate limit triggered. Exiting immediately.")
+                sys.exit(1)
+            
             else:
                 logging.error(f"Access forbidden: {create_resp.text}")
                 failed = True
