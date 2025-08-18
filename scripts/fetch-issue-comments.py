@@ -4,11 +4,6 @@ from requests.exceptions import RequestException
 import os
 import json
 
-# # handle returns "jasonuranta" or another string
-# # issue_number returns a string or None
-# handle = os.environ.get("INPUT_HANDLE")         # From workflow_dispatch input
-# issue_number = os.environ.get("INPUT_ISSUE_NUMBER")  # Might be None
-
 
 
 # "GH_TOKEN" is the "personal access token" needed to authenticate from GitHub
@@ -16,11 +11,33 @@ GH_TOKEN = os.environ["GH_TOKEN"]
 owner = os.environ.get("INPUT_OWNER", "hackforla")
 repo  = os.environ.get("INPUT_REPO", "website")
 
-users_raw = os.environ.get(
-    "INPUT_USERS",
-    "JasonUranta,JackRichman,mgodoy2023,Zak234,anonymousanemone")
+
+users_raw = os.environ.get("INPUT_USERS", \
+                "JasonUranta,JackRichman,mgodoy2023,Zak234,anonymousanemone")
+
 users = {u.strip() for u in users_raw.split(",") if u.strip()}
 users_lower = {u.lower() for u in users}  # making user filtering case-insensitive
+
+
+def trim_comments(c):
+    """
+    Return a cleaned-up version of a GitHub issue comment, 
+    removing heavy user metadata and reactions.
+    """
+    
+    slimmed = dict(c)  # shallow copy of the whole comment
+    verbose_user_keys = ["node_id", "avatar_url", "gravatar_id", "url", \
+        "html_url", "followers_url", "following_url", "gists_url", \
+        "starred_url", "subscriptions_url", "organizations_url", "repos_url", \
+        "events_url", "received_events_url"]
+
+    slimmed.pop("reactions", None)
+    if "user" in slimmed:
+        user = dict(slimmed["user"])  # shallow copy so we can mutate safely
+        for key in verbose_user_keys:
+            user.pop(key, None)
+        slimmed["user"] = user
+    return slimmed
 
 
 all_comments = []
@@ -80,7 +97,7 @@ while True:
 
 
 
-filtered_comments = [c for c in all_comments if c["user"]["login"].lower() in users_lower]
+filtered_comments = [trim_comments(c) for c in all_comments if c["user"]["login"].lower() in users_lower]
 
 # Ensure output directory exists
 try:
