@@ -1,4 +1,4 @@
-name: Run Repo Fetcher
+name: Repo Contributions Fetcher
 
 on:
   workflow_dispatch:  
