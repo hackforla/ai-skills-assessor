@@ -25,7 +25,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PAT }} 
         run: |
-          python issue_contributor_fetcher/repo_fetcher.py
+          python issue_contributor_fetcher/repo_fetcher/repo_fetcher.py
 
       - name: Upload CSV Results
         uses: actions/upload-artifact@v4
