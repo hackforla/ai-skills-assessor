@@ -5,7 +5,6 @@ import csv
 import logging
 import time
 
-
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 # Script paths
@@ -34,9 +33,9 @@ USERS = config.get("users", [])
 if not ORG:
     logging.error("Org not specified in config.")
     exit(1)
-    
+
 if not USERS:
-    logging.error("User(s) not specified in config.")
+    logging.error("No users specified in config. Please provide at least one username.")
     exit(1)
 
 # --- Helper functions ---
@@ -60,46 +59,61 @@ def fetch_repos(org):
 
         repos.extend([r["full_name"] for r in data])
         page += 1
-        time.sleep(0.5)  # slight delay to avoid rate limits
+        time.sleep(0.5)
 
     logging.info(f"Found {len(repos)} repos in org {org}")
     return repos
 
 
-def fetch_contributions(repo, users):
-    """Fetch issues and PRs for given users in a repo."""
+def fetch_contributions(repo, users, max_retries=5):
+    """Fetch issues and PRs for specified users in a repo with rate-limit handling."""
     results = []
-    page = 1
 
-    while True:
-        query = f"repo:{repo} " + " ".join([f"involves:{u}" for u in users])
+    for u in users:
+        logging.info(f"Fetching contributions for user '{u}' in repo '{repo}'")
+        page = 1
+        while True:
+            query = f"repo:{repo} involves:{u}"
+            url = "https://api.github.com/search/issues"
+            params = {"q": query, "per_page": 100, "page": page}
 
-        url = "https://api.github.com/search/issues"
-        params = {"q": query, "per_page": 100, "page": page}
-        resp = requests.get(url, headers=HEADERS, params=params)
+            for attempt in range(max_retries):
+                resp = requests.get(url, headers=HEADERS, params=params)
 
-        if resp.status_code != 200:
-            logging.error(f"Error fetching contributions for {repo}: {resp.status_code} {resp.text}")
-            break
+                remaining = int(resp.headers.get("X-RateLimit-Remaining", 1))
+                reset_time = int(resp.headers.get("X-RateLimit-Reset", time.time() + 60))
 
-        data = resp.json()
-        items = data.get("items", [])
-        if not items:
-            break
+                if resp.status_code == 200:
+                    break
+                elif resp.status_code == 403 and "rate limit" in resp.text.lower():
+                    wait_seconds = max(reset_time - time.time(), 5)
+                    logging.warning(f"Rate limit hit. Waiting {int(wait_seconds)} seconds...")
+                    time.sleep(wait_seconds)
+                else:
+                    logging.error(f"Error fetching contributions for {repo}: {resp.status_code} {resp.text}")
+                    time.sleep(5)
+            else:
+                logging.error(f"Failed after {max_retries} retries for page {page} in {repo}")
+                break
 
-        for item in items:
-            results.append({
-                "user": item["user"]["login"] if item.get("user") else "unknown",
-                "repo": repo,
-                "number": item["number"],
-                "type": "PR" if "pull_request" in item else "Issue"
-            })
+            data = resp.json()
+            items = data.get("items", [])
+            if not items:
+                break
 
-        if "next" not in resp.links:
-            break
+            for item in items:
+                results.append({
+                    "user": u,  # Use the user from the USERS list
+                    "repo": repo,
+                    "number": item["number"],
+                    "type": "PR" if "pull_request" in item else "Issue"
+                })
 
-        page += 1
-        time.sleep(1)  # avoid secondary rate limits
+            if "next" not in resp.links:
+                break
+
+            page += 1
+            time.sleep(1)  # avoid secondary rate limits
 
     return results
 
@@ -109,11 +123,10 @@ def org_fetcher(org, users):
     repos = fetch_repos(org)
 
     for repo in repos:
-        logging.info(f"Fetching contributions in {repo}...")
         repo_results = fetch_contributions(repo, users)
         all_results.extend(repo_results)
 
-    # Create output folder if it doesn't exist
+    # Ensure output folder exists
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
 
     # Write CSV
@@ -127,3 +140,4 @@ def org_fetcher(org, users):
 
 if __name__ == "__main__":
     org_fetcher(ORG, USERS)
+
