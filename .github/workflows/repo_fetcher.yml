@@ -31,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: poc-results
-          path: issue_contributor_fetcher/poc_results.csv
+          path: issue_contributor_fetcher/repo_fetcher/poc_results.csv
