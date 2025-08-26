@@ -24,6 +24,9 @@ on:
 # Write permissions needed to push into repo
 permissions:
   contents: write
+  issues: read
+  pull-requests: read
+  
 
 
 jobs:
@@ -36,7 +39,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: '3.12'
 
       - name: Install dependencies
         run: pip install requests
@@ -56,7 +59,7 @@ jobs:
       - name: "Filler: blah blah blah (for now)"
         uses: actions/upload-artifact@v4
         with:
-          name: issue-comments-${{ github.rund_id }}
+          name: issue-comments-${{ github.run_id }}
           path: data/issue_comments.json
           if-no-files-found: warn
           retention-days: 90
