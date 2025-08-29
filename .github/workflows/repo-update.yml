@@ -1,4 +1,4 @@
-name: Auto Label Multiple Repos with Tracking
+name: Auto Label Multiple Repos
 
 on:
   workflow_dispatch:
@@ -63,7 +63,7 @@ jobs:
             git status
             git diff
             git add $JSON_FILE
-            git commit -m "Update label status for target repos"
+            git commit -m "GitHub Action Commit: Completed labeling for specified target repos"
             git log -1
             git push origin mixin --verbose
           else

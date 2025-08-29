@@ -1,6 +1,10 @@
 {
   "repos": {
     "hackforla/ai-skills-assessor": {
+      "labeled": true,
+      "date": "2025-08-22T01:26:53Z"
+    },
+    "hackforla/ai-skills-assessor-testrepo1": {
       "labeled": false,
       "date": ""
     }
