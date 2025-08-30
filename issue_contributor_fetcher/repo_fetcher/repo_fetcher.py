@@ -5,12 +5,6 @@ import csv
 import logging
 import time
 
-'''
-To run this script follow the following steps:
-1. set bash environment variable: export GH_TOKEN="<your token>"
-2. make sure you are not in any folders (default)
-3. run the following: python3 issue_contributor_fetcher/repo_fetcher.py
-'''
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 # set up
