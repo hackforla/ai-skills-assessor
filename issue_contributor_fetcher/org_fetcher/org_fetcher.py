@@ -75,21 +75,32 @@ def repo_exists(org, repo):
         logging.error(f"Error checking repo '{repo}' in org '{org}': {resp.status_code} {resp.text}")
         return False
 
-def fetch_contributions(repo, users, max_retries=5):
-    """Fetch issues and PRs for specified users in a repo with rate-limit handling."""
+def fetch_contributions(repo, users=None, max_retries=5):
+    """Fetch issues and PRs for specified users in a repo, or all if users is empty."""
+    users = users or []
     results = []
 
-    for u in users:
-        logging.info(f"Fetching contributions for user '{u}' in repo '{repo}'")
+    if not users:
+        # Fetch all contributions in the repo
+        users_to_query = [None]
+    else:
+        users_to_query = users
+
+    for u in users_to_query:
+        if u:
+            logging.info(f"Fetching contributions for user '{u}' in repo '{repo}'")
+            query = f"repo:{repo} involves:{u}"
+        else:
+            logging.info(f"Fetching all contributions in repo '{repo}'")
+            query = f"repo:{repo}"
+
         page = 1
         while True:
-            query = f"repo:{repo} involves:{u}"
             url = "https://api.github.com/search/issues"
             params = {"q": query, "per_page": 100, "page": page}
 
             for attempt in range(max_retries):
                 resp = requests.get(url, headers=HEADERS, params=params)
-
                 remaining = int(resp.headers.get("X-RateLimit-Remaining", 1))
                 reset_time = int(resp.headers.get("X-RateLimit-Reset", time.time() + 60))
 
@@ -113,7 +124,7 @@ def fetch_contributions(repo, users, max_retries=5):
 
             for item in items:
                 results.append({
-                    "user": u,
+                    "user": u if u else "ALL",
                     "repo": repo,
                     "number": item["number"],
                     "type": "PR" if "pull_request" in item else "Issue"
@@ -123,9 +134,10 @@ def fetch_contributions(repo, users, max_retries=5):
                 break
 
             page += 1
-            time.sleep(1)  # avoid secondary rate limits
+            time.sleep(1)
 
     return results
+
 
 
 def org_fetcher(org, users=None, target_repos=None):
