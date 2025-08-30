@@ -123,12 +123,24 @@ def fetch_contributions(repo, users=None, max_retries=5):
                 break
 
             for item in items:
-                results.append({
-                    "user": u if u else "ALL",
-                    "repo": repo,
-                    "number": item["number"],
-                    "type": "PR" if "pull_request" in item else "Issue"
-                })
+                assignees = item.get("assignees", [])
+                if assignees:
+                    # One row per assigned user
+                    for assignee in assignees:
+                        results.append({
+                            "user": assignee["login"],
+                            "repo": repo,
+                            "number": item["number"],
+                            "type": "PR" if "pull_request" in item else "Issue"
+                        })
+                else:
+                    # If no assignees, still include the issue
+                    results.append({
+                        "user": "UNASSIGNED",
+                        "repo": repo,
+                        "number": item["number"],
+                        "type": "PR" if "pull_request" in item else "Issue"
+                    })
 
             if "next" not in resp.links:
                 break
