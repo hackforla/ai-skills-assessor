@@ -134,9 +134,10 @@ def fetch_contributions(repo, users=None, max_retries=5):
                             "type": "PR" if "pull_request" in item else "Issue"
                         })
                 else:
-                    # If no assignees, still include the issue
+                    # If no assignees, use the author of the issue/PR
+                    author = item.get("user", {}).get("login", "UNKNOWN")
                     results.append({
-                        "user": "UNASSIGNED",
+                        "user": author,
                         "repo": repo,
                         "number": item["number"],
                         "type": "PR" if "pull_request" in item else "Issue"
