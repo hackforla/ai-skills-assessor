@@ -136,16 +136,17 @@ def org_fetcher(org, users, target_repos=None):
     all_results = []
 
     if target_repos:
-        repos = target_repos
-        logging.info(f"Fetching contributions for specified repos: {repos}")
+        logging.info(f"Fetching contributions for specified repos: {target_repos}")
+        for repo in target_repos:
+            # Ensure full repo name for GitHub API
+            full_repo_name = repo if '/' in repo else f"{org}/{repo}"
+            repo_results = fetch_contributions(full_repo_name, users)
+            all_results.extend(repo_results)
     else:
         repos = fetch_repos(org)
-
-    for repo in repos:
-        if not repo_exists(repo):
-            continue  # skip non-existent repos
-        repo_results = fetch_contributions(repo, users)
-        all_results.extend(repo_results)
+        for repo in repos:
+            repo_results = fetch_contributions(repo, users)
+            all_results.extend(repo_results)
 
     # Ensure output folder exists
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
