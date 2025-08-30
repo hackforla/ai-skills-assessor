@@ -29,6 +29,7 @@ with open(CONFIG_FILE, "r") as f:
 
 ORG = config.get("org")
 USERS = config.get("users", [])
+REPOS = config.get("repos", [])
 
 if not ORG:
     logging.error("Org not specified in config.")
@@ -38,8 +39,8 @@ if not USERS:
     logging.error("No users specified in config. Please provide at least one username.")
     exit(1)
 
-# --- Helper functions ---
 
+# --- Helper functions ---
 def fetch_repos(org):
     """Fetch all repos for an organization."""
     repos = []
@@ -64,6 +65,19 @@ def fetch_repos(org):
     logging.info(f"Found {len(repos)} repos in org {org}")
     return repos
 
+def repo_exists(org, repo):
+    """Check if a repo exists within the specified organization on GitHub."""
+    full_name = f"{org}/{repo}"
+    url = f"https://api.github.com/repos/{full_name}"
+    resp = requests.get(url, headers=HEADERS)
+    if resp.status_code == 200:
+        return True
+    elif resp.status_code == 404:
+        logging.warning(f"Repo '{repo}' does not exist in org '{org}'. Skipping.")
+        return False
+    else:
+        logging.error(f"Error checking repo '{repo}' in org '{org}': {resp.status_code} {resp.text}")
+        return False
 
 def fetch_contributions(repo, users, max_retries=5):
     """Fetch issues and PRs for specified users in a repo with rate-limit handling."""
@@ -103,7 +117,7 @@ def fetch_contributions(repo, users, max_retries=5):
 
             for item in items:
                 results.append({
-                    "user": u,  # Use the user from the USERS list
+                    "user": u,
                     "repo": repo,
                     "number": item["number"],
                     "type": "PR" if "pull_request" in item else "Issue"
@@ -118,11 +132,18 @@ def fetch_contributions(repo, users, max_retries=5):
     return results
 
 
-def org_fetcher(org, users):
+def org_fetcher(org, users, target_repos=None):
     all_results = []
-    repos = fetch_repos(org)
+
+    if target_repos:
+        repos = target_repos
+        logging.info(f"Fetching contributions for specified repos: {repos}")
+    else:
+        repos = fetch_repos(org)
 
     for repo in repos:
+        if not repo_exists(repo):
+            continue  # skip non-existent repos
         repo_results = fetch_contributions(repo, users)
         all_results.extend(repo_results)
 
@@ -139,5 +160,5 @@ def org_fetcher(org, users):
 
 
 if __name__ == "__main__":
-    org_fetcher(ORG, USERS)
+    org_fetcher(ORG, USERS, REPOS)
 
