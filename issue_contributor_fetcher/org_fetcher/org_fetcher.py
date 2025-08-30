@@ -35,10 +35,6 @@ if not ORG:
     logging.error("Org not specified in config.")
     exit(1)
 
-if not USERS:
-    logging.error("No users specified in config. Please provide at least one username.")
-    exit(1)
-
 
 # --- Helper functions ---
 def fetch_repos(org):
@@ -132,13 +128,13 @@ def fetch_contributions(repo, users, max_retries=5):
     return results
 
 
-def org_fetcher(org, users, target_repos=None):
+def org_fetcher(org, users=None, target_repos=None):
+    users = users or []  # ensure it's a list even if None
     all_results = []
 
     if target_repos:
         logging.info(f"Fetching contributions for specified repos: {target_repos}")
         for repo in target_repos:
-            # Ensure full repo name for GitHub API
             full_repo_name = repo if '/' in repo else f"{org}/{repo}"
             repo_results = fetch_contributions(full_repo_name, users)
             all_results.extend(repo_results)
@@ -148,15 +144,26 @@ def org_fetcher(org, users, target_repos=None):
             repo_results = fetch_contributions(repo, users)
             all_results.extend(repo_results)
 
-    # Ensure output folder exists
-    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
-
     # Write CSV
+    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
     with open(OUTPUT_FILE, "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=["user", "repo", "number", "type"])
+        fieldnames = ["user", "org", "repo", "number", "type"]
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(all_results)
 
+        for item in all_results:
+            if "/" in item["repo"]:
+                org_name, repo_name = item["repo"].split("/", 1)
+            else:
+                org_name, repo_name = org, item["repo"]
+            writer.writerow({
+                "user": item["user"],
+                "org": org_name,
+                "repo": repo_name,
+                "number": item["number"],
+                "type": item["type"]
+            })
+            
     logging.info(f"Complete. Results written to {OUTPUT_FILE}")
 
 
