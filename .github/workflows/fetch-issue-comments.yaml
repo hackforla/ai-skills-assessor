@@ -14,11 +14,18 @@ on:
         required: true
         default: "website"
       users:
-        description: "Comma-separated list of GitHub usernames to keep"
+        description: "Comma-separated list of GitHub usernames to keep (use * for all)"
         required: true
         default: "JasonUranta,JackRichman,mgodoy2023,Zak234,anonymousanemone"
+      include_pr_reviews:              
+        description: "Also fetch PR review comments (/pulls/comments)"
+        required: false
+        default: "false"
 
   issue_comment:
+    types: [created]
+  
+  pull_request_review_comment:
     types: [created]
 
 # Write permissions needed to push into repo
@@ -46,11 +53,12 @@ jobs:
         
       - name: Run comment fetcher
         env:
-          # "GH_TOKEN" is the personal access token needed to authenticate from GitHub
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }} 
           INPUT_OWNER: ${{ github.event.inputs.owner || 'hackforla' }}
           INPUT_REPO:  ${{ github.event.inputs.repo  || 'website' }}
           INPUT_USERS: ${{ github.event.inputs.users || 'JasonUranta,JackRichman,mgodoy2023,Zak234,anonymousanemone' }}
+          INPUT_INCLUDE_PR_REVIEWS: ${{ github.event.inputs.include_pr_reviews || 'false' }}
         run: python scripts/fetch-issue-comments.py
 
       
