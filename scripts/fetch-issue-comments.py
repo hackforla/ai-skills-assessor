@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import sys
 import json
@@ -26,10 +27,10 @@ owner = os.environ.get("INPUT_OWNER", "hackforla")
 repo  = os.environ.get("INPUT_REPO", "website")
 include_pr_reviews = os.environ.get("INPUT_INCLUDE_PR_REVIEWS", "false").lower() in {"1","true","yes","on"}
 
-
-users_raw = os.environ.get("INPUT_USERS", "") # general case
-users_raw = os.environ.get("INPUT_USERS", "JasonUranta,JackRichman,mgodoy2023,Zak234,anonymousanemone") # default input 
-
+users_raw = os.environ.get(
+    "INPUT_USERS",
+    "JasonUranta,JackRichman,mgodoy2023,Zak234,anonymousanemone"
+)
 whitelist = [u.strip() for u in users_raw.split(",") if u.strip() and u.strip() != "*"]
 users = set(whitelist)
 users_lower = {u.lower() for u in users}  # case-insensitive filter; empty means keep all
@@ -40,6 +41,8 @@ logging.basicConfig(
     datefmt="%Y-%m-%d %H:%M:%S",
 )
 logger = logging.getLogger(__name__)
+
+
 # ================================ Helpers ===================================
 
 def load_existing_and_last_updated(output_path: str = OUTPUT_PATH):
@@ -64,15 +67,14 @@ def load_existing_and_last_updated(output_path: str = OUTPUT_PATH):
             or c.get("created_at_iso")
             or c.get("created_at")
         )
-        # ISO 8601 Z strings compare lexicographically
-        if ts and (last is None or ts > last):
+        if ts and (last is None or ts > last):  # ISO 8601 Z strings compare lexicographically
             last = ts
     return existing, last
 
 
 def trim_comments(c: dict) -> dict:
-    """Return a cleaned-up version of a GitHub issue comment, removing heavy user metadata and reactions."""
-    slimmed = dict(c)  # shallow copy of the whole comment
+    """Return a cleaned-up version of a GitHub issue/review comment (lean user; no reactions)."""
+    slimmed = dict(c)  # shallow copy
     verbose_user_keys = [
         "node_id", "avatar_url", "gravatar_id", "url", "html_url", "followers_url",
         "following_url", "gists_url", "starred_url", "subscriptions_url",
@@ -89,7 +91,7 @@ def trim_comments(c: dict) -> dict:
 
 def to_assessment_record(c: dict, owner: str, repo: str) -> dict:
     """
-    Build a compact, assessment-ready record and keep a slim 'raw' record for provenance.
+    Build a compact, assessment-ready record for /issues/comments and keep a slim 'raw' record for provenance.
     """
     login      = (c.get("user") or {}).get("login", "")
     body       = c.get("body") or ""
@@ -144,6 +146,7 @@ def to_assessment_record(c: dict, owner: str, repo: str) -> dict:
 
 
 def to_assessment_record_from_review(c: dict, owner: str, repo: str) -> dict:
+    """Compact record builder for /pulls/comments (PR review comments)."""
     login      = (c.get("user") or {}).get("login", "")
     body       = c.get("body") or ""
     created    = c.get("created_at")
@@ -183,13 +186,11 @@ def to_assessment_record_from_review(c: dict, owner: str, repo: str) -> dict:
         "raw": trim_comments(c),
     }
 
-    # Optional: keep a couple of review-only hints (still compact)
-    # (These also exist inside raw if you need them fully.)
-    if "path" in c:        record["file_path"] = c["path"]
-    if "commit_id" in c:   record["commit_id"] = c["commit_id"]
+    # Optional: retain some review-specific hints
+    if "path" in c:      record["file_path"] = c["path"]
+    if "commit_id" in c: record["commit_id"] = c["commit_id"]
 
     return record
-
 
 
 def next_link(resp) -> str | None:
@@ -211,7 +212,7 @@ def build_session(token: str) -> requests.Session:
     s = requests.Session()
     retry = Retry(
         total=4,
-        connect=4, 
+        connect=4,
         read=4,
         backoff_factor=0.5,
         status_forcelist=[429, 500, 502, 503, 504],
@@ -220,7 +221,7 @@ def build_session(token: str) -> requests.Session:
     )
     s.mount("https://", HTTPAdapter(max_retries=retry, pool_connections=10, pool_maxsize=10))
     s.headers.update({
-        # GitHub accepts "token <...>" for PAT/GITHUB_TOKEN
+        # GitHub accepts "token <...>" or "Bearer <...>"; Bearer works for GITHUB_TOKEN.
         "Authorization": f"Bearer {token}",
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": API_VERSION,
@@ -251,110 +252,123 @@ def main():
 
     logger.info(f"Fetching comments for {owner}/{repo} (since={params.get('since','ALL')}) -> {OUTPUT_PATH}")
 
-    endpoint = f"https://api.github.com/repos/{owner}/{repo}/issues/comments"
-    url = endpoint          # first call uses endpoint + params
-    first_request = True
-    backoff = BASE_BACKOFF
-    page_idx = 1
-    new_count = 0
+    issues_endpoint  = f"https://api.github.com/repos/{owner}/{repo}/issues/comments"
+    reviews_endpoint = f"https://api.github.com/repos/{owner}/{repo}/pulls/comments"
 
     tmp_ndjson = OUTPUT_PATH + ".new.ndjson"
+    backoff   = BASE_BACKOFF
+    page_idx  = 1
+    new_count = 0
 
-    # --------- Page streaming + filter → NDJSON ---------
-    if include_pr_reviews:
-        logger.info(f"Include PR review comments enabled — fetching /pulls/comments")
-        endpoint_reviews = f"https://api.github.com/repos/{owner}/{repo}/pulls/comments"
-        url = endpoint_reviews
-        first_request = True
-        # keep whatever backoff you currently have (or reset, your choice)
-        # backoff = BASE_BACKOFF
-        # page_idx continues incrementing to reflect overall progress
+    # --------- Page streaming + filter → NDJSON (issues + optional reviews) ---------
 
-    try:
-        with open(tmp_ndjson, "a", encoding="utf-8") as tmp:  # append
-            while url:
-                req_params = params if first_request else None
-                first_request = False
+    def fetch_stream(endpoint_url: str, record_builder, label: str):
+        """Stream one endpoint, respecting rate limits, writing NDJSON lines with the right record builder."""
+        nonlocal page_idx, backoff, new_count  # reuse progress counters/backoff across phases
 
-                try:
-                    response = session.get(url, params=req_params, timeout=REQUEST_TIMEOUT)
-                except (RequestException, Timeout) as e:
-                    logger.warning(f"[Page #{page_idx}] Network error (reviews): {e}. Retrying in {backoff}s…")
-                    time.sleep(backoff)
-                    backoff = min(backoff * 2, MAX_BACKOFF)
-                    continue
+        url = endpoint_url
+        first_request = True  # each endpoint sends params on its own first page
 
-                if response.status_code in (403, 429):
-                    remaining = response.headers.get("X-RateLimit-Remaining")
-                    body = (response.text or "").lower()
-                    secondary = ("secondary rate limit" in body) or ("abuse detection" in body)
+        while url:
+            req_params = params if first_request else None
+            first_request = False
 
-                    if remaining == "0" or secondary or response.status_code == 429:
-                        retry_after = response.headers.get("Retry-After")
-                        if isinstance(retry_after, str) and retry_after.isdigit():
-                            wait = min(int(retry_after), 600)
-                            used_header = "retry-after"
+            try:
+                response = session.get(url, params=req_params, timeout=REQUEST_TIMEOUT)
+            except (RequestException, Timeout) as e:
+                logger.warning(f"[{label}] [Page #{page_idx}] Network error: {e}. Retrying in {backoff}s…")
+                time.sleep(backoff)
+                backoff = min(backoff * 2, MAX_BACKOFF)
+                continue
+
+            # Prefer Retry-After; fallback to X-RateLimit-Reset; else exponential backoff
+            if response.status_code in (403, 429):
+                remaining = response.headers.get("X-RateLimit-Remaining")
+                body = (response.text or "").lower()
+                secondary = ("secondary rate limit" in body) or ("abuse detection" in body)
+
+                if remaining == "0" or secondary or response.status_code == 429:
+                    retry_after = response.headers.get("Retry-After")
+                    if isinstance(retry_after, str) and retry_after.isdigit():
+                        wait = min(int(retry_after), 600)
+                        used_header = "retry-after"
+                    else:
+                        reset = response.headers.get("X-RateLimit-Reset")
+                        if isinstance(reset, str) and reset.isdigit():
+                            wait = min(max(int(reset) - int(time.time()) + 2, BASE_BACKOFF), 600)
+                            used_header = "rate-limit-reset"
                         else:
-                            reset = response.headers.get("X-RateLimit-Reset")
-                            if isinstance(reset, str) and reset.isdigit():
-                                wait = min(max(int(reset) - int(time.time()) + 2, BASE_BACKOFF), 600)
-                                used_header = "rate-limit-reset"
-                            else:
-                                wait = backoff
-                                used_header = "exponential"
-                                backoff = min(backoff * 2, MAX_BACKOFF)
+                            wait = backoff
+                            used_header = "exponential"
+                            backoff = min(backoff * 2, MAX_BACKOFF)
 
-                        logger.warning(f"[Page #{page_idx}] Rate limited (reviews, via={used_header}). Sleeping {wait}s…")
-                        time.sleep(wait)
-                        if used_header != "exponential":
-                            backoff = BASE_BACKOFF
-                        continue
-
-                if response.status_code in (500, 502, 503, 504):
-                    logger.warning(f"[Page #{page_idx}] Server error {response.status_code} (reviews). Retrying in {backoff}s…")
-                    time.sleep(backoff)
-                    backoff = min(backoff * 2, MAX_BACKOFF)
+                    logger.warning(f"[{label}] [Page #{page_idx}] Rate limited (via={used_header}). Sleeping {wait}s…")
+                    time.sleep(wait)
+                    if used_header != "exponential":
+                        backoff = BASE_BACKOFF  # reset backoff after handled sleep
                     continue
 
-                if response.status_code != 200:
-                    logger.error(f"GitHub API {response.status_code}: {response.text[:500]}")
-                    sys.exit(1)
+            if response.status_code in (500, 502, 503, 504):
+                logger.warning(f"[{label}] [Page #{page_idx}] Server error {response.status_code}. Retrying in {backoff}s…")
+                time.sleep(backoff)
+                backoff = min(backoff * 2, MAX_BACKOFF)
+                continue
 
+            if response.status_code != 200:
+                logger.error(f"[{label}] GitHub API {response.status_code}: {response.text[:500]}")
+                sys.exit(1)
+
+            # Parse JSON once
+            try:
+                data = response.json() or []
+            except ValueError:
+                logger.error(f"[{label}] Non-JSON response from GitHub; aborting.")
+                sys.exit(1)
+
+            # Progress logging (best effort)
+            last_url = response.links.get("last", {}).get("url")
+            if last_url:
+                from urllib.parse import urlparse, parse_qs
                 try:
-                    data = response.json() or []
-                except ValueError:
-                    logger.error("Non-JSON response from GitHub; aborting.")
-                    sys.exit(1)
-                
-                # Logging Clarity:
-                last_url = response.links.get("last", {}).get("url")
-                if last_url:
-                    from urllib.parse import urlparse, parse_qs
                     last_page = parse_qs(urlparse(last_url).query).get("page", ["?"])[0]
-                    logger.info(f"Page {page_idx}/{last_page}")
-                else:
-                    logger.info(f"Page {page_idx}")
+                    logger.info(f"[{label}] Page {page_idx}/{last_page}")
+                except Exception:
+                    logger.info(f"[{label}] Page {page_idx}")
+            else:
+                logger.info(f"[{label}] Page {page_idx}")
 
-                # Good page → reset backoff
-                backoff = BASE_BACKOFF
-                
-                if data:
-                    for c in data:
-                        login = (c.get("user") or {}).get("login", "").lower()
-                        if not users_lower or login in users_lower:
-                            record = to_assessment_record_from_review(c, owner, repo)
-                            tmp.write(json.dumps(record, ensure_ascii=False))
-                            tmp.write("\n")
-                            new_count += 1
-                
-                page_idx += 1
-                url = next_link(response)
-                if not url:
-                    break
-                
+            # Good page → reset backoff
+            backoff = BASE_BACKOFF
+
+            # Stream-filter writes with the right builder
+            if data:
+                for c in data:
+                    login = (c.get("user") or {}).get("login", "").lower()
+                    if not users_lower or login in users_lower:
+                        rec = record_builder(c, owner, repo)
+                        tmp.write(json.dumps(rec, ensure_ascii=False))
+                        tmp.write("\n")
+                        new_count += 1
+
+            page_idx += 1
+            url = next_link(response)
+            if not url:
+                break
+
+    # Always start fresh so temp NDJSON cannot balloon across runs
+    try:
+        with open(tmp_ndjson, "w", encoding="utf-8") as tmp:
+            # Phase 1: /issues/comments
+            fetch_stream(issues_endpoint, to_assessment_record, "issues")
+
+            # Phase 2: /pulls/comments (optional)
+            if include_pr_reviews:
+                logger.info("Include PR review comments enabled — fetching /pulls/comments")
+                fetch_stream(reviews_endpoint, to_assessment_record_from_review, "reviews")
+
     except OSError as e:
-        logger.error(f"Failed appending review NDJSON: {e}")
-        # Non-fatal; continue to merge what we have on disk if any.
+        logger.error(f"Failed writing temp NDJSON: {e}")
+        # Non-fatal; merge whatever exists.
 
     # --------- Merge & dedupe with existing ---------
     by_id = {}
@@ -372,7 +386,6 @@ def main():
                 if cid is not None:
                     by_id[cid] = c
     except FileNotFoundError:
-        # No new pages or nothing written; OK.
         pass
     except Exception as e:
         logger.warning(f"Failed to read temp NDJSON: {e}")
@@ -391,9 +404,9 @@ def main():
     # --------- Save final JSON (atomic) ---------
     try:
         save_json_atomic(out, OUTPUT_PATH)
-        # Clean up empty NDJSON
+        # Always remove temp NDJSON so it can't grow forever
         try:
-            if os.path.exists(tmp_ndjson) and os.path.getsize(tmp_ndjson) == 0:
+            if os.path.exists(tmp_ndjson):
                 os.remove(tmp_ndjson)
         except OSError:
             pass
@@ -407,3 +420,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
