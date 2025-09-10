@@ -6,7 +6,6 @@ import base64
 import re
 import time
 import logging
-import requests
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s')
@@ -95,6 +94,7 @@ def create_labels(owner, repo, labels, token):
     failed = False
     i = 0
     success_count = 0
+    secondary_delay = 30
     
     while i < len(labels):
         # retrives name of the label to be created (from list)
@@ -116,7 +116,8 @@ def create_labels(owner, repo, labels, token):
                 "name": label_name,
                 "description": label['description'][:100],
                 "color": label['color']
-            }
+            },
+            timeout=10
         )
 
         if create_resp.status_code == 201:
@@ -136,11 +137,13 @@ def create_labels(owner, repo, labels, token):
                 sleep_duration = max(reset_time - int(time.time()) + 5, 5)
                 logging.warning(f"Rate limit reached, sleeping for {sleep_duration}s...")
                 time.sleep(sleep_duration)
-                continue  # retry same label after sleeping
-            
+                continue  # retry same label
+
             elif "secondary rate limit" in create_resp.text.lower():
-                logging.error("Secondary rate limit triggered. Exiting immediately.")
-                sys.exit(1)
+                logging.warning(f"Secondary rate limit hit on label '{label_name}'. Sleeping {secondary_delay}s...")
+                time.sleep(secondary_delay)
+                secondary_delay = min(secondary_delay * 2, 300)
+                continue  # retry same label
             
             else:
                 logging.error(f"Access forbidden: {create_resp.text}")
