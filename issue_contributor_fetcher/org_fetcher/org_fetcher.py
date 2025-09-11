@@ -5,6 +5,26 @@ import csv
 import logging
 import time
 
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+# Build a shared session with retries
+def build_session():
+    s = requests.Session()
+    retry = Retry(
+        total=4,
+        connect=4,
+        read=4,
+        backoff_factor=1,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=frozenset(["GET"]),
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry, pool_connections=10, pool_maxsize=10)
+    s.mount("https://", adapter)
+    s.headers.update(HEADERS)
+    return s
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 # Script paths
@@ -13,15 +33,25 @@ CONFIG_FILE = os.path.join(script_dir, "target_org.json")
 OUTPUT_FILE = os.path.join(script_dir, "org_contr.csv")
 
 # --- GitHub token from secret ---
-GITHUB_TOKEN = os.environ.get("PAT")
+GITHUB_TOKEN = (
+    os.environ.get("PAT")
+    or os.environ.get("GITHUB_TOKEN")
+    or os.environ.get("GH_TOKEN")
+)
 if not GITHUB_TOKEN:
-    logging.error("PAT token not found in environment. Make sure to set it as a secret in GitHub Actions.")
-    exit(1)
+    logging.error("GitHub token not found in env (PAT/GITHUB_TOKEN/GH_TOKEN).")
+    raise SystemExit(1)
 
 HEADERS = {
-    "Authorization": f"token {GITHUB_TOKEN}",
-    "Accept": "application/vnd.github+json"
+    "Authorization": f"Bearer {GITHUB_TOKEN}",
+    "Accept": "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+    "User-Agent": "org-contributions-fetcher/1.0",
 }
+
+# build session after header is defined
+SESSION = build_session()
+REQUEST_TIMEOUT = 15 
 
 # Load configuration
 with open(CONFIG_FILE, "r") as f:
@@ -44,7 +74,7 @@ def fetch_repos(org):
     while True:
         url = f"https://api.github.com/orgs/{org}/repos"
         params = {"per_page": 100, "page": page}
-        resp = requests.get(url, headers=HEADERS, params=params)
+        resp = SESSION.get(url, params=params, timeout=REQUEST_TIMEOUT)
 
         if resp.status_code != 200:
             logging.error(f"Error fetching repos for org {org}: {resp.status_code} {resp.text}")
@@ -56,7 +86,6 @@ def fetch_repos(org):
 
         repos.extend([r["full_name"] for r in data])
         page += 1
-        time.sleep(0.5)
 
     logging.info(f"Found {len(repos)} repos in org {org}")
     return repos
@@ -65,7 +94,8 @@ def repo_exists(org, repo):
     """Check if a repo exists within the specified organization on GitHub."""
     full_name = f"{org}/{repo}"
     url = f"https://api.github.com/repos/{full_name}"
-    resp = requests.get(url, headers=HEADERS)
+    resp = SESSION.get(url, timeout=REQUEST_TIMEOUT)
+
     if resp.status_code == 200:
         return True
     elif resp.status_code == 404:
@@ -100,7 +130,7 @@ def fetch_contributions(repo, users=None, max_retries=5):
             params = {"q": query, "per_page": 100, "page": page}
 
             for attempt in range(max_retries):
-                resp = requests.get(url, headers=HEADERS, params=params)
+                resp = SESSION.get(url, params=params, timeout=REQUEST_TIMEOUT)
                 remaining = int(resp.headers.get("X-RateLimit-Remaining", 1))
                 reset_time = int(resp.headers.get("X-RateLimit-Reset", time.time() + 60))
 
@@ -112,7 +142,6 @@ def fetch_contributions(repo, users=None, max_retries=5):
                     time.sleep(wait_seconds)
                 else:
                     logging.error(f"Error fetching contributions for {repo}: {resp.status_code} {resp.text}")
-                    time.sleep(5)
             else:
                 logging.error(f"Failed after {max_retries} retries for page {page} in {repo}")
                 break
@@ -147,7 +176,6 @@ def fetch_contributions(repo, users=None, max_retries=5):
                 break
 
             page += 1
-            time.sleep(1)
 
     return results
 

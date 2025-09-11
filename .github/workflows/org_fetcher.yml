@@ -16,8 +16,23 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: Install dependencies
         run: pip install requests
+
+      - name: Check for GH_TOKEN (PAT)
+        run: |
+          if [ -z "${{ secrets.PAT }}" ]; then
+            echo "::error::GH_TOKEN (PAT) is not set"
+            exit 1
+          fi
 
       - name: Run Org Fetcher
         env:
