@@ -1,6 +1,6 @@
 [
   {
-    "label_name":"Approach: Agile",
+    "label_name":"x- Approach: Agile",
     "description":"Iterative, Collaborative Development",
     "keywords":[
       "agile"
@@ -9,7 +9,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"Approach: BDD",
+    "label_name":"x- Approach: BDD",
     "description":"Behavior-Driven Development with Pre-Written Tests",
     "keywords":[
       "bdd"
@@ -18,7 +18,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"Approach: DDD",
+    "label_name":"x- Approach: DDD",
     "description":"Uses Domain Concepts for Software Design",
     "keywords":[
       "ddd"
@@ -27,7 +27,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"Approach: FDD",
+    "label_name":"x- Approach: FDD",
     "description":"Feature-Driven Development",
     "keywords":[
       "fdd"
@@ -36,7 +36,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"Approach: TDD",
+    "label_name":"x- Approach: TDD",
     "description":"Test-Driven Development",
     "keywords":[
       "tdd"
@@ -45,7 +45,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"Approach: WCAG",
+    "label_name":"x- Approach: WCAG",
     "description":"Web Accessibility Standards Implementation",
     "keywords":[
       "wcag"
@@ -54,7 +54,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"Approach: Software Licensing",
+    "label_name":"x- Approach: Software Licensing",
     "description":"Open Source, Liability, Stakeholder Agreements",
     "keywords":[
       "software licensing"
@@ -63,7 +63,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"Approach: Comparative Analysis",
+    "label_name":"x- Approach: Comparative Analysis",
     "description":"Comparative Analysis",
     "keywords":[
       "comparative analysis"
@@ -72,7 +72,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"Approach: OOP",
+    "label_name":"x- Approach: OOP",
     "description":"Object-Oriented Programming",
     "keywords":[
       "oop"
@@ -81,7 +81,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"Architectural pattern: MVC",
+    "label_name":"x- Architectural pattern: MVC",
     "description":"Model-View-Controller",
     "keywords":[
       "mvc"
@@ -90,7 +90,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"BDD: User Stories",
+    "label_name":"x- BDD: User Stories",
     "description":"Behavior-Driven Requirements with Given\/When\/Then",
     "keywords":[
       "user stories"
@@ -99,7 +99,7 @@
     "color":"9edae5"
   },
   {
-    "label_name":"BDD: Waiting on Stakeholder",
+    "label_name":"x- BDD: Waiting on Stakeholder",
     "description":"Blocked Pending Stakeholder Input or Decision",
     "keywords":[
       "waiting on stakeholder"
@@ -108,7 +108,7 @@
     "color":"9edae5"
   },
   {
-    "label_name":"BDD: Living Documentation",
+    "label_name":"x- BDD: Living Documentation",
     "description":"Maintains Executable Specs as Current Documentation",
     "keywords":[
       "living documentation"
@@ -117,7 +117,7 @@
     "color":"9edae5"
   },
   {
-    "label_name":"BDD: Continuous Feedback",
+    "label_name":"x- BDD: Continuous Feedback",
     "description":"Integrates Ongoing Feedback from Tests and Users",
     "keywords":[
       "continuous feedback"
@@ -126,7 +126,7 @@
     "color":"9edae5"
   },
   {
-    "label_name":"Database: NoSQL",
+    "label_name":"x- Database: NoSQL",
     "description":"Nonrelational Data Stores E.g., MongoDB, Redis",
     "keywords":[
       "nosql"
@@ -135,7 +135,7 @@
     "color":"2ca02c"
   },
   {
-    "label_name":"Database: ORMs",
+    "label_name":"x- Database: ORMs",
     "description":"Object-Relational Mappers",
     "keywords":[
       "orms"
@@ -144,7 +144,7 @@
     "color":"2ca02c"
   },
   {
-    "label_name":"Database: SQL",
+    "label_name":"x- Database: SQL",
     "description":"Structured Query Language in Relational DBs",
     "keywords":[
       "sql"
@@ -153,7 +153,7 @@
     "color":"2ca02c"
   },
   {
-    "label_name":"Documentation: Document",
+    "label_name":"x- Documentation: Document",
     "description":"Structured Document Creation and Editing",
     "keywords":[
       "document"
@@ -162,7 +162,7 @@
     "color":"e377c2"
   },
   {
-    "label_name":"Documentation: Instructions",
+    "label_name":"x- Documentation: Instructions",
     "description":"Write Step-By-Step Procedures",
     "keywords":[
       "instructions"
@@ -171,7 +171,7 @@
     "color":"e377c2"
   },
   {
-    "label_name":"Documentation: Shared Design Workspace",
+    "label_name":"x- Documentation: Shared Design Workspace",
     "description":"Shared Design Tools (Figma, Framer, Canva)",
     "keywords":[
       "shared design workspace"
@@ -180,7 +180,7 @@
     "color":"e377c2"
   },
   {
-    "label_name":"Documentation: Slides",
+    "label_name":"x- Documentation: Slides",
     "description":"Presentation Material Design and Updates",
     "keywords":[
       "slides"
@@ -189,7 +189,7 @@
     "color":"e377c2"
   },
   {
-    "label_name":"Documentation: Spreadsheet",
+    "label_name":"x- Documentation: Spreadsheet",
     "description":"Tabular Data Creation and Management",
     "keywords":[
       "spreadsheet"
@@ -198,7 +198,7 @@
     "color":"e377c2"
   },
   {
-    "label_name":"Documentation: WIKI",
+    "label_name":"x- Documentation: WIKI",
     "description":"Collaborative Knowledge Base Creation and Updates",
     "keywords":[
       "wiki"
@@ -207,7 +207,7 @@
     "color":"e377c2"
   },
   {
-    "label_name":"Framework: Django",
+    "label_name":"x- Framework: Django",
     "description":"Web Backend Development with Django",
     "keywords":[
       "django"
@@ -216,7 +216,7 @@
     "color":"ff7f0e"
   },
   {
-    "label_name":"Framework: Express.js",
+    "label_name":"x- Framework: Express.js",
     "description":"Server API Development with Express.js",
     "keywords":[
       "express.js"
@@ -225,7 +225,7 @@
     "color":"ff7f0e"
   },
   {
-    "label_name":"Framework: FastAPI",
+    "label_name":"x- Framework: FastAPI",
     "description":"API Development with Python FastAPI",
     "keywords":[
       "fastapi"
@@ -234,7 +234,7 @@
     "color":"ff7f0e"
   },
   {
-    "label_name":"Framework: Flask",
+    "label_name":"x- Framework: Flask",
     "description":"Lightweight Web App Development with Flask",
     "keywords":[
       "flask"
@@ -243,7 +243,7 @@
     "color":"ff7f0e"
   },
   {
-    "label_name":"Framework: Jekyll",
+    "label_name":"x- Framework: Jekyll",
     "description":"Static Website Development with Jekyll",
     "keywords":[
       "jekyll"
@@ -252,7 +252,7 @@
     "color":"ff7f0e"
   },
   {
-    "label_name":"Framework: Node.js",
+    "label_name":"x- Framework: Node.js",
     "description":"Server-Side Logic Implementation with Node.js",
     "keywords":[
       "node.js"
@@ -261,7 +261,7 @@
     "color":"ff7f0e"
   },
   {
-    "label_name":"Framework: React",
+    "label_name":"x- Framework: React",
     "description":"Interactive UI Component Creation with React",
     "keywords":[
       "react"
@@ -270,7 +270,7 @@
     "color":"ff7f0e"
   },
   {
-    "label_name":"Infrastructure: APM",
+    "label_name":"x- Infrastructure: APM",
     "description":"Application and Performance Monitoring (APM)",
     "keywords":[
       "apm"
@@ -279,7 +279,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Caching",
+    "label_name":"x- Infrastructure: Caching",
     "description":"Data Caching for Performance Boost",
     "keywords":[
       "caching"
@@ -288,7 +288,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: CI\/CD",
+    "label_name":"x- Infrastructure: CI\/CD",
     "description":"Continuous Integration and Deployment",
     "keywords":[
       "ci",
@@ -298,7 +298,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Cloud Hosting",
+    "label_name":"x- Infrastructure: Cloud Hosting",
     "description":"Cloud Hosting excluding Container Management",
     "keywords":[
       "cloud hosting"
@@ -307,7 +307,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Container - Hosting Deployment",
+    "label_name":"x- Infrastructure: Container - Hosting Deployment",
     "description":"Deploying Containers to Hosting Environments",
     "keywords":[
       "container - hosting deployment"
@@ -316,7 +316,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Container - Local Deployment",
+    "label_name":"x- Infrastructure: Container - Local Deployment",
     "description":"Container Deployment for Dev\/Testing",
     "keywords":[
       "container - local deployment"
@@ -325,7 +325,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: CDN",
+    "label_name":"x- Infrastructure: CDN",
     "description":"Content Delivery Network",
     "keywords":[
       "cdn"
@@ -334,7 +334,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: CMS",
+    "label_name":"x- Infrastructure: CMS",
     "description":"Content Management Systems",
     "keywords":[
       "cms"
@@ -343,7 +343,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: DNS",
+    "label_name":"x- Infrastructure: DNS",
     "description":"Domain Name System Management",
     "keywords":[
       "dns"
@@ -352,7 +352,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Filesystems",
+    "label_name":"x- Infrastructure: Filesystems",
     "description":"Storage Structure and File Management",
     "keywords":[
       "filesystems"
@@ -361,7 +361,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Forms\/Response Spreadsheet",
+    "label_name":"x- Infrastructure: Forms\/Response Spreadsheet",
     "description":"Integrates Forms With Data Collection in Spreadsheets",
     "keywords":[
       "forms",
@@ -371,7 +371,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: HTTP",
+    "label_name":"x- Infrastructure: HTTP",
     "description":"HyperText Transfer Protocol",
     "keywords":[
       "http"
@@ -380,7 +380,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: IaC",
+    "label_name":"x- Infrastructure: IaC",
     "description":"Infrastructure as Code",
     "keywords":[
       "iac"
@@ -389,7 +389,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Ingress Controllers",
+    "label_name":"x- Infrastructure: Ingress Controllers",
     "description":"Kubernetes",
     "keywords":[
       "ingress controllers"
@@ -398,7 +398,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Load Balancers",
+    "label_name":"x- Infrastructure: Load Balancers",
     "description":"Balances Network Traffic Across Servers",
     "keywords":[
       "load balancers"
@@ -407,7 +407,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Microservices",
+    "label_name":"x- Infrastructure: Microservices",
     "description":"Builds or Maintains Loosely Coupled Service Architectures",
     "keywords":[
       "microservices"
@@ -416,7 +416,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Provisioning Tools",
+    "label_name":"x- Infrastructure: Provisioning Tools",
     "description":"Automated Environment Setup with Infrastructure as Code",
     "keywords":[
       "provisioning tools"
@@ -425,7 +425,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Reverse Proxies",
+    "label_name":"x- Infrastructure: Reverse Proxies",
     "description":"Traffic Routing and Security via Proxy Servers",
     "keywords":[
       "reverse proxies"
@@ -434,7 +434,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Script Hosting",
+    "label_name":"x- Infrastructure: Script Hosting",
     "description":"Script Hosting for Client and Server Use",
     "keywords":[
       "script hosting"
@@ -443,7 +443,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Service Discovery",
+    "label_name":"x- Infrastructure: Service Discovery",
     "description":"Automatic Service Registration and Discovery",
     "keywords":[
       "service discovery"
@@ -452,7 +452,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: VPCs",
+    "label_name":"x- Infrastructure: VPCs",
     "description":"Virtual Private Clouds",
     "keywords":[
       "vpcs"
@@ -461,7 +461,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: WS",
+    "label_name":"x- Infrastructure: WS",
     "description":"Web Sockets",
     "keywords":[
       "ws"
@@ -470,7 +470,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Infrastructure: Container Orchestration Platform",
+    "label_name":"x- Infrastructure: Container Orchestration Platform",
     "description":"Container Orchestration (Usually Kubernetes)",
     "keywords":[
       "container orchestration platform"
@@ -479,7 +479,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"Kanban: Limiting WIP",
+    "label_name":"x- Kanban: Limiting WIP",
     "description":"Limiting Work in Progress",
     "keywords":[
       "limiting wip"
@@ -488,7 +488,7 @@
     "color":"c49c94"
   },
   {
-    "label_name":"Kanban: Workflow Policies",
+    "label_name":"x- Kanban: Workflow Policies",
     "description":"Task Movement and Board Rules",
     "keywords":[
       "workflow policies"
@@ -497,7 +497,7 @@
     "color":"c49c94"
   },
   {
-    "label_name":"Kanban: Real-Time Updates",
+    "label_name":"x- Kanban: Real-Time Updates",
     "description":"Live Task Status Updates",
     "keywords":[
       "real-time updates"
@@ -506,7 +506,7 @@
     "color":"c49c94"
   },
   {
-    "label_name":"Kanban: Lead Time Measurement",
+    "label_name":"x- Kanban: Lead Time Measurement",
     "description":"Measures Total Task Duration (Incl. Wait)",
     "keywords":[
       "lead time measurement"
@@ -515,7 +515,7 @@
     "color":"c49c94"
   },
   {
-    "label_name":"Kanban: Swimlanes",
+    "label_name":"x- Kanban: Swimlanes",
     "description":"Task Organization in Horizontal Lanes",
     "keywords":[
       "swimlanes"
@@ -524,7 +524,7 @@
     "color":"c49c94"
   },
   {
-    "label_name":"Kanban: Pull-Based System",
+    "label_name":"x- Kanban: Pull-Based System",
     "description":"Task Advancement Based on Capacity",
     "keywords":[
       "pull-based system"
@@ -533,7 +533,7 @@
     "color":"c49c94"
   },
   {
-    "label_name":"Kanban: Visual Workflow Board\/Swimlanes",
+    "label_name":"x- Kanban: Visual Workflow Board\/Swimlanes",
     "description":"Visual Boards to Track Task Progress",
     "keywords":[
       "visual workflow board",
@@ -543,7 +543,7 @@
     "color":"c49c94"
   },
   {
-    "label_name":"Language & File Type: ICNS",
+    "label_name":"x- Language & File Type: ICNS",
     "description":".icns File - Apple Icon Format",
     "keywords":[
       "icns"
@@ -552,7 +552,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: TypeScript",
+    "label_name":"x- Language & File Type: TypeScript",
     "description":".ts File - TypeScript Language",
     "keywords":[
       "typescript"
@@ -561,7 +561,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: WebP",
+    "label_name":"x- Language & File Type: WebP",
     "description":".webp File - Web Picture Format (WebP)",
     "keywords":[
       "webp"
@@ -570,7 +570,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: Liquid",
+    "label_name":"x- Language & File Type: Liquid",
     "description":".liquid File - Liquid Template",
     "keywords":[
       "liquid"
@@ -579,7 +579,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: Jupyter\/IPyNB",
+    "label_name":"x- Language & File Type: Jupyter\/IPyNB",
     "description":".ipynb File - Jupyter Interactive Notebook",
     "keywords":[
       "jupyter",
@@ -589,7 +589,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: Package Managers",
+    "label_name":"x- Language & File Type: Package Managers",
     "description":"Package Manager Files (e.g., package.json, Pipfile)",
     "keywords":[
       "package managers"
@@ -598,7 +598,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: RAW",
+    "label_name":"x- Language & File Type: RAW",
     "description":".raw, .cr2, .nef, etc. File - Raw Image Formats",
     "keywords":[
       "raw"
@@ -607,7 +607,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: Shell",
+    "label_name":"x- Language & File Type: Shell",
     "description":".sh File - Shell Scripting",
     "keywords":[
       "shell"
@@ -616,7 +616,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: BMP",
+    "label_name":"x- Language & File Type: BMP",
     "description":".bmp File - Bitmap Format",
     "keywords":[
       "bmp"
@@ -625,7 +625,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: EPS",
+    "label_name":"x- Language & File Type: EPS",
     "description":".eps File - Encapsulated PostScript",
     "keywords":[
       "eps"
@@ -634,7 +634,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: GIF",
+    "label_name":"x- Language & File Type: GIF",
     "description":".gif File - Graphics Interchange",
     "keywords":[
       "gif"
@@ -643,7 +643,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: HEIF",
+    "label_name":"x- Language & File Type: HEIF",
     "description":".heif\/.heic File - High Efficiency Format",
     "keywords":[
       "heif"
@@ -652,7 +652,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: JPEG",
+    "label_name":"x- Language & File Type: JPEG",
     "description":".jpg\/.jpeg File - Joint Photographic Format",
     "keywords":[
       "jpeg"
@@ -661,7 +661,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: PNG",
+    "label_name":"x- Language & File Type: PNG",
     "description":".png File - Portable Network Graphics",
     "keywords":[
       "png"
@@ -670,7 +670,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: PSD",
+    "label_name":"x- Language & File Type: PSD",
     "description":".psd File - Photoshop Document",
     "keywords":[
       "psd"
@@ -679,7 +679,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: SVG",
+    "label_name":"x- Language & File Type: SVG",
     "description":".svg File - Scalable Vector Graphics",
     "keywords":[
       "svg"
@@ -688,7 +688,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: TIFF",
+    "label_name":"x- Language & File Type: TIFF",
     "description":".tif\/.tiff File - Tagged Image Format",
     "keywords":[
       "tiff"
@@ -697,7 +697,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: CSS",
+    "label_name":"x- Language & File Type: CSS",
     "description":".css File - Cascading Style Sheets",
     "keywords":[
       "css"
@@ -706,7 +706,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: HTML",
+    "label_name":"x- Language & File Type: HTML",
     "description":".html, .htm File - HyperText Markup Language",
     "keywords":[
       "html"
@@ -715,7 +715,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: Markdown",
+    "label_name":"x- Language & File Type: Markdown",
     "description":".md File - Markdown Markup Language",
     "keywords":[
       "markdown"
@@ -724,7 +724,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: PDF",
+    "label_name":"x- Language & File Type: PDF",
     "description":".pdf File - Portable Document Format",
     "keywords":[
       "pdf"
@@ -733,7 +733,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: SCSS",
+    "label_name":"x- Language & File Type: SCSS",
     "description":".scss File - Sassy Cascading Style Sheets",
     "keywords":[
       "scss"
@@ -742,7 +742,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: YAML",
+    "label_name":"x- Language & File Type: YAML",
     "description":".yaml, .yml File - YAML Ain't Markup Language",
     "keywords":[
       "yaml"
@@ -751,7 +751,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: R",
+    "label_name":"x- Language & File Type: R",
     "description":".r File - R Programming Language",
     "keywords":[
       "r"
@@ -760,7 +760,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: GraphQL",
+    "label_name":"x- Language & File Type: GraphQL",
     "description":".graphql or .gql File - GraphQL Query Language",
     "keywords":[
       "graphql"
@@ -769,7 +769,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: JavaScript",
+    "label_name":"x- Language & File Type: JavaScript",
     "description":".js File - JavaScript Programming Language",
     "keywords":[
       "javascript"
@@ -778,7 +778,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Language & File Type: Python",
+    "label_name":"x- Language & File Type: Python",
     "description":".py File - Python Programming Language",
     "keywords":[
       "python"
@@ -787,7 +787,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"Lean: Decomposing Issues",
+    "label_name":"x- Lean: Decomposing Issues",
     "description":"Breaking Work Into Smaller Tasks",
     "keywords":[
       "decomposing issues"
@@ -796,7 +796,7 @@
     "color":"dbdb8d"
   },
   {
-    "label_name":"Lean: Labeling",
+    "label_name":"x- Lean: Labeling",
     "description":"Tagging Tasks With Categories or Metadata",
     "keywords":[
       "labeling"
@@ -805,7 +805,7 @@
     "color":"dbdb8d"
   },
   {
-    "label_name":"Method: Algorithms",
+    "label_name":"x- Method: Algorithms",
     "description":"Algorithmic Logic and Processes Implementation",
     "keywords":[
       "algorithms"
@@ -814,7 +814,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Async Handling",
+    "label_name":"x- Method: Async Handling",
     "description":"Asynchronous Code Execution Management",
     "keywords":[
       "async handling"
@@ -823,7 +823,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Blockquotes",
+    "label_name":"x- Method: Blockquotes",
     "description":"Markdown and Documentation Quotes",
     "keywords":[
       "blockquotes"
@@ -832,7 +832,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Command-Line Scripting",
+    "label_name":"x- Method: Command-Line Scripting",
     "description":"Command-Line Script Automation",
     "keywords":[
       "command-line scripting"
@@ -841,7 +841,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Control Flow",
+    "label_name":"x- Method: Control Flow",
     "description":"Program Logic with Branching and Loops",
     "keywords":[
       "control flow"
@@ -850,7 +850,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: DOM Manipulation",
+    "label_name":"x- Method: DOM Manipulation",
     "description":"Dynamic Webpage Structure Changes via JavaScript",
     "keywords":[
       "dom manipulation"
@@ -859,7 +859,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Event Handling",
+    "label_name":"x- Method: Event Handling",
     "description":"User and System Event Handling",
     "keywords":[
       "event handling"
@@ -868,7 +868,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Extends",
+    "label_name":"x- Method: Extends",
     "description":"Inheritance, Template, and Shared Code Extension",
     "keywords":[
       "extends"
@@ -877,7 +877,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: File Handling",
+    "label_name":"x- Method: File Handling",
     "description":"Programmatic File Read\/Write",
     "keywords":[
       "file handling"
@@ -886,7 +886,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Filters",
+    "label_name":"x- Method: Filters",
     "description":"Data Collection Filtering",
     "keywords":[
       "filters"
@@ -895,7 +895,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Forms\/Input",
+    "label_name":"x- Method: Forms\/Input",
     "description":"Google Forms and Sheets, Notion",
     "keywords":[
       "forms",
@@ -905,7 +905,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Functions",
+    "label_name":"x- Method: Functions",
     "description":"Reusable Code Blocks (Functions)",
     "keywords":[
       "functions"
@@ -914,7 +914,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Headings",
+    "label_name":"x- Method: Headings",
     "description":"Semantic Content Structuring with Headings",
     "keywords":[
       "headings"
@@ -923,7 +923,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Includes",
+    "label_name":"x- Method: Includes",
     "description":"Reusable Partial Templates and Snippets",
     "keywords":[
       "includes"
@@ -932,7 +932,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Links\/Navigation",
+    "label_name":"x- Method: Links\/Navigation",
     "description":"Site Navigation and Hyperlink Management",
     "keywords":[
       "links",
@@ -942,7 +942,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Lists",
+    "label_name":"x- Method: Lists",
     "description":"Ordered and Unordered List Management",
     "keywords":[
       "lists"
@@ -951,7 +951,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Math Operations",
+    "label_name":"x- Method: Math Operations",
     "description":"Arithmetic and Numeric Calculations",
     "keywords":[
       "math operations"
@@ -960,7 +960,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Mixins",
+    "label_name":"x- Method: Mixins",
     "description":"Reusable Style or Code Bundles (E.g., SCSS Mixins)",
     "keywords":[
       "mixins"
@@ -969,7 +969,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Modules\/Imports",
+    "label_name":"x- Method: Modules\/Imports",
     "description":"Code Organization with Modules and Imports",
     "keywords":[
       "modules",
@@ -979,7 +979,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Nesting",
+    "label_name":"x- Method: Nesting",
     "description":"Hierarchical Code and Content Structures",
     "keywords":[
       "nesting"
@@ -988,7 +988,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Objects",
+    "label_name":"x- Method: Objects",
     "description":"Object-Based Data and Behavior Organization",
     "keywords":[
       "objects"
@@ -997,7 +997,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: REST APIs",
+    "label_name":"x- Method: REST APIs",
     "description":"Representational State Transfer APIs",
     "keywords":[
       "rest apis"
@@ -1006,7 +1006,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Semantic Layout",
+    "label_name":"x- Method: Semantic Layout",
     "description":"Semantic HTML for Structure and Accessibility",
     "keywords":[
       "semantic layout"
@@ -1015,7 +1015,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Local Storage",
+    "label_name":"x- Method: Local Storage",
     "description":"Session Files",
     "keywords":[
       "local storage"
@@ -1024,7 +1024,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: String Handling",
+    "label_name":"x- Method: String Handling",
     "description":"Text and Character Sequence Manipulation",
     "keywords":[
       "string handling"
@@ -1033,7 +1033,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Method: Tables",
+    "label_name":"x- Method: Tables",
     "description":"Markdown, Spreadsheet, and Data Tables",
     "keywords":[
       "tables"
@@ -1042,7 +1042,7 @@
     "color":"98df8a"
   },
   {
-    "label_name":"Scrum: Sprint Planning",
+    "label_name":"x- Scrum: Sprint Planning",
     "description":"Defining Sprint Goals and Backlog",
     "keywords":[
       "sprint planning"
@@ -1051,7 +1051,7 @@
     "color":"f7b6d2"
   },
   {
-    "label_name":"Scrum: Stand-Up",
+    "label_name":"x- Scrum: Stand-Up",
     "description":"Daily Team Status Meeting",
     "keywords":[
       "stand-up"
@@ -1060,7 +1060,7 @@
     "color":"f7b6d2"
   },
   {
-    "label_name":"Scrum: Review",
+    "label_name":"x- Scrum: Review",
     "description":"Sprint Demo and Stakeholder Feedback",
     "keywords":[
       "review"
@@ -1069,7 +1069,7 @@
     "color":"f7b6d2"
   },
   {
-    "label_name":"Scrum: Retrospective",
+    "label_name":"x- Scrum: Retrospective",
     "description":"Sprint Improvement and Reflection",
     "keywords":[
       "retrospective"
@@ -1078,7 +1078,7 @@
     "color":"f7b6d2"
   },
   {
-    "label_name":"Scrum: Sprint",
+    "label_name":"x- Scrum: Sprint",
     "description":"Timeboxed Development Cycle",
     "keywords":[
       "sprint"
@@ -1087,7 +1087,7 @@
     "color":"f7b6d2"
   },
   {
-    "label_name":"Security: Cookies",
+    "label_name":"x- Security: Cookies",
     "description":"Session and Tracking Data in Browsers",
     "keywords":[
       "cookies"
@@ -1096,7 +1096,7 @@
     "color":"8c564b"
   },
   {
-    "label_name":"Security: CORS",
+    "label_name":"x- Security: CORS",
     "description":"Cross-Origin Resource Sharing",
     "keywords":[
       "cors"
@@ -1105,7 +1105,7 @@
     "color":"8c564b"
   },
   {
-    "label_name":"Security: Cryptography",
+    "label_name":"x- Security: Cryptography",
     "description":"Data Encryption and Security",
     "keywords":[
       "cryptography"
@@ -1114,7 +1114,7 @@
     "color":"8c564b"
   },
   {
-    "label_name":"Security: Firewalls\/Security Groups",
+    "label_name":"x- Security: Firewalls\/Security Groups",
     "description":"Network Access Controls",
     "keywords":[
       "firewalls",
@@ -1124,7 +1124,7 @@
     "color":"8c564b"
   },
   {
-    "label_name":"Security: IAM",
+    "label_name":"x- Security: IAM",
     "description":"Identity & Access Management",
     "keywords":[
       "iam"
@@ -1133,7 +1133,7 @@
     "color":"8c564b"
   },
   {
-    "label_name":"Security: OAuth2",
+    "label_name":"x- Security: OAuth2",
     "description":"OAuth2 Authorization Framework",
     "keywords":[
       "oauth2"
@@ -1142,7 +1142,7 @@
     "color":"8c564b"
   },
   {
-    "label_name":"Security: SSL\/TLS",
+    "label_name":"x- Security: SSL\/TLS",
     "description":"SSL\/TLS Security Protocols",
     "keywords":[
       "ssl",
@@ -1152,7 +1152,7 @@
     "color":"8c564b"
   },
   {
-    "label_name":"Security: VPNs",
+    "label_name":"x- Security: VPNs",
     "description":"Virtual Private Networks",
     "keywords":[
       "vpns"
@@ -1161,7 +1161,7 @@
     "color":"8c564b"
   },
   {
-    "label_name":"Security: ZTN",
+    "label_name":"x- Security: ZTN",
     "description":"Zero Trust Networks",
     "keywords":[
       "ztn"
@@ -1170,7 +1170,7 @@
     "color":"8c564b"
   },
   {
-    "label_name":"Skill: Adding Assets",
+    "label_name":"x- Skill: Adding Assets",
     "description":"Images, PDFs, External Links",
     "keywords":[
       "adding assets"
@@ -1179,7 +1179,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Auditing",
+    "label_name":"x- Skill: Auditing",
     "description":"Code, Security, Compliance, Content, Process",
     "keywords":[
       "auditing"
@@ -1188,7 +1188,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Creating",
+    "label_name":"x- Skill: Creating",
     "description":"Code, Documentation, Diagrams, User Stories, Interfaces",
     "keywords":[
       "creating"
@@ -1197,7 +1197,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Deploying",
+    "label_name":"x- Skill: Deploying",
     "description":"Code Deployment to Staging or Production",
     "keywords":[
       "deploying"
@@ -1206,7 +1206,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Diagram",
+    "label_name":"x- Skill: Diagram",
     "description":"Architecture, Flow, System, Process Diagrams",
     "keywords":[
       "diagram"
@@ -1215,7 +1215,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Editing",
+    "label_name":"x- Skill: Editing",
     "description":"Content and Code Corrections and Improvements",
     "keywords":[
       "editing"
@@ -1224,7 +1224,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Enhancing",
+    "label_name":"x- Skill: Enhancing",
     "description":"Feature, UI, and Performance Enhancements",
     "keywords":[
       "enhancing"
@@ -1233,7 +1233,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Feasibility Assessment",
+    "label_name":"x- Skill: Feasibility Assessment",
     "description":"Technical and Business Evaluation",
     "keywords":[
       "feasibility assessment"
@@ -1242,7 +1242,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Formatting",
+    "label_name":"x- Skill: Formatting",
     "description":"Code, Documents, Spreadsheets, Visuals",
     "keywords":[
       "formatting"
@@ -1251,7 +1251,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: PR Review\/PR Coaching",
+    "label_name":"x- Skill: PR Review\/PR Coaching",
     "description":"Reviews Code Contributions and Mentors Collaborators",
     "keywords":[
       "pr review",
@@ -1261,7 +1261,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Refactor",
+    "label_name":"x- Skill: Refactor",
     "description":"Testing & QA",
     "keywords":[
       "refactor"
@@ -1270,7 +1270,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Task Estimation\/Scoring Issues",
+    "label_name":"x- Skill: Task Estimation\/Scoring Issues",
     "description":"Task Estimation and Scoring",
     "keywords":[
       "task estimation",
@@ -1280,7 +1280,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Writing",
+    "label_name":"x- Skill: Writing",
     "description":"Documentation, User Stories, Issue Descriptions, UI Copy",
     "keywords":[
       "writing"
@@ -1289,7 +1289,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Planning\/Architecting",
+    "label_name":"x- Skill: Planning\/Architecting",
     "description":"Sprint, Feature, and System Design Planning",
     "keywords":[
       "planning",
@@ -1299,7 +1299,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Scoping",
+    "label_name":"x- Skill: Scoping",
     "description":"Project and Feature Boundaries",
     "keywords":[
       "scoping"
@@ -1308,7 +1308,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Analyzing",
+    "label_name":"x- Skill: Analyzing",
     "description":"Investigates Data or Code for Insights and Problem-Solving",
     "keywords":[
       "analyzing"
@@ -1317,7 +1317,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Prioritization",
+    "label_name":"x- Skill: Prioritization",
     "description":"Prioritizing Features and Tasks by Value or Urgency",
     "keywords":[
       "prioritization"
@@ -1326,7 +1326,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Skill: Feature Description\/Definition",
+    "label_name":"x- Skill: Feature Description\/Definition",
     "description":"Feature Documentation and Definition",
     "keywords":[
       "feature description",
@@ -1336,7 +1336,7 @@
     "color":"ffbb78"
   },
   {
-    "label_name":"Statistics: Bayesian Statistics",
+    "label_name":"x- Statistics: Bayesian Statistics",
     "description":"Applies Probabilistic Methods for Inference and Prediction",
     "keywords":[
       "bayesian statistics"
@@ -1345,7 +1345,7 @@
     "color":"aec7e8"
   },
   {
-    "label_name":"Statistics: Descriptive Statistics",
+    "label_name":"x- Statistics: Descriptive Statistics",
     "description":"Mean, Median, Mode, Variance",
     "keywords":[
       "descriptive statistics"
@@ -1354,7 +1354,7 @@
     "color":"aec7e8"
   },
   {
-    "label_name":"Statistics: Experimental Design",
+    "label_name":"x- Statistics: Experimental Design",
     "description":"Plans Controlled Tests to Measure Effects and Outcomes",
     "keywords":[
       "experimental design"
@@ -1363,7 +1363,7 @@
     "color":"aec7e8"
   },
   {
-    "label_name":"Statistics: IS",
+    "label_name":"x- Statistics: IS",
     "description":"Inferential Statistics (Hypothesis Testing, Confidence Intervals)",
     "keywords":[
       "is"
@@ -1372,7 +1372,7 @@
     "color":"aec7e8"
   },
   {
-    "label_name":"Statistics: Multivariate Analysis",
+    "label_name":"x- Statistics: Multivariate Analysis",
     "description":"Studies Relationships Among Multiple Variables",
     "keywords":[
       "multivariate analysis"
@@ -1381,7 +1381,7 @@
     "color":"aec7e8"
   },
   {
-    "label_name":"Statistics: Probability Theory",
+    "label_name":"x- Statistics: Probability Theory",
     "description":"Study of Random Events and Likelihoods",
     "keywords":[
       "probability theory"
@@ -1390,7 +1390,7 @@
     "color":"aec7e8"
   },
   {
-    "label_name":"Statistics: Regression Analysis",
+    "label_name":"x- Statistics: Regression Analysis",
     "description":"Linear, Logistic",
     "keywords":[
       "regression analysis"
@@ -1399,7 +1399,7 @@
     "color":"aec7e8"
   },
   {
-    "label_name":"Statistics: Sampling Methods",
+    "label_name":"x- Statistics: Sampling Methods",
     "description":"Selects Representative Subsets From Populations or Datasets",
     "keywords":[
       "sampling methods"
@@ -1408,7 +1408,7 @@
     "color":"aec7e8"
   },
   {
-    "label_name":"Statistics: Statistical Modeling",
+    "label_name":"x- Statistics: Statistical Modeling",
     "description":"Builds Models to Explain or Predict Data Behaviors",
     "keywords":[
       "statistical modeling"
@@ -1417,7 +1417,7 @@
     "color":"aec7e8"
   },
   {
-    "label_name":"Statistics: Time Series Analysis",
+    "label_name":"x- Statistics: Time Series Analysis",
     "description":"Analyzes Data Points Collected Over Time Intervals",
     "keywords":[
       "time series analysis"
@@ -1426,7 +1426,7 @@
     "color":"aec7e8"
   },
   {
-    "label_name":"Syntax: Access Modifiers",
+    "label_name":"x- Syntax: Access Modifiers",
     "description":"Sets Visibility and Access Level of Code Elements",
     "keywords":[
       "access modifiers"
@@ -1435,7 +1435,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Arrays\/Lists",
+    "label_name":"x- Syntax: Arrays\/Lists",
     "description":"Defines and Manipulates Ordered Collections of Values",
     "keywords":[
       "arrays",
@@ -1445,7 +1445,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Assertions",
+    "label_name":"x- Syntax: Assertions",
     "description":"Adds Test or Runtime Checks to Validate Assumptions",
     "keywords":[
       "assertions"
@@ -1454,7 +1454,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Classes and Objects",
+    "label_name":"x- Syntax: Classes and Objects",
     "description":"Syntax and Usage of Classes and Objects in Object-Oriented Programming",
     "keywords":[
       "classes and objects"
@@ -1463,7 +1463,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Comments",
+    "label_name":"x- Syntax: Comments",
     "description":"Adds Explanatory Notes Within Source Code",
     "keywords":[
       "comments"
@@ -1472,7 +1472,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Conditionals",
+    "label_name":"x- Syntax: Conditionals",
     "description":"Implements Decision-Making Logic Using If\/Else Structures",
     "keywords":[
       "conditionals"
@@ -1481,7 +1481,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Data Structures",
+    "label_name":"x- Syntax: Data Structures",
     "description":"Uses Specialized Containers Like Stacks, Queues, Trees",
     "keywords":[
       "data structures"
@@ -1490,7 +1490,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Data Types",
+    "label_name":"x- Syntax: Data Types",
     "description":"Declares and Converts Variable Types in Code",
     "keywords":[
       "data types"
@@ -1499,7 +1499,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Error Handling",
+    "label_name":"x- Syntax: Error Handling",
     "description":"Manages Exceptions and Error States in Code Execution",
     "keywords":[
       "error handling"
@@ -1508,7 +1508,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Functions\/Methods",
+    "label_name":"x- Syntax: Functions\/Methods",
     "description":"Declares and Calls Reusable Procedural Code Blocks",
     "keywords":[
       "functions",
@@ -1518,7 +1518,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Generics\/Template Types",
+    "label_name":"x- Syntax: Generics\/Template Types",
     "description":"Uses Type Parameters for Reusable Code Definitions",
     "keywords":[
       "generics",
@@ -1528,7 +1528,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Importing\/Exporting Modules",
+    "label_name":"x- Syntax: Importing\/Exporting Modules",
     "description":"Shares Code Between Files or Packages via Imports and Exports",
     "keywords":[
       "importing",
@@ -1538,7 +1538,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Indentation\/Whitespaces",
+    "label_name":"x- Syntax: Indentation\/Whitespaces",
     "description":"Uses Consistent Spacing to Enhance Code Readability",
     "keywords":[
       "indentation",
@@ -1548,7 +1548,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Keywords",
+    "label_name":"x- Syntax: Keywords",
     "description":"Uses Reserved Language Words Correctly in Code",
     "keywords":[
       "keywords"
@@ -1557,7 +1557,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Lambda Functions\/Arrow Functions",
+    "label_name":"x- Syntax: Lambda Functions\/Arrow Functions",
     "description":"Defines Anonymous Functions With Concise Syntax",
     "keywords":[
       "lambda functions",
@@ -1567,7 +1567,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Loops",
+    "label_name":"x- Syntax: Loops",
     "description":"Repeats Code Execution Using For, While, or Other Loops",
     "keywords":[
       "loops"
@@ -1576,7 +1576,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Operators",
+    "label_name":"x- Syntax: Operators",
     "description":"Uses Arithmetic, Logical, or Comparison Symbols in Expressions",
     "keywords":[
       "operators"
@@ -1585,7 +1585,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Regex",
+    "label_name":"x- Syntax: Regex",
     "description":"Regular Expressions",
     "keywords":[
       "regex"
@@ -1594,7 +1594,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Switch\/Case",
+    "label_name":"x- Syntax: Switch\/Case",
     "description":"Implements Multi-Way Branching Based on Value Matching",
     "keywords":[
       "switch",
@@ -1604,7 +1604,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Templates\/Interpolation",
+    "label_name":"x- Syntax: Templates\/Interpolation",
     "description":"Embeds Variables or Expressions Within Strings or Markup",
     "keywords":[
       "templates",
@@ -1614,7 +1614,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Ternary Operator",
+    "label_name":"x- Syntax: Ternary Operator",
     "description":"Uses Inline Conditional Expressions for Brevity",
     "keywords":[
       "ternary operator"
@@ -1623,7 +1623,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Type Casting\/Conversion",
+    "label_name":"x- Syntax: Type Casting\/Conversion",
     "description":"Converts Values From One Data Type to Another",
     "keywords":[
       "type casting",
@@ -1633,7 +1633,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Syntax: Variables",
+    "label_name":"x- Syntax: Variables",
     "description":"Declares and Uses Named Data Holders in Code",
     "keywords":[
       "variables"
@@ -1642,7 +1642,7 @@
     "color":"17becf"
   },
   {
-    "label_name":"Testing & QA: Automated Testing",
+    "label_name":"x- Testing & QA: Automated Testing",
     "description":"Unit Testing, E2E Testing, and Integration Testing",
     "keywords":[
       "automated testing"
@@ -1651,7 +1651,7 @@
     "color":"d62728"
   },
   {
-    "label_name":"Testing & QA: Debugging",
+    "label_name":"x- Testing & QA: Debugging",
     "description":"Identifying and Fixing Code Issues, Using Breakpoints or Logs",
     "keywords":[
       "debugging"
@@ -1660,7 +1660,7 @@
     "color":"d62728"
   },
   {
-    "label_name":"Testing & QA: Error Monitoring",
+    "label_name":"x- Testing & QA: Error Monitoring",
     "description":"Capturing Runtime Errors in Production",
     "keywords":[
       "error monitoring"
@@ -1669,7 +1669,7 @@
     "color":"d62728"
   },
   {
-    "label_name":"Testing & QA: Linters",
+    "label_name":"x- Testing & QA: Linters",
     "description":"Static Analysis Tools for Code Style and Syntax",
     "keywords":[
       "linters"
@@ -1678,7 +1678,7 @@
     "color":"d62728"
   },
   {
-    "label_name":"Testing & QA: Performance\/Load Testing",
+    "label_name":"x- Testing & QA: Performance\/Load Testing",
     "description":"Evaluating System Behavior Under Stress",
     "keywords":[
       "performance",
@@ -1688,7 +1688,7 @@
     "color":"d62728"
   },
   {
-    "label_name":"Testing & QA: User Story Tests",
+    "label_name":"x- Testing & QA: User Story Tests",
     "description":"Acceptance Tests Based on User Requirements",
     "keywords":[
       "user story tests"
@@ -1697,7 +1697,7 @@
     "color":"d62728"
   },
   {
-    "label_name":"Testing & QA: QA Testing",
+    "label_name":"x- Testing & QA: QA Testing",
     "description":"Function Tests",
     "keywords":[
       "qa testing"
@@ -1706,7 +1706,7 @@
     "color":"d62728"
   },
   {
-    "label_name":"Testing & QA: Log Aggregation",
+    "label_name":"x- Testing & QA: Log Aggregation",
     "description":"Centralizing Logs From Multiple Services",
     "keywords":[
       "log aggregation"
@@ -1715,7 +1715,7 @@
     "color":"d62728"
   },
   {
-    "label_name":"Testing & QA: Network Monitoring Tools",
+    "label_name":"x- Testing & QA: Network Monitoring Tools",
     "description":"Tools to Observe and Diagnose Network Issues",
     "keywords":[
       "network monitoring tools"
@@ -1724,7 +1724,7 @@
     "color":"d62728"
   },
   {
-    "label_name":"Testing & QA: Tracing Tools",
+    "label_name":"x- Testing & QA: Tracing Tools",
     "description":"Distributed Request Tracking Across Services",
     "keywords":[
       "tracing tools"
@@ -1733,7 +1733,7 @@
     "color":"d62728"
   },
   {
-    "label_name":"Workflow: Branching",
+    "label_name":"x- Workflow: Branching",
     "description":"Creating and Managing Git Branches",
     "keywords":[
       "branching"
@@ -1742,7 +1742,7 @@
     "color":"9467bd"
   },
   {
-    "label_name":"Workflow: Git",
+    "label_name":"x- Workflow: Git",
     "description":"Version Control",
     "keywords":[
       "git"
@@ -1751,7 +1751,7 @@
     "color":"9467bd"
   },
   {
-    "label_name":"Workflow: Merge Conflicts",
+    "label_name":"x- Workflow: Merge Conflicts",
     "description":"Resolving Overlapping Code Changes in Git",
     "keywords":[
       "merge conflicts"
@@ -1760,7 +1760,7 @@
     "color":"9467bd"
   },
   {
-    "label_name":"XP: User Stories",
+    "label_name":"x- XP: User Stories",
     "description":"User Stories: Customer Need Descriptions (As a X, I Need to Do Y, for Z Reason)",
     "keywords":[
       "user stories"
@@ -1769,7 +1769,7 @@
     "color":"7f7f7f"
   },
   {
-    "label_name":"Scrum: User Stories",
+    "label_name":"x- Scrum: User Stories",
     "description":"Short User-Focused Descriptions of Needed Features",
     "keywords":[
       "user stories"
@@ -1778,7 +1778,7 @@
     "color":"f7b6d2"
   },
   {
-    "label_name":"FDD: User Stories",
+    "label_name":"x- FDD: User Stories",
     "description":"Feature-Based User Requirements",
     "keywords":[
       "user stories"
@@ -1787,7 +1787,7 @@
     "color":"c7c7c7"
   },
   {
-    "label_name":"SAFe: User Stories",
+    "label_name":"x- SAFe: User Stories",
     "description":"Scaled Agile Work Items Aligned to Program Increments",
     "keywords":[
       "user stories"
@@ -1796,7 +1796,7 @@
     "color":"ff9896"
   },
   {
-    "label_name":"DDD: Context Mapping",
+    "label_name":"x- DDD: Context Mapping",
     "description":"Diagramming and Analyzing Relationships and Communication Between Bounded Context",
     "keywords":[
       "context mapping"
@@ -1805,7 +1805,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"DDD: ACL",
+    "label_name":"x- DDD: ACL",
     "description":"Anti-Corruption Layer: Protects Your Domain Model From Being Influenced by an External or Legacy System",
     "keywords":[
       "acl"
@@ -1814,7 +1814,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"DDD: Event Storming",
+    "label_name":"x- DDD: Event Storming",
     "description":"A Collaborative Workshop Method to Explore Domain Processes Using Events and Sticky Notes",
     "keywords":[
       "event storming"
@@ -1823,7 +1823,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"DDD: Event-Driven Architecture",
+    "label_name":"x- DDD: Event-Driven Architecture",
     "description":"Using Events to Decouple Services and Ensure Responsiveness",
     "keywords":[
       "event-driven architecture"
@@ -1832,7 +1832,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"DDD: DDD with CQRS",
+    "label_name":"x- DDD: DDD with CQRS",
     "description":"Separating Commands (Write) and Queries (Read) for Scalability and Clarity",
     "keywords":[
       "ddd with cqrs"
@@ -1841,7 +1841,7 @@
     "color":"bcbd22"
   },
   {
-    "label_name":"FDD: Domain Object Modeling",
+    "label_name":"x- FDD: Domain Object Modeling",
     "description":"Establishing a Shared Model of the Domain With Stakeholders, Which Informs Feature Design",
     "keywords":[
       "domain object modeling"
@@ -1850,7 +1850,7 @@
     "color":"c7c7c7"
   },
   {
-    "label_name":"FDD: Iterative and Incremental Delivery",
+    "label_name":"x- FDD: Iterative and Incremental Delivery",
     "description":"FDD Delivers in Small Feature Slices, Improving Adaptability and Client Feedback Loops",
     "keywords":[
       "iterative and incremental delivery"
@@ -1859,7 +1859,7 @@
     "color":"c7c7c7"
   },
   {
-    "label_name":"FDD: Client-Centric Development",
+    "label_name":"x- FDD: Client-Centric Development",
     "description":"Features Are Defined From the Client's Perspective and Prioritized Based on Business Value",
     "keywords":[
       "client-centric development"
@@ -1868,7 +1868,7 @@
     "color":"c7c7c7"
   },
   {
-    "label_name":"FDD: Regular Builds\/Integration",
+    "label_name":"x- FDD: Regular Builds\/Integration",
     "description":"Frequent Integration of Features to Ensure Software Stays in a Working State",
     "keywords":[
       "regular builds",
@@ -1878,7 +1878,7 @@
     "color":"c7c7c7"
   },
   {
-    "label_name":"FDD: Version Control\/Class Ownership",
+    "label_name":"x- FDD: Version Control\/Class Ownership",
     "description":"Source Control and Ownership Ensure Consistency and Accountability in Code Changes",
     "keywords":[
       "version control",
@@ -1888,7 +1888,7 @@
     "color":"c7c7c7"
   },
   {
-    "label_name":"TDD: Red-Green-Refactor Cycle",
+    "label_name":"x- TDD: Red-Green-Refactor Cycle",
     "description":"The Core TDD Loop: Write a Failing Test (Red), Make It Pass (Green), and Improve the Code (Refactor)",
     "keywords":[
       "red-green-refactor cycle"
@@ -1897,7 +1897,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"TDD: Refactor the Code",
+    "label_name":"x- TDD: Refactor the Code",
     "description":"Clean Up the Code While Keeping Tests Green (Passing)",
     "keywords":[
       "refactor the code"
@@ -1906,7 +1906,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"TDD: Refactoring Safely",
+    "label_name":"x- TDD: Refactoring Safely",
     "description":"Improving Code Design Without Changing Functionality - Supported by Tests",
     "keywords":[
       "refactoring safely"
@@ -1915,7 +1915,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"TDD: Thinking in Examples",
+    "label_name":"x- TDD: Thinking in Examples",
     "description":"The Ability to Define Behavior Clearly by First Specifying Examples or Test Cases",
     "keywords":[
       "thinking in examples"
@@ -1924,7 +1924,7 @@
     "color":"1f77b4"
   },
   {
-    "label_name":"XP: Coding Standards",
+    "label_name":"x- XP: Coding Standards",
     "description":"Teams Agree on Consistent Coding Style to Ensure Readability and Maintainability",
     "keywords":[
       "coding standards"
@@ -1933,7 +1933,7 @@
     "color":"7f7f7f"
   },
   {
-    "label_name":"XP: Incremental Delivery",
+    "label_name":"x- XP: Incremental Delivery",
     "description":"Delivering Useful Software in Short, Repeatable Cycles",
     "keywords":[
       "incremental delivery"
