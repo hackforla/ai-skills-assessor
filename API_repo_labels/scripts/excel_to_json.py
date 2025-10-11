@@ -12,8 +12,17 @@ df = df.fillna('')
 # filter to only include "sure" labels
 df = df[df['Sure/Unsure'].str.strip().str.lower() == 'sure']
 
-# create required fields using for labelling
+# Clean column names
+df.columns = df.columns.str.strip()          # remove leading/trailing spaces
+df.columns = df.columns.str.replace('\xa0', ' ')  # replace non-breaking spaces
+
+# Debug: see exactly what columns Pandas sees
+print("Columns detected:", df.columns.tolist())
+
+# Extract label name column
 df['label_name'] = df['X- Label Name(Dev Team script)'].str.strip()
+
+# create required fields using for labelling
 df['description'] = df['Description'].str.strip()
 df['label_series'] = df['Label Series'].str.strip()
 
