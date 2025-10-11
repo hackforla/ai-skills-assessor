@@ -101,6 +101,11 @@ def create_labels(owner, repo, labels, token):
         label = labels[i]
         label_name = label['label_name'].strip()
         normalized_label_name = label_name.lower()
+        
+        if len(label_name) > 50:
+            logging.warning(f"Skipping label '{label_name}' because it exceeds 50 characters.")
+            i += 1
+            continue
 
         # if label to be created exists, skip
         if normalized_label_name in existing_label_names:

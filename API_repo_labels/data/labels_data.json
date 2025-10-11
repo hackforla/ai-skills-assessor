@@ -470,7 +470,7 @@
     "color":"cccccc"
   },
   {
-    "label_name":"x- Infrastructure: Container Orchestration Platform",
+    "label_name":"x- Infrastructure: Container Orchestration",
     "description":"Container Orchestration (Usually Kubernetes)",
     "keywords":[
       "container orchestration platform"
