@@ -38,6 +38,6 @@ jobs:
                   git config user.name "github-actions"
                   git config user.email "github-actions@github.com"
 
-                  git add data/labels_data.json
+                  git add API_repo_labels/data/labels_data.json
                   git diff --cached --quiet || git commit -m "Auto-update labels_data.json from Excel"
                   git push origin mixin --verbose
