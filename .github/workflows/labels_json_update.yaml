@@ -31,7 +31,7 @@ jobs:
 
             - name: Run Excel to JSON conversion
               run: |
-                  python issue_contributor_fetcher/org_fetcher/excel_to_json.py
+                  python API_repo_labels/scripts/excel_to_json.py
 
             - name: Commit and push updated JSON
               run: |
