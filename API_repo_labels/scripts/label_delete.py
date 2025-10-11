@@ -99,8 +99,8 @@ def handle_rate_limit(response):
 if __name__ == "__main__":
     # configure all three to use this file
     # hard code owner and repo and set GH_TOKEN
-    owner = "sandy3w"
-    repo = "HfLA-label-test"
+    owner = "hackforla"
+    repo = "ai-skills-assessor-testrepo1"
     token = os.environ.get("GH_TOKEN")
 
     if not all([owner, repo, token]):
