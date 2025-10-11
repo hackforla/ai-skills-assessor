@@ -13,7 +13,7 @@ df = df.fillna('')
 df = df[df['Sure/Unsure'].str.strip().str.lower() == 'sure']
 
 # create required fields using for labelling
-df['label_name'] = df['Label Name = (Label Series: Concept)'].str.strip()
+df['label_name'] = df['X- Label Name(Dev Team script)'].str.strip()
 df['description'] = df['Description'].str.strip()
 df['label_series'] = df['Label Series'].str.strip()
 
