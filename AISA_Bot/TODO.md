@@ -16,12 +16,12 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 - **Runtime**: GitHub Actions runner executes `scripts/run_poc.py`
 - **Authentication**: Bot account with Personal Access Token
 - **Data Storage**: All data stored IN THE REPO (config, taxonomy, output files)
-- **Configuration**: Bot reads `config/` files from repo
+- **Configuration**: Bot reads `config/` files from repo (GitHub org/repo names in settings.py)
 - **Outputs**: Bot commits CSV/JSON results to `data/output/` in repo
-- **Secrets Management** (pending Bonnie's decision):
-  - **Option 1**: Master secrets stored in **1Password**, retrieved and configured as GitHub Actions secrets
-  - **Option 2**: Secrets stored directly in **GitHub repository secrets**
-  - Bot accesses via environment variables at runtime (same for both options)
+- **Secrets Management**:
+  - **Two secrets required**: GITHUB_TOKEN and OPENAI_API_KEY
+  - **Dual storage**: Master copies stored in **1Password** AND configured as **GitHub Actions secrets**
+  - Bot accesses via environment variables at runtime
 
 ### Data Flow:
 ```
@@ -57,11 +57,11 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### ⏳ Task 5: Environment Template
 **Status**: PENDING
-**Description**: Create .env.example template with GITHUB_TOKEN, OPENAI_API_KEY, GITHUB_ORG, GITHUB_REPO placeholders (actual secrets stored in 1Password OR GitHub secrets per Bonnie's decision, configured as GitHub Actions secrets)
+**Description**: Create .env.example template with GITHUB_TOKEN and OPENAI_API_KEY placeholders (actual secrets stored in both 1Password AND GitHub secrets)
 
 ### ⏳ Task 6: Settings Configuration
 **Status**: PENDING
-**Description**: Create config/settings.py for constants: API endpoints, rate limits (500 RPM, 30K TPM), 1-minute timeout per issue, file paths, SKILL_OUTPUT_MODE configuration
+**Description**: Create config/settings.py for constants: GitHub org/repo names, API endpoints, rate limits (500 RPM, 30K TPM), 1-minute timeout per issue, file paths (all paths relative for GitHub Actions runner), SKILL_OUTPUT_MODE configuration
 
 ### ⏳ Task 7: Contributors List
 **Status**: PENDING
@@ -209,11 +209,11 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### ⏳ Task 34: README Documentation
 **Status**: PENDING
-**Description**: Create comprehensive README.md: project overview, GitHub bot architecture, setup instructions for Actions secrets (from 1Password OR GitHub secrets per Bonnie's decision), environment configuration, skill output mode options, usage examples, credit to true-github-contributors
+**Description**: Create comprehensive README.md: project overview, GitHub bot architecture, setup instructions for configuring two secrets (GITHUB_TOKEN and OPENAI_API_KEY stored in both 1Password and GitHub), environment configuration, skill output mode options, usage examples, credit to true-github-contributors
 
 ### ⏳ Task 35: Configuration Documentation
 **Status**: PENDING
-**Description**: Document configuration options: SKILL_OUTPUT_MODE (api_labels, comment_checklist, both), GitHub Actions secrets setup, bot account permissions, secrets management (1Password vs GitHub) in README and settings.py
+**Description**: Document configuration options: SKILL_OUTPUT_MODE (api_labels, comment_checklist, both), GitHub Actions secrets setup (two secrets: GITHUB_TOKEN and OPENAI_API_KEY), bot account permissions in README and settings.py
 
 ---
 
@@ -249,7 +249,7 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### ⏳ Task 41b: Configure GitHub Actions Secrets
 **Status**: PENDING
-**Description**: Configure GitHub Actions secrets in hackforla/ai-skills-assessor repo: retrieve GITHUB_TOKEN (bot PAT) and OPENAI_API_KEY from 1Password OR use GitHub-stored secrets per Bonnie's decision, add as repository secrets, verify bot account has collaborator permissions
+**Description**: Configure GitHub Actions secrets in hackforla/ai-skills-assessor repo: add GITHUB_TOKEN (bot PAT) and OPENAI_API_KEY as repository secrets (master copies also stored in 1Password), verify bot account has collaborator permissions
 
 ### ⏳ Task 42: Workflow Testing
 **Status**: PENDING
