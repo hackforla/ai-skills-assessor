@@ -30,7 +30,7 @@ from email.utils import parsedate_to_datetime
 
 # ========================= Configuration & Defaults =========================
 
-OUTPUT_PATH = os.environ.get("INPUT_OUTPUT_PATH", "data/issue_comments.json")
+OUTPUT_PATH = os.environ.get("INPUT_OUTPUT_PATH", "data/issue-comments.json")
 API_VERSION = "2022-11-28"
 REQUEST_TIMEOUT = 30  # seconds
 BASE_BACKOFF = 5      # seconds

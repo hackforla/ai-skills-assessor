@@ -18,7 +18,7 @@ on:
         required: false
         default: "false"
       output_path:
-        description: "Output JSON path (defaults to data/issue_comments.json)"
+        description: "Output JSON path (defaults to data/issue-comments.json)"
         required: false
       full_resync:
         description: "Ignore watermarks & ETags and backfill everything"
@@ -76,7 +76,7 @@ jobs:
           if [ -n "${{ github.event.inputs.output_path }}" ]; then
             echo "VALUE=${{ github.event.inputs.output_path }}" >> "$GITHUB_OUTPUT"
           else
-            echo "VALUE=data/issue_comments.json" >> "$GITHUB_OUTPUT"
+            echo "VALUE=data/issue-comments.json" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run comment fetcher
