@@ -1,0 +1,191 @@
+akibrhast
+opened on Apr 23, 2021 · edited by Aveline-art
+Member
+Overview
+As a member of the website team, we need a system that allows us to track GitHub action logs for an extended amount of time, beyond GitHub's 90 day allowance.
+
+Action items
+
+Create some sort of system that allows logging of Github actions logs for an extended amount of time.
+
+The logs should be stored in a .txt file in a directory called '/logs' which is added to .gitignore
+
+The log needs to have a one to one correspondence with the GitHub actions logs. This means that all information logged by GitHub needs to also be logged in this system. (this includes time stamps and information about the triggers)
+
+The only exception to the above is the code that is run. However, the name of the GitHub actions file should be in the log.
+Resources/Instructions
+If you have trouble starting this project, you might start with implementing the log with a GitHub action. The workflow_run trigger seems very promising if this is the route you want to take.
+
+As this issue is fairly large, you might have a lot of trouble, so please reach out! Important things to keep in mind when designing this is that this is made for the team. Be conscious of how the logs are formed and formatted, so that they would be useful for the team! You might also want to improve upon the action items above (perhaps a way to clear the logs?). If you dare to challenge yourself, be sure to share that intention with the team! We love to hear your ideas.
+
+Some useful links
+Keeping your GitHub Actions and workflows secure: Preventing pwn requests
+Events that trigger workflows
+Workflow syntax for GitHub Actions
+Storing workflow data as artifacts
+GitHub GraphQL
+
+Activity
+
+sayalikotkar
+added 
+Feature Missing
+This label means that the issue needs to be linked to a precise feature label.
+ on Jun 20, 2021
+akibrhast
+akibrhast commented on Jun 22, 2021
+akibrhast
+on Jun 22, 2021
+Member
+Author
+To discuss with @Aveline-art
+
+
+Sihemgourou
+added 
+role missing
+ on Jun 24, 2021
+
+Aveline-art
+added 
+Discussion
+Starting point for gathering further information and/or feedback
+ 
+enhancement
+New feature or request suggestion
+ 
+Feature: Board/GitHub Maintenance
+Project board maintenance that we have to do repeatedly
+ 
+Research
+Tasks for researchers
+ 
+role: back end/devOps
+Tasks for back-end developers
+ 
+Complexity: Large
+ and removed 
+Feature Missing
+This label means that the issue needs to be linked to a precise feature label.
+ 
+role missing
+ on Jun 25, 2021
+Aveline-art
+Aveline-art commented on Jun 25, 2021
+Aveline-art
+on Jun 25, 2021 · edited by akibrhast
+Member
+Design/Research questions:
+
+
+Where and how will the information be stored?
+
+What ways are there to listen for the initiation or completion of a GitHub action?
+
+What information has to be part of the log?
+
+Who is the end user of the logging system?
+
+What does the current logging system lack that this needs to address? Answer: The current logging system only preserve logs for the last 3 months. It should preserve logs for over that amount.
+Design criteria:
+TBD.
+
+akibrhast
+akibrhast commented on Jun 27, 2021
+akibrhast
+on Jun 27, 2021
+Member
+Author
+Discussed with @Aveline-art and added details in the main body.
+
+ExperimentsInHonesty
+ExperimentsInHonesty commented on Jun 28, 2021
+ExperimentsInHonesty
+on Jun 28, 2021 · edited by ExperimentsInHonesty
+Member
+This issue needs a rewrite on the top, to be in the format of all our other issues
+
+ ### Overview
+ User story (as a ____ I need to do _____ for _____ reason)
+
+### Action Items
+- [ ] thing 1
+- [ ] thing 2
+
+### Resources/Instructions
+Links that will be useful
+
+abuna1985
+removed 
+Discussion
+Starting point for gathering further information and/or feedback
+ on Jul 1, 2021
+
+Zak234
+self-assigned thison Jul 10, 2021
+
+Sihemgourou
+added 
+To Update !
+No update has been provided
+ on Jul 18, 2021
+github-actions
+github-actions commented on Jul 18, 2021
+github-actions
+bot
+on Jul 18, 2021
+@Zak234 Please add update
+
+Progress
+Blockers
+Availability
+ETA
+Zak234
+Zak234 commented on Jul 25, 2021
+Zak234
+on Jul 25, 2021 · edited by Zak234
+Contributor
+Still working on the Github action. Experimenting with Javascript and Graph Ql. Available basically anytime. ETA, hopefully one week.
+
+
+ExperimentsInHonesty
+mentioned this on Aug 2, 2021
+ER: additions to the "Hack for LA's GitHub Actions" wiki guide #2033
+Zak234
+Zak234 commented on Aug 3, 2021
+Zak234
+on Aug 3, 2021
+Contributor
+Talked with Ava and it was decided that this issue should be closed due to its complexity and lack of benefits from completion. In case of being opened in the future, using REST API to download job logs seemed to be the most promising avenue although large amount of data processing would need to be done to remove the Github action code from the logs and get the data in a more readable state.
+
+
+Zak234
+closed this as completedon Aug 3, 2021
+ExperimentsInHonesty
+ExperimentsInHonesty commented on Aug 8, 2021
+ExperimentsInHonesty
+on Aug 8, 2021
+Member
+Wiki related to this issue https://github.com/hackforla/website/wiki/Decision-Records-on-Solutions-Not-Implemented
+
+
+JessicaLucindaCheng
+added 
+size: 5pt
+Can be done in 19-30 hours
+ on Mar 7, 2022
+
+ExperimentsInHonesty
+added this to the 08. Team workflow milestone on Mar 16, 2023
+
+ExperimentsInHonesty
+added this to  P: HfLA Website: Project Boardon Jun 23, 2024
+
+ExperimentsInHonesty
+moved this to Done in  P: HfLA Website: Project Boardon Jun 23, 2024
+
+HackforLABot
+mentioned this on Aug 10
+Pre-work Checklist: Developer: Sakari #3269
+chinaexpert1
+Add a comment
