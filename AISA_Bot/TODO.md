@@ -51,17 +51,15 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### 🔄 Task 3: .gitignore
 **Status**: PARTIALLY COMPLETED
-**Programmer**: Unknown (existing at project root)
-**Existing Work**: Root-level .gitignore exists with `.env`, `node_modules/`, `package-lock.json`, `coverage/`
+**Programmer**: JasonUranta
+**Existing Work**: Root-level [.gitignore](https://github.com/hackforla/ai-skills-assessor/blob/mixin/.gitignore) exists with `.env`, `node_modules/`, `package-lock.json`, `coverage/`
 **Remaining Work**: Need to add `__pycache__`, `*.pyc`, ensure data/output/ and data/taxonomy/ are NOT ignored, move or create AISA_Bot-specific .gitignore
-**Location**: `C:\Users\Putna\OneDrive - Johns Hopkins\Documents\Hack For LA\AI Skills Assessor Project\.gitignore`
 
 ### 🔄 Task 4: Requirements File
 **Status**: PARTIALLY COMPLETED
-**Programmer**: Unknown (existing at project root)
-**Existing Work**: Root-level requirements.txt exists with `requests>=2.32,<3.0`
+**Programmers**: chinaexpert1, ExperimentsInHonesty
+**Existing Work**: Root-level [requirements.txt](https://github.com/hackforla/ai-skills-assessor/blob/mixin/requirements.txt) exists with `requests>=2.32,<3.0`
 **Remaining Work**: Need to add PyGithub, python-dotenv, openai, pytest, openpyxl/pandas dependencies
-**Location**: `C:\Users\Putna\OneDrive - Johns Hopkins\Documents\Hack For LA\AI Skills Assessor Project\requirements.txt`
 
 ### ⏳ Task 5: Environment Template
 **Status**: PENDING
@@ -77,11 +75,11 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### 🔄 Task 8: Data Directory Structure
 **Status**: PARTIALLY COMPLETED
-**Programmer**: Unknown (existing at project root)
+**Programmers**: JasonUranta (scripts/data), Sandy3w (issue_contributor_fetcher)
 **Existing Work**:
-- `data/` directory exists with `issue_comments.json` (246KB)
-- `API_repo_labels/data/` exists with `excel_labels_data.xlsx` (3.5MB) and `labels_data.json` (48KB - taxonomy)
-- `config/` directory exists with `target_repos_status.json`
+- [`data/`](https://github.com/hackforla/ai-skills-assessor/tree/mixin/data) directory exists with [`issue_comments.json`](https://github.com/hackforla/ai-skills-assessor/blob/mixin/data/issue_comments.json) (246KB)
+- [`API_repo_labels/data/`](https://github.com/hackforla/ai-skills-assessor/tree/mixin/API_repo_labels/data) exists with [`excel_labels_data.xlsx`](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/data/excel_labels_data.xlsx) (3.5MB) and [`labels_data.json`](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/data/labels_data.json) (48KB - taxonomy)
+- [`config/`](https://github.com/hackforla/ai-skills-assessor/tree/mixin/config) directory exists with [`target_repos_status.json`](https://github.com/hackforla/ai-skills-assessor/blob/mixin/config/target_repos_status.json)
 **Remaining Work**:
 - Create `AISA_Bot/data/taxonomy/` and move/copy skills taxonomy
 - Create `AISA_Bot/data/temp/` (gitignored)
@@ -93,9 +91,9 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### 🔄 Task 9: GitHub Fetcher Implementation
 **Status**: PARTIALLY COMPLETED
-**Programmer**: Unknown (multiple existing scripts)
+**Programmers**: JasonUranta (scripts/fetch-issue-comments.py), Sandy3w (issue_contributor_fetcher)
 **Existing Work**:
-- **scripts/fetch-issue-comments.py** (672 lines): Comprehensive issue comment fetcher with:
+- **[scripts/fetch-issue-comments.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/scripts/fetch-issue-comments.py)** (672 lines) by JasonUranta: Comprehensive issue comment fetcher with:
   - Incremental sync using watermarks
   - Per-endpoint watermarks (issues vs reviews)
   - Full-resync support
@@ -105,14 +103,14 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
   - Reaction data collection
   - Normalized timestamps
   - Atomic JSON writes
-  - Outputs to `data/issue_comments.json`
-- **issue_contributor_fetcher/org_fetcher/org_fetcher.py** (226 lines): Org-level contribution fetching
+  - Outputs to [`data/issue_comments.json`](https://github.com/hackforla/ai-skills-assessor/blob/mixin/data/issue_comments.json)
+- **[issue_contributor_fetcher/org_fetcher/org_fetcher.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/issue_contributor_fetcher/org_fetcher/org_fetcher.py)** (226 lines) by Sandy3w: Org-level contribution fetching
   - Fetches all repos for an organization
   - Fetches contributions (issues/PRs) for specified users across repos
   - HTTPAdapter with retry logic
   - Pagination handling
   - Outputs to CSV
-- **issue_contributor_fetcher/repo_fetcher/repo_fetcher.py** (172 lines): Repo-level contribution fetching
+- **[issue_contributor_fetcher/repo_fetcher/repo_fetcher.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/issue_contributor_fetcher/repo_fetcher/repo_fetcher.py)** (172 lines) by Sandy3w: Repo-level contribution fetching
   - GitHub Search API with "involves:" query
   - Session management with retries
 **Remaining Work**:
@@ -129,10 +127,10 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### 🔄 Task 11: Prompt Builder Implementation
 **Status**: PARTIALLY COMPLETED
-**Programmer**: Unknown
+**Programmer**: Sandy3w
 **Existing Work**:
-- **API_repo_labels/scripts/excel_to_json.py**: Implements taxonomy loading and conversion
-  - Converts `excel_labels_data.xlsx` to `labels_data.json`
+- **[API_repo_labels/scripts/excel_to_json.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/excel_to_json.py)**: Implements taxonomy loading and conversion
+  - Converts [`excel_labels_data.xlsx`](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/data/excel_labels_data.xlsx) to [`labels_data.json`](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/data/labels_data.json)
   - Filters "sure" labels only
   - Creates keywords from concepts for label assignment
   - Maps label series to colors
@@ -144,8 +142,10 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 - Consolidate into `src/prompt_builder.py`
 
 ### ⏳ Task 12: LLM Prompt Design
-**Status**: PENDING
+**Status**: PENDING (Research done by chinaexpert1, pending implementation from Sandy3w)
+**Programmers**: chinaexpert1 (research), Sandy3w (pending implementation)
 **Description**: Design LLM prompt format: STAR method instructions, 30-word limit, skill taxonomy inclusion, JSON output structure for bullets and labels
+**Note**: Prompt research has been completed by chinaexpert1; awaiting implementation from Sandy3w
 
 ### ⏳ Task 13: Prompt Builder Tests
 **Status**: PENDING
@@ -173,11 +173,11 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### 🔄 Task 17: Label Applier Implementation
 **Status**: PARTIALLY COMPLETED
-**Programmer**: Unknown
+**Programmer**: Sandy3w
 **Existing Work**:
-- **API_repo_labels/scripts/repo_labeler.py** (173 lines): Implements comprehensive label creation/application
+- **[API_repo_labels/scripts/repo_labeler.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/repo_labeler.py)** (173 lines): Implements comprehensive label creation/application
   - Checks repo access permissions
-  - Loads labels from `labels_data.json`
+  - Loads labels from [`labels_data.json`](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/data/labels_data.json)
   - Creates labels via GitHub API with deduplication
   - Sophisticated rate limiting:
     - Primary rate limit handling (X-RateLimit-Remaining)
@@ -228,16 +228,16 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### 🔄 Task 25: Utilities Implementation
 **Status**: PARTIALLY COMPLETED
-**Programmer**: Unknown (multiple existing scripts)
+**Programmers**: JasonUranta (scripts/fetch-issue-comments.py utilities)
 **Existing Work**:
-- **scripts/fetch-issue-comments.py** implements several utility functions:
+- **[scripts/fetch-issue-comments.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/scripts/fetch-issue-comments.py)** by JasonUranta implements several utility functions:
   - `save_json_atomic()`: Atomic JSON writes with temp file + rename pattern
   - `_iso()`: ISO timestamp formatting
   - `_parse_iso()`: ISO timestamp parsing
   - `_min_updated()`: Find minimum update timestamp
   - Logging setup using Python's logging module
   - File I/O helpers (read_etag, write_etag, read_meta, write_meta)
-- **API_repo_labels/scripts/repo_labeler.py** implements:
+- **[API_repo_labels/scripts/repo_labeler.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/repo_labeler.py)** implements:
   - Retry logic with exponential backoff
   - Rate limit handling utilities
 **Remaining Work**:
@@ -267,14 +267,14 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### 🔄 Task 29: Error Handling Implementation
 **Status**: PARTIALLY COMPLETED
-**Programmer**: Unknown (multiple existing scripts)
+**Programmers**: JasonUranta (scripts/fetch-issue-comments.py)
 **Existing Work**:
-- **scripts/fetch-issue-comments.py** implements error handling:
+- **[scripts/fetch-issue-comments.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/scripts/fetch-issue-comments.py)** by JasonUranta implements error handling:
   - Try-except blocks for network errors, JSON parsing errors
   - Logging of errors with logger.error() and logger.warning()
   - Specific handling for different HTTP status codes (401, 404, 422, 500, 502, 503, 504)
   - Graceful degradation with partial failure tolerance
-- **API_repo_labels/scripts/repo_labeler.py** implements:
+- **[API_repo_labels/scripts/repo_labeler.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/repo_labeler.py)** implements:
   - Error detection and logging
   - Retry logic for transient errors
 **Remaining Work**:
@@ -284,9 +284,9 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### 🔄 Task 30: Rate Limiting Implementation
 **Status**: PARTIALLY COMPLETED (GitHub API only)
-**Programmer**: Unknown (multiple existing scripts)
+**Programmers**: JasonUranta (scripts/fetch-issue-comments.py)
 **Existing Work - GitHub API Rate Limiting**:
-- **scripts/fetch-issue-comments.py** (comprehensive implementation):
+- **[scripts/fetch-issue-comments.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/scripts/fetch-issue-comments.py)** by JasonUranta (comprehensive implementation):
   - Handles 403/429 status codes
   - Respects X-RateLimit-Remaining header
   - Secondary rate limit detection ("secondary rate limit", "abuse detection" in response body)
@@ -295,12 +295,12 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
   - Exponential backoff (BASE_BACKOFF=5s, MAX_BACKOFF=60s)
   - Sleep budget tracking (MAX_TOTAL_SLEEP=600s per endpoint)
   - Jitter addition to prevent thundering herd
-- **API_repo_labels/scripts/repo_labeler.py**:
+- **[API_repo_labels/scripts/repo_labeler.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/repo_labeler.py)**:
   - Primary rate limit handling (X-RateLimit-Remaining)
   - Secondary rate limit detection
   - Exponential backoff (starts at 5s, max 60s)
   - Batch rest every 10 successful creations
-- **API_repo_labels/scripts/label_delete.py**:
+- **[API_repo_labels/scripts/label_delete.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/label_delete.py)**:
   - Retry logic with exponential backoff for 403 responses
 **Remaining Work**:
 - Implement OpenAI Tier 1 rate limiting (500 RPM, 30K TPM)
@@ -408,6 +408,8 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ## Project Structure
 
+### Planned AISA_Bot Structure (Target)
+
 ```
 AISA_Bot/
 ├── src/
@@ -448,6 +450,55 @@ AISA_Bot/
 └── TODO.md (this file)
 ```
 
+### Current Repository Structure (As of 2025-10-20)
+
+```
+ai-skills-assessor/ (root)
+├── .github/
+│   └── workflows/                         [JasonUranta]
+├── .gitignore                             [JasonUranta]
+├── AISA_Bot/                              [Claude Code - NEW]
+│   ├── config/                            [Created, empty]
+│   ├── data/                              [Created, empty]
+│   ├── scripts/                           [Created, empty]
+│   ├── src/                               [Created, empty]
+│   ├── tests/                             [Created, empty]
+│   ├── TODO.docx                          [Generated]
+│   └── TODO.md                            [This file]
+├── API_repo_labels/                       [Sandy3w]
+│   ├── data/
+│   │   ├── excel_labels_data.xlsx         [Skills taxonomy - 3.5MB]
+│   │   └── labels_data.json               [Processed taxonomy - 48KB]
+│   └── scripts/
+│       ├── excel_to_json.py               [Taxonomy converter]
+│       ├── label_delete.py                [Label deletion with retry]
+│       └── repo_labeler.py                [Label creation/application - 173 lines]
+├── config/
+│   └── target_repos_status.json           [Configuration file]
+├── data/
+│   └── issue_comments.json                [Output - 246KB]
+├── issue_contributor_fetcher/             [Sandy3w]
+│   ├── org_fetcher/
+│   │   └── org_fetcher.py                 [Org-level fetching - 226 lines]
+│   └── repo_fetcher/
+│       └── repo_fetcher.py                [Repo-level fetching - 172 lines]
+├── scripts/                               [JasonUranta]
+│   └── fetch-issue-comments.py            [Comprehensive fetcher - 672 lines]
+├── CLAUDE_CONTEXT.md                      [Project context]
+├── conversion_to_python.py                [JS to Python conversion helper]
+├── convert_todo_to_docx.py                [TODO documentation generator]
+├── LAST_CLAUDE_CHAT.md                    [Previous session summary]
+├── README.md                              [TBD]
+└── requirements.txt                       [chinaexpert1, ExperimentsInHonesty]
+```
+
+**Structure Notes**:
+- **AISA_Bot/**: New target structure for consolidated bot code (created 2025-10-20)
+- **API_repo_labels/**: Sandy3w's R&D work on label taxonomy and application
+- **issue_contributor_fetcher/**: Sandy3w's R&D work on GitHub data fetching
+- **scripts/**: JasonUranta's production-quality comment fetcher
+- Root-level files contain existing R&D code to be consolidated
+
 ---
 
 ## References
@@ -464,32 +515,36 @@ AISA_Bot/
 
 The following scripts contain substantial functionality that can be consolidated into AISA_Bot:
 
-1. **scripts/fetch-issue-comments.py** (672 lines)
+1. **[scripts/fetch-issue-comments.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/scripts/fetch-issue-comments.py)** (672 lines) - **JasonUranta**
    - Comprehensive GitHub issue/PR comment fetcher
    - Incremental sync, ETag support, watermarks
    - Sophisticated rate limiting and error handling
    - Maps to: Task 9 (github_fetcher.py), Task 25 (utils.py), Task 29 (error handling), Task 30 (rate limiting)
 
-2. **API_repo_labels/scripts/repo_labeler.py** (173 lines)
+2. **[API_repo_labels/scripts/repo_labeler.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/repo_labeler.py)** (173 lines) - **Sandy3w**
    - Label creation via GitHub API
    - Deduplication, rate limiting, batch processing
    - Maps to: Task 17 (label_applier.py), Task 30 (rate limiting)
 
-3. **API_repo_labels/scripts/excel_to_json.py**
+3. **[API_repo_labels/scripts/excel_to_json.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/excel_to_json.py)** - **Sandy3w**
    - Taxonomy loading and conversion
    - Maps to: Task 11 (prompt_builder.py - load_taxonomy())
 
-4. **issue_contributor_fetcher/org_fetcher/org_fetcher.py** (226 lines)
+4. **[issue_contributor_fetcher/org_fetcher/org_fetcher.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/issue_contributor_fetcher/org_fetcher/org_fetcher.py)** (226 lines) - **Sandy3w**
    - Organization-level contribution fetching
    - Maps to: Task 9 (github_fetcher.py - fetch_issues_for_contributors())
 
-5. **issue_contributor_fetcher/repo_fetcher/repo_fetcher.py** (172 lines)
+5. **[issue_contributor_fetcher/repo_fetcher/repo_fetcher.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/issue_contributor_fetcher/repo_fetcher/repo_fetcher.py)** (172 lines) - **Sandy3w**
    - Repository-level contribution fetching
    - Maps to: Task 9 (github_fetcher.py - fetch_issues_for_contributors())
 
-6. **API_repo_labels/scripts/label_delete.py**
+6. **[API_repo_labels/scripts/label_delete.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/label_delete.py)** - **Sandy3w**
    - Label deletion with retry logic
    - Maps to: Task 30 (rate limiting patterns)
+
+7. **LLM Prompt Research** - **chinaexpert1**
+   - Research completed for Task 12 (LLM prompt design)
+   - Awaiting implementation from Sandy3w
 
 ### Completion Status by Phase
 
@@ -505,9 +560,9 @@ The following scripts contain substantial functionality that can be consolidated
 ### Next Steps
 
 1. **Consolidation Phase**: Move existing R&D code into AISA_Bot structure
-   - Create src/github_fetcher.py from scripts/fetch-issue-comments.py + org_fetcher.py + repo_fetcher.py
-   - Create src/label_applier.py from API_repo_labels/scripts/repo_labeler.py
-   - Create src/prompt_builder.py incorporating API_repo_labels/scripts/excel_to_json.py
+   - Create src/github_fetcher.py from [scripts/fetch-issue-comments.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/scripts/fetch-issue-comments.py) + [org_fetcher.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/issue_contributor_fetcher/org_fetcher/org_fetcher.py) + [repo_fetcher.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/issue_contributor_fetcher/repo_fetcher/repo_fetcher.py)
+   - Create src/label_applier.py from [API_repo_labels/scripts/repo_labeler.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/repo_labeler.py)
+   - Create src/prompt_builder.py incorporating [API_repo_labels/scripts/excel_to_json.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/excel_to_json.py)
    - Create src/utils.py from common utility functions
 
 2. **New Development**: Implement missing components
@@ -515,6 +570,23 @@ The following scripts contain substantial functionality that can be consolidated
    - Comment poster (Task 20)
    - Pipeline orchestration (Task 26)
    - CLI entry point (Task 28)
+
+---
+
+## 👥 Contributors
+
+### Code Contributors
+- **JasonUranta**: [scripts/fetch-issue-comments.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/scripts/fetch-issue-comments.py), [.github workflows](https://github.com/hackforla/ai-skills-assessor/tree/mixin/.github), [.gitignore](https://github.com/hackforla/ai-skills-assessor/blob/mixin/.gitignore), data management utilities
+- **Sandy3w**: [issue_contributor_fetcher](https://github.com/hackforla/ai-skills-assessor/tree/mixin/issue_contributor_fetcher) ([org_fetcher.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/issue_contributor_fetcher/org_fetcher/org_fetcher.py), [repo_fetcher.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/issue_contributor_fetcher/repo_fetcher/repo_fetcher.py)), [API_repo_labels](https://github.com/hackforla/ai-skills-assessor/tree/mixin/API_repo_labels) ([excel_to_json.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/excel_to_json.py), [repo_labeler.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/repo_labeler.py), [label_delete.py](https://github.com/hackforla/ai-skills-assessor/blob/mixin/API_repo_labels/scripts/label_delete.py)), pending prompt implementation
+- **chinaexpert1**: [requirements.txt](https://github.com/hackforla/ai-skills-assessor/blob/mixin/requirements.txt), LLM prompt research (Task 12)
+- **ExperimentsInHonesty**: [requirements.txt](https://github.com/hackforla/ai-skills-assessor/blob/mixin/requirements.txt)
+- **Claude Code**: Project structure setup (AISA_Bot directory)
+
+### Research & Documentation
+- **chinaexpert1**: LLM prompt design research (awaiting implementation from Sandy3w)
+
+### Pending Work Assignments
+- **Sandy3w**: Task 12 implementation (LLM prompt format)
 
 ---
 
