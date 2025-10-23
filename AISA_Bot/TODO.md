@@ -159,6 +159,13 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 **Status**: PENDING
 **Description**: Implement src/openai_client.py: initialize_client() using GitHub Actions secrets, call_gpt4(), parse_response(), handle_rate_limiting() with exponential backoff for 500 RPM / 30K TPM limits
 
+**Note on LLM Flexibility**: The project may switch LLM providers in the future. Many libraries exist which help handle the management of prompts, routing, etc. and often abstract away any vendor-specific API formats. Popular options include:
+- **LangChain**: Comprehensive framework for LLM application development
+- **DSPy**: Declarative programming for language models
+- **Pydantic**: Data validation and settings management with LLM integration
+
+Consider designing the OpenAI client with an abstraction layer to facilitate future LLM provider changes with minimal code modifications.
+
 ### ⏳ Task 15: OpenAI Client Tests
 **Status**: PENDING
 **Description**: Create tests/test_openai_client.py with unit tests using mocked OpenAI API responses
@@ -570,6 +577,83 @@ The following scripts contain substantial functionality that can be consolidated
    - Comment poster (Task 20)
    - Pipeline orchestration (Task 26)
    - CLI entry point (Task 28)
+
+---
+
+## 🏷️ AI Labeling Workflow Overview
+
+This section describes the complete workflow for automated AI-based issue labeling, from trigger to human review.
+
+### 1. Trigger
+- A manual label (e.g., "Apply Labels") is applied from the **New Issue Approval** column
+- This label triggers a GitHub Action that calls the GitHub API to pull the issue's data (title, body, labels, etc.)
+
+### 2. AI Label Generation
+- The issue content is fed into the GPT model via an API call
+- The model returns a list of suggested labels based on the issue content
+- Labels are generated according to the configured taxonomy
+
+### 3. Label Application
+- A second GitHub Action uses the GitHub API to apply the AI-suggested labels to the issue
+- The issue now reflects the AI's proposed categorization
+- Supports both direct API label application and comment-based checklists
+
+### 4. Human Review Process
+- A human reviewer evaluates the labels:
+  - **If adequate**: No changes are made
+  - **If inadequate**: The reviewer manually adds or removes labels
+- All reviewed issues are logged, including:
+  - Whether the AI-generated labels were accepted
+  - What edits were made
+- These logs will inform prompt tuning during both the **Proof of Concept (PoC)** and **Pilot** phases
+
+### 5. Prioritized Backlog Labeling
+- When an issue moves into the **Prioritized Backlog**, an additional label is added (e.g., "576" or "XPB")
+- This label signals that the issue is ready for someone to pick up
+- Required for the dashboard to display the issue correctly
+- The dashboard uses GitHub interface links filtered by these labels to surface available issues with specific skill tags
+
+### 6. Validation and Enforcement Rules (Pilot Phase)
+- **Missing Labels Detection**: If a dev issue enters the Prioritized Backlog without required labels:
+  - It is automatically moved back to **New Issue Approval**
+- **Ready for Prioritization Without Skills**: If someone adds the "Ready for Prioritization" label without skill labels:
+  - The label is removed
+  - A comment is left on the issue explaining why (e.g., "Removed Ready for Prioritization — no skill labels present")
+
+### 7. Future Streamlining
+- In later phases, adding "Ready for Prioritization" could automatically trigger AI label generation
+- This would reduce manual steps and improve workflow efficiency
+
+### 8. Label Scope
+- Labels apply **only to the issue assignee**, not to:
+  - Reviewers
+  - Supervisors
+  - Coaches
+- This ensures dashboard accuracy and prevents contributors from receiving credit for supervisory work on their own issues
+- Supervisory or coaching roles will be represented through bullet summaries, not labels
+
+### 9. Handling Multiple Assignees
+- Some issues may have multiple assignees over time
+- To maintain clean data and fair attribution:
+  - **If one person completes part of an issue and abandons it**:
+    - The issue should be closed
+    - Split into a new issue for the next assignee
+  - **The new issue should**:
+    - Summarize the prior work
+    - Scope what remains
+- This decomposition prevents credit overlap and preserves historical context for each contributor
+
+### Workflow Implementation Status
+- **Phase**: POC (Proof of Concept)
+- **Related Tasks**:
+  - Task 16: Label Handler Implementation
+  - Task 17: Label Applier Implementation
+  - Task 20: Comment Poster Implementation
+  - Task 40: GitHub Actions Workflow
+- **Output Modes Supported**:
+  1. `api_labels`: Direct GitHub API label application
+  2. `comment_checklist`: Markdown checklist in comments
+  3. `both`: Combined approach
 
 ---
 
