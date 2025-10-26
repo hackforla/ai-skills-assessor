@@ -68,7 +68,7 @@ def delete_labels(owner, repo, token):
         label_name = label['name']
         
         # Only delete if label starts with "x-" or contains a semicolon
-        if not (label_name.startswith("x-") or ":" in label_name):
+        if not (label_name.startswith("x-")):
             continue
         
         delete_url = f"https://api.github.com/repos/{owner}/{repo}/labels/{quote(label_name)}"
