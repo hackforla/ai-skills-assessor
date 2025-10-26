@@ -72,7 +72,6 @@ def delete_labels(owner, repo, token):
             continue
         
         delete_url = f"https://api.github.com/repos/{owner}/{repo}/labels/{quote(label_name)}"
-        print(f"Deleting label: {label_name}")
 
         # error check while attempting to delete specified label
         try:
