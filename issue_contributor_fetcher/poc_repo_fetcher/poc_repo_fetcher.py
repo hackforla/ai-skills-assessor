@@ -30,7 +30,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(mess
 # set up
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-CONFIG_FILE = os.path.join(script_dir, "target_repo.json")
+CONFIG_FILE = os.path.join(script_dir, "poc_target_repo.json")
 
 
 # set in bash using: export GH_TOKEN="<your token>"
