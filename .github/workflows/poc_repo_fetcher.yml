@@ -1,7 +1,7 @@
-name: Repo Contributions Fetcher
+name: POC Repo Contributions Fetcher
 
 on:
-  workflow_dispatch:  
+  workflow_dispatch:
 
 jobs:
   fetch_issues_prs:
@@ -11,13 +11,13 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
-          ref: mixin 
+          ref: mixin
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
-      
+          python-version: "3.11"
+
       - name: Cache pip
         uses: actions/cache@v4
         with:
@@ -38,7 +38,7 @@ jobs:
 
       - name: Run Repo Fetcher Script
         env:
-          GH_TOKEN: ${{ secrets.PAT }} 
+          GH_TOKEN: ${{ secrets.PAT }}
         run: |
           python issue_contributor_fetcher/repo_fetcher/repo_fetcher.py
 
