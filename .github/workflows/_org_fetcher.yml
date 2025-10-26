@@ -1,0 +1,46 @@
+name: Org Contributions Fetcher
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch_contributions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Check for GH_TOKEN (PAT)
+        run: |
+          if [ -z "${{ secrets.PAT }}" ]; then
+            echo "::error::GH_TOKEN (PAT) is not set"
+            exit 1
+          fi
+
+      - name: Run Org Fetcher
+        env:
+          PAT: ${{ secrets.PAT }}
+        run: python issue_contributor_fetcher/org_fetcher/org_fetcher.py
+
+      - name: Upload CSV artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: org-contributions
+          path: issue_contributor_fetcher/org_fetcher/org_contr.csv
