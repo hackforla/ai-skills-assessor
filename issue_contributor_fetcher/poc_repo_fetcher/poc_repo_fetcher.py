@@ -157,7 +157,7 @@ def repo_fetcher(repo, users):
         logging.info(f"Found {len(all_results)} issues/PRs.")
 
     # OUTPUT CSV
-    output_file = os.path.join(script_dir, "poc_results.csv")
+    output_file = os.path.join(script_dir, "poc_repo_fetcher_results.csv")
     with open(output_file, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=["user", "repo", "number", "type"])
         writer.writeheader()
