@@ -1,0 +1,208 @@
+RobertaFricker
+opened on Apr 14, 2021 · edited by abuna1985
+Member
+Overview
+As a part of the Dev team's efforts to standardize components throughout the website, we need to standardize the accordion component. The JavaScript code needs to be standardized, and some changes with how the JavaScript manipulates the accordion styles needs to be changed. There are also some style issues with the accordion component that need to be fixed. On the 2FA page on the website, the accordion component in the FAQ section stretches farther than the card in the tablet view range.
+
+Action Items
+
+Take JavaScript code for the accordion out of getting-started.html and 2FA.html, and move the JavaScript code into the elements folder. The final result should be js code in the following file /assets/js/elements/accordion.js
+
+Once there is an assets/js/elements/accordion.js, you need to include it into the pages/getting-started.html and guide-pages/2FA.html via the script tag like so. <script src="/assets/js/elements/accordion.js" type="module"></script>. You will place it where the previous <script> containing the accordion logic was.
+
+Move any accordion related style classes from _getting-started-page.scss and 2FA.scss into a new file called _accordion.scss in the elements folder.
+
+Change the JavaScript code so that it adds a style class called "show" when the accordion is opened, and when closed it removes that class, rather than having the JavaScript code add the styles directly.
+
+As per comment Develop Updated Getting Started page #1619 (comment), the accordion arrows need to be made pink in all viewport ranges.
+Resources/Instructions
+Current uses of accordion on website
+https://www.hackforla.org/getting-started
+https://www.hackforla.org/guide-pages/2FA
+
+Relevant files
+https://github.com/hackforla/website/blob/gh-pages/_guide-pages/2FA.html
+https://github.com/hackforla/website/blob/gh-pages/pages/getting-started.html
+https://github.com/hackforla/website/blob/gh-pages/_sass/components/guide-pages/2FA.scss
+https://github.com/hackforla/website/blob/gh-pages/_sass/components/_getting-started-page.scss
+Figma Design 2FA (black border)
+
+Below are screenshots of the behavior of the FAQ section when it's resized above 958 left-right:
+image
+
+image
+
+Activity
+
+RobertaFricker
+added 
+role: front end
+Tasks for front end developers
+ 
+role: UI
+ 
+Complexity: Medium
+ 
+UX
+ and removed 
+role: UI
+ on Apr 14, 2021
+
+RobertaFricker
+changed the title [-]guide-page for 2FA doesn't resize correctly in FAQ section at over 958 in responsive mode[/-] [+]hackforla/guide-pages/2FA site FAQ line/arrow resizes incorretly over 958 in responsive mode[/+] on Apr 14, 2021
+
+RobertaFricker
+changed the title [-]hackforla/guide-pages/2FA site FAQ line/arrow resizes incorretly over 958 in responsive mode[/-] [+]hackforla/guide-pages/2FA site FAQ line/arrow resizes incorrectly over 958 in responsive mode[/+] on Apr 14, 2021
+
+RobertaFricker
+changed the title [-]hackforla/guide-pages/2FA site FAQ line/arrow resizes incorrectly over 958 in responsive mode[/-] [+]hackforla/guide-pages/2FA site FAQ section line/arrow resizing incorrectly[/+] on Apr 15, 2021
+akibrhast
+akibrhast commented on Apr 18, 2021
+akibrhast
+on Apr 18, 2021 · Hidden as resolved
+Roberta's Comment
+Danielle's Comment
+
+@daniellex0 @RobertaFricker
+Though I'm not sure I completely followed Roberta's comment, from what I saw, the min-width is creating an issue and I don't think min-width needs to be there at all—nothing else changed at other screen sizes when min-with was taken out.
+
+Note: I did not take into account any other pages, as I worked it out via dev tools on the live site, and not through a locally hosted site.
+Live site _with_ min-width: 835px
+Live site _without_ min-width
+@erikaBell -
+#1406 (comment)
+
+akibrhast
+akibrhast commented on Apr 18, 2021
+akibrhast
+on Apr 18, 2021 · Hidden as resolved
+I believe @erikaBell is correct that min-width: 835px is not necessary. However, this specific styling is coming from _getting-started-page.scss, and not from 2FA.scss. I am not 100% sure if removing this min-width would mess anything up from the getting-started page - @averdin2
+#1406 (comment)
+
+akibrhast
+akibrhast commented on Apr 18, 2021
+akibrhast
+on Apr 18, 2021 · Hidden as resolved
+@averdin2 @erikaBell Really sorry about the delay- hmmm this is so strange, earlier when I was checking and disabled min-width the accordion seemed to get messed up, but now that I'm testing it everything seems fine... So do you think min-width is not serving any purpose at all?
+
+I will say, it does seem strange that it's min-width. If anything, I'd expect a max-width.. - @daniellex0
+#1406 (comment)
+
+akibrhast
+akibrhast commented on Apr 18, 2021
+akibrhast
+on Apr 18, 2021 · Hidden as resolved
+The comments above are a continuation of the discussion regarding an issue found during this PR between @averdin2 , @erikaBell , @daniellex0 -> #1406
+
+
+Sihemgourou
+added 
+role: design
+ and removed 
+UX
+ on Jun 12, 2021
+
+sayalikotkar
+added 
+Feature Missing
+This label means that the issue needs to be linked to a precise feature label.
+ on Jun 20, 2021
+30 remaining items
+abuna1985
+abuna1985 commented on Aug 29, 2021
+abuna1985
+on Aug 29, 2021 · edited by abuna1985
+Member
+@ExperimentsInHonesty I think we can either:
+
+move the last item into a separate issue.
+Remove it entirely from the 2FA page
+It seems like the accordion for the Getting Started Page is nested in a card with 30px of padding. The accordion for 2FA is nested in a section-container class that has a left/right padding of 187px and top/bottom padding of 75px. The CSS for the accordion within 2FA needs to account for this. Also, the Figma design of 2FA shows the border under the text instead of under the title.
+Figma Design- Guide Pages - 2FA
+
+Click to see screenshot of the expanded accordion within 2FA Guide pages
+
+abenipa3
+mentioned this on Aug 29, 2021
+Work flow for guides to appear on the website #1630
+
+JackRichman
+mentioned this on Aug 30, 2021
+Standardization of the accordion element #2208
+
+github-actions
+added 
+To Update !
+No update has been provided
+ and removed 
+To Update !
+No update has been provided
+ on Sep 3, 2021
+github-actions
+github-actions commented on Sep 3, 2021
+github-actions
+bot
+on Sep 3, 2021 · Hidden as outdated
+@JackRichman
+
+Please add update using this template (even if you have a pull request)
+
+Progress: "What is the current status of your project? What have you completed and what is left to do?"
+Blockers: "Difficulties or errors encountered."
+Availability: "How much time will you have this week to work on this issue?"
+ETA: "When do you expect this issue to be completed?"
+Pictures: "Add any pictures of the visual changes made to the site so far."
+If you need help, be sure to either: 1) ask for help at your next meeting, 2) put a "Status: Help Wanted" label on your issue and pull request, or 3) put up a request for assistance on the #hfla-site channel.
+
+You are receiving this comment because your last comment was before Tuesday, August 31, 2021 at 12:02 AM PST.
+
+
+blakes24
+mentioned this on Sep 5, 2021
+HfLA: DEV TEAM Meeting Agenda Sunday 🧣 #2027
+github-actions
+github-actions commented on Sep 10, 2021
+github-actions
+bot
+on Sep 10, 2021 · Hidden as outdated
+@JackRichman
+
+Please add update using the below template (even if you have a pull request). Afterwards, remove the 'To Update !' label and add the 'Status: Updated' label.
+
+Progress: "What is the current status of your project? What have you completed and what is left to do?"
+Blockers: "Difficulties or errors encountered."
+Availability: "How much time will you have this week to work on this issue?"
+ETA: "When do you expect this issue to be completed?"
+Pictures: "Add any pictures of the visual changes made to the site so far."
+If you need help, be sure to either: 1) ask for help at your next meeting, 2) put a "Status: Help Wanted" label on your issue and pull request, or 3) put up a request for assistance on the #hfla-site channel.
+
+You are receiving this comment because your last comment was before Tuesday, September 7, 2021 at 12:02 AM PST.
+
+
+github-actions
+added 
+To Update !
+No update has been provided
+ and removed 
+To Update !
+No update has been provided
+ on Sep 10, 2021
+
+KayodeAlabi
+added 
+UAT: has visuals
+ on Sep 12, 2021
+
+macho-catt
+closed this as completedin #2208on Sep 15, 2021
+
+Josiah-O
+added 
+size: missing
+ on Aug 13, 2023
+
+ExperimentsInHonesty
+added this to  P: HfLA Website: Project Boardon Jun 23, 2024
+
+ExperimentsInHonesty
+moved this to Done in  P: HfLA Website: Project Boardon Jun 23, 2024

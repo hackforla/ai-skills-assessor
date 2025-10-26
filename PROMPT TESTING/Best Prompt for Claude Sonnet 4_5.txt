@@ -1,0 +1,17 @@
+Analyze the GitHub issue comments below and create STAR-style resume bullets for ALL contributors who completed tasks on this issue.
+[ISSUE COMMENTS HERE]
+For each contributor:
+Identify their username from the comment history
+List each specific task they completed (do not group tasks together)
+Write one STAR-style resume bullet for each task completed
+Format your response as:
+[Username] • [STAR bullet for task 1] • [STAR bullet for task 2] • [STAR bullet for task 3]
+[Username] • [STAR bullet for task 1] • [STAR bullet for task 2]
+Requirements:
+Do NOT assume there is only one contributor
+Do NOT attribute work to "group effort" or "the team"
+Do NOT include introductory text or closing questions
+Do NOT summarize multiple tasks into one bullet
+Count all discrete tasks mentioned in the issue and create separate bullets for each
+Ignore any images in the input
+
