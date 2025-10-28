@@ -42,6 +42,7 @@ REACTION_KEYS = ["+1", "-1", "laugh", "hooray", "confused", "heart", "rocket", "
 
 # Prefer GITHUB_TOKEN (Actions) and fall back to GH_TOKEN
 token = os.getenv("GITHUB_TOKEN") or os.getenv("GH_TOKEN")
+
 if not token:
     raise SystemExit("Missing GITHUB_TOKEN/GH_TOKEN. Set one in the workflow env/secrets.")
 
@@ -177,6 +178,30 @@ def save_json_atomic(data: List[dict], output_path: str) -> None:
     with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     os.replace(tmp_path, output_path)
+
+def save_markdown(data: List[dict], json_path: str) -> None:
+    """Convert JSON records to Markdown and save alongside the JSON."""
+    md_path = json_path.replace('.json', '.md')
+    
+    with open(md_path, 'w', encoding='utf-8') as f:
+        f.write(f"# GitHub Issue Comments - {owner}/{repo}\n\n")
+        f.write(f"*Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}*\n\n")
+        f.write(f"Total comments: {len(data)}\n\n")
+        f.write("---\n\n")
+        
+        for comment in data:
+            user = comment.get('user_login', 'Unknown')
+            created = comment.get('created_at_iso', 'Unknown')
+            issue_num = comment.get('issue_number', '?')
+            html_url = comment.get('html_url', '')
+            body = comment.get('raw', {}).get('body', '')
+            is_pr = comment.get('is_pr_comment', False)
+            comment_type = "PR" if is_pr else "Issue"
+            
+            f.write(f"## [{comment_type} #{issue_num}]({html_url}) - @{user}\n\n")
+            f.write(f"**Created:** {created}\n\n")
+            f.write(f"{body}\n\n")
+            f.write("---\n\n")
 
 def _sanitize_for_filename(s: str) -> str:
     return "".join(ch if ch.isalnum() or ch in ("-", "_", ".") else "_" for ch in s)
@@ -654,6 +679,7 @@ def main() -> None:
 
     try:
         save_json_atomic(out, OUTPUT_PATH)
+        save_markdown(out, OUTPUT_PATH)
         write_meta(effective_sig)  # persist current config signature after a successful write
         logger.info(f"Comments added this update: {total_new}")
         logger.info(f"Total comments after update: {len(out)}")

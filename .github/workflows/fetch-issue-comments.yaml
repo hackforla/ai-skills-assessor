@@ -107,6 +107,25 @@ jobs:
           path: ${{ steps.outpath.outputs.VALUE }}.gz
           if-no-files-found: ignore
           retention-days: 90
+      
+      - name: Gzip Markdown for artifact (if exists)
+        shell: bash
+        run: |
+          MD_PATH="${{ steps.outpath.outputs.VALUE }}"
+          MD_PATH="${MD_PATH%.json}.md"
+          if [ -f "$MD_PATH" ]; then
+            gzip -c "$MD_PATH" > "$MD_PATH.gz"
+          else
+            echo "No markdown at $MD_PATH; skipping gzip."
+          fi
+
+      - name: Upload issue-comments markdown artifact (gz)
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue-comments-${{ github.run_id }}.md.gz
+          path: ${{ steps.outpath.outputs.VALUE }}.md.gz
+          if-no-files-found: ignore
+          retention-days: 90
 
       - name: Commit JSON to repo (optional & safe)
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.commit_to_repo == 'true' }}
@@ -118,10 +137,11 @@ jobs:
             echo "No output file to commit."
             exit 0
           fi
-          if ! git diff --quiet -- "$OUT"; then
+          MD_OUT="${OUT%.json}.md"
+          if ! git diff --quiet -- "$OUT" "$MD_OUT"; then
             git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add "$OUT"
+            git add "$OUT" "$MD_OUT"
             git commit -m "Update issue comments [skip ci]"
             git push
           else
