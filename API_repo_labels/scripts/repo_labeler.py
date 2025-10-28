@@ -51,6 +51,9 @@ def load_labels():
 
 
 def create_labels(owner, repo, labels, token):
+    skipped_labels = []
+    failed_labels = []
+    
     if not check_repo_access(owner, repo, token):
         logging.error(f"Stopping label creation for '{owner}/{repo}' due to repo access error.")
         sys.exit(1)
@@ -101,6 +104,12 @@ def create_labels(owner, repo, labels, token):
         label = labels[i]
         label_name = label['label_name'].strip()
         normalized_label_name = label_name.lower()
+        
+        if len(label_name) > 50:
+            logging.warning(f"Skipping label '{label_name}' because it exceeds 50 characters.")
+            skipped_labels.append(label_name)
+            i += 1
+            continue
 
         # if label to be created exists, skip
         if normalized_label_name in existing_label_names:
@@ -157,6 +166,10 @@ def create_labels(owner, repo, labels, token):
     if failed:
         sys.exit(1)
     else:
+        if skipped_labels:
+            logging.warning(f"The following labels were skipped (too long): {skipped_labels}")
+            
+        logging.info("Label creation process completed.")
         sys.exit(0)
 
         

@@ -1,3 +1,7 @@
-[
-  {"owner": "hackforla", "repo": "ai-skills-assessor"}
-]
+{
+  "repos": {
+    "sandy3w/ai-skills-assessor": {
+      "delete_labels": true
+    }
+  }
+}

@@ -63,17 +63,15 @@ def delete_labels(owner, repo, token):
     logging.info(f"Target repo: {owner}/{repo}")
 
     existing_labels = get_all_labels(owner, repo, headers)
-    logging.info("Found labels:", [label['name'] for label in existing_labels])
-
+    
     for label in existing_labels:
         label_name = label['name']
         
         # Only delete if label starts with "x-" or contains a semicolon
-        if not (label_name.startswith("x-") or ":" in label_name):
+        if not (label_name.startswith("x-")):
             continue
         
         delete_url = f"https://api.github.com/repos/{owner}/{repo}/labels/{quote(label_name)}"
-        print(f"Deleting label: {label_name} -> {delete_url}")
 
         # error check while attempting to delete specified label
         try:

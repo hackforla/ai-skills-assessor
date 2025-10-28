@@ -1,0 +1,43 @@
+name: Update Labels JSON
+
+on:
+    push:
+        paths:
+            - "data/excel_labels_data.xlsx"
+    workflow_dispatch:
+
+jobs:
+    update_json:
+        runs-on: ubuntu-latest
+
+        permissions:
+            contents: write
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  ref: mixin
+                  token: ${{ secrets.PAT }}
+
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.11"
+
+            - name: Install dependencies
+              run: |
+                  pip install pandas openpyxl
+
+            - name: Run Excel to JSON conversion
+              run: |
+                  python API_repo_labels/scripts/excel_to_json.py
+
+            - name: Commit and push updated JSON
+              run: |
+                  git config user.name "github-actions"
+                  git config user.email "github-actions@github.com"
+
+                  git add API_repo_labels/data/labels_data.json
+                  git diff --cached --quiet || git commit -m "Auto-update labels_data.json from Excel"
+                  git push origin mixin --verbose
