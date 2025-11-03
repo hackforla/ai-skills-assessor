@@ -16,7 +16,6 @@ def get_all_labels(owner, repo, headers):
     backoff = 5
 
     # fetches all label from target repo
-    # fetches all label from target repo
     while True:
         url = f"https://api.github.com/repos/{owner}/{repo}/labels?per_page=100&page={page}"
         logging.info(f"Fetching labels from: {url}")
@@ -33,13 +32,13 @@ def get_all_labels(owner, repo, headers):
                     sys.exit(1)
 
                 batch = response.json()
-                break  # success, exit retry loop
+                break  
 
             except requests.exceptions.RequestException as e:
                 attempt += 1
                 logging.warning(f"Request failed ({attempt}/{retries}): {e}")
                 if attempt < retries:
-                    sleep_time = backoff * (2 ** (attempt - 1))  # exponential backoff: 5,10,20...
+                    sleep_time = backoff * (2 ** (attempt - 1))  
                     logging.info(f"Retrying after {sleep_time} seconds...")
                     time.sleep(sleep_time)
                 else:
@@ -47,7 +46,7 @@ def get_all_labels(owner, repo, headers):
                     sys.exit(1)
 
         if not batch:
-            break  # no more labels
+            break 
         
         labels.extend(batch)
         page += 1
@@ -64,13 +63,15 @@ def delete_labels(owner, repo, token):
     logging.info(f"Target repo: {owner}/{repo}")
 
     existing_labels = get_all_labels(owner, repo, headers)
-    logging.info("Found labels:", [label['name'] for label in existing_labels])
-
-    # deletes all labels found
+    
     for label in existing_labels:
         label_name = label['name']
+        
+        # Only delete if label starts with "x-" or contains a semicolon
+        if not (label_name.startswith("x-")):
+            continue
+        
         delete_url = f"https://api.github.com/repos/{owner}/{repo}/labels/{quote(label_name)}"
-        print(f"Deleting label: {label_name} -> {delete_url}")
 
         # error check while attempting to delete specified label
         try:
@@ -97,10 +98,8 @@ def handle_rate_limit(response):
     return False
 
 if __name__ == "__main__":
-    # configure all three to use this file
-    # hard code owner and repo and set GH_TOKEN
-    owner = "sandy3w"
-    repo = "HfLA-label-test"
+    owner = os.environ.get("REPO_OWNER")
+    repo = os.environ.get("REPO_NAME")
     token = os.environ.get("GH_TOKEN")
 
     if not all([owner, repo, token]):

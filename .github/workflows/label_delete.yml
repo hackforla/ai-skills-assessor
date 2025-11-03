@@ -1,0 +1,48 @@
+name: Delete Generated Labels from Specified Repos
+on:
+    workflow_dispatch:
+
+jobs:
+    delete_labels_from_target_repos:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+              with:
+                  ref: mixin
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.11"
+
+            - name: Install Python Dependencies
+              run: pip install requests pandas openpyxl
+
+            - name: Install jq
+              run: sudo apt-get update && sudo apt-get install -y jq
+
+            - name: Delete labels in target repos
+              env:
+                  GH_TOKEN: ${{ secrets.PAT }}
+              run: |
+                  JSON_FILE=config/repo_labels_delete.json
+
+                  while read -r repo_entry; do
+                    REPO_FULL=$(echo "$repo_entry" | jq -r '.key')
+                    OWNER=$(echo "$REPO_FULL" | cut -d'/' -f1)
+                    REPO=$(echo "$REPO_FULL" | cut -d'/' -f2)
+
+                    echo "Deleting labels in repo: $REPO_FULL"
+
+                    GH_TOKEN=${{ secrets.PAT }} REPO_OWNER=$OWNER REPO_NAME=$REPO \
+                      python API_repo_labels/scripts/label_delete.py
+
+                    EXIT_CODE=$?
+                    if [ $EXIT_CODE -ne 0 ]; then
+                      echo "Deletion failed for $REPO_FULL, skipping..."
+                    fi
+
+                    sleep 5
+                  done < <(jq -c '.repos | to_entries[] | select(.value.delete_labels == true)' $JSON_FILE)
