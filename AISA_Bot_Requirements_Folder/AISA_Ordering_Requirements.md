@@ -64,6 +64,10 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 **Existing Work**: Root-level [requirements.txt](https://github.com/hackforla/ai-skills-assessor/blob/mixin/requirements.txt) exists with `requests>=2.32,<3.0`  
 **Remaining Work**: Need to add PyGithub, python-dotenv, openai, pytest, openpyxl/pandas dependencies  
 
+Issues:
+
+https://github.com/hackforla/ai-skills-assessor/issues/2
+
 ### ⏳ Task 5: Environment Template  
 **Status**: PENDING  
 **Description**: Create .env.example template with GITHUB_TOKEN and OPENAI_API_KEY placeholders (actual secrets stored in both 1Password AND GitHub secrets)  
@@ -120,6 +124,10 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 - Consolidate into `src/github_fetcher.py` with functions: `fetch_issue()`, `fetch_issue_comments()`, `fetch_issues_for_contributors()`, `check_existing_labels()`  
 - Adapt for AISA_Bot requirements and bot account credentials  
 
+Issues:
+
+https://github.com/hackforla/ai-skills-assessor/issues/38
+
 ### ⏳ Task 10: GitHub Fetcher Tests  
 **Status**: PENDING  
 **Description**: Create tests/test_github_fetcher.py with unit tests using mocked GitHub API responses and error handling  
@@ -144,11 +152,28 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 - Implement `build_llm_prompt()` function for resume bullets and skill classification  
 - Consolidate into `src/prompt_builder.py`  
 
+Issues:
+
+https://github.com/hackforla/ai-skills-assessor/issues/38
+
+
+
 ### ⏳ Task 12: LLM Prompt Design  
 **Status**: PENDING (Research done by chinaexpert1, pending implementation from Sandy3w)  
 **Programmers**: chinaexpert1 (research), Sandy3w (pending implementation)  
 **Description**: Design LLM prompt format: STAR method instructions, 30-word limit, skill taxonomy inclusion, JSON output structure for bullets and labels  
 **Note**: Prompt research has been completed by chinaexpert1; awaiting implementation from Sandy3w  
+
+Issues:
+https://github.com/hackforla/ai-skills-assessor/issues/24
+https://github.com/hackforla/ai-skills-assessor/issues/26
+https://github.com/hackforla/ai-skills-assessor/issues/36
+https://github.com/hackforla/ai-skills-assessor/issues/33
+https://github.com/hackforla/ai-skills-assessor/issues/32
+https://github.com/hackforla/ai-skills-assessor/issues/31
+https://github.com/hackforla/ai-skills-assessor/issues/30
+https://github.com/hackforla/ai-skills-assessor/issues/29
+https://github.com/hackforla/ai-skills-assessor/issues/27
 
 ### ⏳ Task 13: Prompt Builder Tests  
 **Status**: PENDING  
@@ -174,6 +199,10 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 **Status**: PENDING  
 **Description**: Implement src/label_handler.py: extract_labels_from_response(), validate_labels_against_taxonomy(), get_new_labels() for deduplication, supports both GitHub API labels and comment checklist modes  
 
+Issues:
+
+https://github.com/hackforla/ai-skills-assessor/issues/38
+
 ### 🔄 Task 17: Label Applier Implementation  
 **Status**: PARTIALLY COMPLETED  
 **Programmer**: Sandy3w  
@@ -193,9 +222,17 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 - Add `check_existing_labels()` to avoid duplicates on issues  
 - Consolidate into `src/label_applier.py`  
 
+Issues:
+
+https://github.com/hackforla/ai-skills-assessor/issues/3
+
 ### ⏳ Task 18: Label Handler Tests  
 **Status**: PENDING  
 **Description**: Create tests/test_label_handler.py with unit tests for label validation, deduplication, and taxonomy matching  
+
+Issues:
+
+https://github.com/hackforla/ai-skills-assessor/issues/39
 
 ### ⏳ Task 19: Label Applier Tests  
 **Status**: PENDING  
@@ -323,7 +360,12 @@ This is a **GitHub-based bot** that runs as a scheduled workflow:
 
 ### ⏳ Task 33: README Documentation  
 **Status**: PENDING  
-**Description**: Create comprehensive README.md: project overview, GitHub bot architecture, setup instructions for configuring two secrets (GITHUB_TOKEN and OPENAI_API_KEY stored in both 1Password and GitHub), environment configuration, skill output mode options, usage examples, credit to true-github-contributors  
+**Description**: Create comprehensive README.md: project overview, GitHub bot architecture, setup instructions for configuring two secrets (GITHUB_TOKEN and OPENAI_API_KEY stored in both 1Password and GitHub), environment configuration, skill output mode options, usage examples, credit to true-github-contributors 
+
+Issues: 
+
+https://github.com/hackforla/ai-skills-assessor/issues/41
+https://github.com/hackforla/ai-skills-assessor/issues/40
 
 ### ⏳ Task 34: Configuration Documentation  
 **Status**: PENDING  
