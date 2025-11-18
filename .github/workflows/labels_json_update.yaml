@@ -3,7 +3,7 @@ name: Update Labels JSON
 on:
     push:
         paths:
-            - "data/excel_labels_data.xlsx"
+            - "data/repo_labeler/excel_labels_data.xlsx"
     workflow_dispatch:
 
 jobs:
@@ -31,13 +31,13 @@ jobs:
 
             - name: Run Excel to JSON conversion
               run: |
-                  python API_repo_labels/scripts/excel_to_json.py
+                  python scripts/repo_labeler/excel_to_json.py
 
             - name: Commit and push updated JSON
               run: |
                   git config user.name "github-actions"
                   git config user.email "github-actions@github.com"
 
-                  git add API_repo_labels/data/labels_data.json
+                  git add data/repo_labeler/labels_data.json
                   git diff --cached --quiet || git commit -m "Auto-update labels_data.json from Excel"
                   git push origin mixin --verbose

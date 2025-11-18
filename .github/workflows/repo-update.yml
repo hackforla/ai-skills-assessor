@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install Python Dependencies
         run: pip install requests pandas openpyxl
@@ -28,8 +28,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PAT }}
         run: |
-          JSON_FILE=config/target_repos_status.json
-          TMP_FILE=config/target_repos_status.tmp.json
+          JSON_FILE=config/repo_labeler/target_repos_status.json
+          TMP_FILE=config/repo_labeler/target_repos_status.tmp.json
           UPDATED=false
 
           # Use input redirection < <(...) to avoid subshell
@@ -40,7 +40,7 @@ jobs:
 
             echo "Processing repo: $REPO_FULL"
 
-            GH_TOKEN=${{ secrets.PAT }} REPO_OWNER=$OWNER REPO_NAME=$REPO python API_repo_labels/scripts/repo_labeler.py
+            GH_TOKEN=${{ secrets.PAT }} REPO_OWNER=$OWNER REPO_NAME=$REPO python scripts/repo_labeler/repo_labeler.py
             EXIT_CODE=$?
 
             if [ $EXIT_CODE -eq 0 ]; then

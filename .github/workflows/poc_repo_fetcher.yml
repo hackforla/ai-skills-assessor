@@ -1,4 +1,4 @@
-name: POC Repo Contributions Fetcher
+name: POC Repo Contributions Summary Fetcher
 
 on:
   workflow_dispatch:
@@ -40,10 +40,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PAT }}
         run: |
-          python issue_contributor_fetcher/poc_repo_fetcher/poc_repo_fetcher.py
+          python scripts/contribution_summary_fetcher/poc_repo_fetcher.py
 
       - name: Upload CSV Results
         uses: actions/upload-artifact@v4
         with:
           name: poc-results
-          path: issue_contributor_fetcher/poc_repo_fetcher/poc_repo_fetcher_results.csv
+          path: data/contribution_summary_fetcher/poc_repo_fetcher_results.csv

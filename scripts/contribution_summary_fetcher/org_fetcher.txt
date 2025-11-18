@@ -28,9 +28,9 @@ def build_session():
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 # Script paths
-script_dir = os.path.dirname(os.path.abspath(__file__))
-CONFIG_FILE = os.path.join(script_dir, "target_org.json")
-OUTPUT_FILE = os.path.join(script_dir, "org_contr.csv")
+REPO_ROOT = os.getcwd()
+CONFIG_FILE = os.path.join(REPO_ROOT, "config/contribution_summary_fetcher/target_org.json")
+OUTPUT_FILE = os.path.join(REPO_ROOT, "data/contribution_summary_fetcher/org_contr.csv")
 
 # --- GitHub token from secret ---
 GITHUB_TOKEN = (

@@ -45,7 +45,7 @@ def check_repo_access(owner, repo, token):
 # load in labels from labels_data.json
 def load_labels():
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    filepath = os.path.join(script_dir, '..', 'data', 'labels_data.json') 
+    filepath = os.path.join(script_dir, '..', '..', 'data', 'repo_labeler', 'labels_data.json') 
     with open(filepath, 'r') as f:
         return json.load(f)
 
