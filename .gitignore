@@ -1,4 +1,50 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Environment variables
 .env
+.env.local
+
+# Coverage reports (regenerated each test run)
+coverage/
+htmlcov/
+.coverage
+.coverage.*
+*.cover
+.pytest_cache/
+
+# Node/npm (if you don't use JavaScript)
 node_modules/
 package-lock.json
-coverage/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Keep data files - COMMIT THESE
+# data/*.json
+# data/*.md
+# data/.syncmeta.* 
+
+# Keep .etag files too (used for incremental sync)
+# data/.etag.*

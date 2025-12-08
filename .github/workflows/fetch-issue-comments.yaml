@@ -18,7 +18,7 @@ on:
         required: false
         default: "false"
       output_path:
-        description: "Output JSON path (defaults to data/issue_comments.json)"
+        description: "Output JSON path (base, defaults to data/issue-comments.json)"
         required: false
       full_resync:
         description: "Ignore watermarks & ETags and backfill everything"
@@ -28,6 +28,10 @@ on:
         description: "Commit the JSON to the repo (workflow_dispatch only)"
         required: false
         default: "false"
+      notes:
+        description: "Additional Notes (stored in metadata only)"
+        required: false
+        default: ""
 
   issue_comment:
     types: [created]
@@ -76,35 +80,69 @@ jobs:
           if [ -n "${{ github.event.inputs.output_path }}" ]; then
             echo "VALUE=${{ github.event.inputs.output_path }}" >> "$GITHUB_OUTPUT"
           else
-            echo "VALUE=data/issue_comments.json" >> "$GITHUB_OUTPUT"
+            echo "VALUE=data/issue-comments.json" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run comment fetcher
         env:
           INPUT_OWNER: ${{ github.event.inputs.owner || github.repository_owner || steps.derive.outputs.OWNER }}
-          INPUT_REPO:  ${{ github.event.inputs.repo  || github.event.repository.name || steps.derive.outputs.REPO }}
+          INPUT_REPO: ${{ github.event.inputs.repo || github.event.repository.name || steps.derive.outputs.REPO }}
           INPUT_USERS: ${{ github.event.inputs.users || 'JasonUranta,JackRichman,mgodoy2023,Zak234,anonymousanemone' }}
           INPUT_INCLUDE_PR_REVIEWS: ${{ github.event.inputs.include_pr_reviews || 'false' }}
           INPUT_OUTPUT_PATH: ${{ steps.outpath.outputs.VALUE }}
           INPUT_FULL_RESYNC: ${{ github.event.inputs.full_resync || 'false' }}
+          INPUT_COMMIT_TO_REPO: ${{ github.event.inputs.commit_to_repo || 'false' }}
+          INPUT_NOTES: ${{ github.event.inputs.notes || '' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: python scripts/fetch-issue-comments.py
 
       - name: Gzip JSON for artifact (if exists)
+        id: gzjson
         shell: bash
         run: |
-          if [ -f "${{ steps.outpath.outputs.VALUE }}" ]; then
-            gzip -c "${{ steps.outpath.outputs.VALUE }}" > "${{ steps.outpath.outputs.VALUE }}.gz"
+          OUT_BASE="${{ steps.outpath.outputs.VALUE }}"
+          DIR="$(dirname "$OUT_BASE")"
+          BASE="$(basename "$OUT_BASE" .json)"
+          # Find the most recent timestamped JSON file, e.g. issue-comments-20251117T225430Z.json
+          JSON_PATH="$(ls -1 "${DIR}/${BASE}-"*.json 2>/dev/null | sort | tail -n 1 || true)"
+          if [ -n "$JSON_PATH" ] && [ -f "$JSON_PATH" ]; then
+            gzip -c "$JSON_PATH" > "${JSON_PATH}.gz"
+            echo "JSON_PATH=$JSON_PATH" >> "$GITHUB_OUTPUT"
+            echo "GZ_PATH=${JSON_PATH}.gz" >> "$GITHUB_OUTPUT"
           else
-            echo "No output at ${{ steps.outpath.outputs.VALUE }}; skipping gzip."
+            echo "No JSON output matching ${DIR}/${BASE}-*.json; skipping gzip."
           fi
 
       - name: Upload issue-comments artifact (gz)
         uses: actions/upload-artifact@v4
         with:
           name: issue-comments-${{ github.run_id }}.json.gz
-          path: ${{ steps.outpath.outputs.VALUE }}.gz
+          path: ${{ steps.gzjson.outputs.GZ_PATH }}
+          if-no-files-found: ignore
+          retention-days: 90
+
+      - name: Gzip Markdown for artifact (if exists)
+        id: gzmd
+        shell: bash
+        run: |
+          OUT_BASE="${{ steps.outpath.outputs.VALUE }}"
+          DIR="$(dirname "$OUT_BASE")"
+          BASE="$(basename "$OUT_BASE" .json)"
+          MD_PATH="$(ls -1 "${DIR}/${BASE}-"*.md 2>/dev/null | sort | tail -n 1 || true)"
+          if [ -n "$MD_PATH" ] && [ -f "$MD_PATH" ]; then
+            gzip -c "$MD_PATH" > "${MD_PATH}.gz"
+            echo "MD_PATH=$MD_PATH" >> "$GITHUB_OUTPUT"
+            echo "GZ_PATH=${MD_PATH}.gz" >> "$GITHUB_OUTPUT"
+          else
+            echo "No markdown output matching ${DIR}/${BASE}-*.md; skipping gzip."
+          fi
+
+      - name: Upload issue-comments markdown artifact (gz)
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue-comments-${{ github.run_id }}.md.gz
+          path: ${{ steps.gzmd.outputs.GZ_PATH }}
           if-no-files-found: ignore
           retention-days: 90
 
@@ -113,18 +151,32 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          OUT="${{ steps.outpath.outputs.VALUE }}"
-          if [ ! -f "$OUT" ]; then
-            echo "No output file to commit."
+          OUT_BASE="${{ steps.outpath.outputs.VALUE }}"
+          DIR="$(dirname "$OUT_BASE")"
+          BASE="$(basename "$OUT_BASE" .json)"
+
+          JSON_PATH="$(ls -1 "${DIR}/${BASE}-"*.json 2>/dev/null | sort | tail -n 1 || true)"
+          MD_PATH="$(ls -1 "${DIR}/${BASE}-"*.md 2>/dev/null | sort | tail -n 1 || true)"
+
+          if [ -z "$JSON_PATH" ] || [ ! -f "$JSON_PATH" ]; then
+            echo "No output JSON file to commit."
             exit 0
           fi
-          if ! git diff --quiet -- "$OUT"; then
-            git config user.name  "github-actions[bot]"
+
+          if [ -z "$MD_PATH" ] || [ ! -f "$MD_PATH" ]; then
+            echo "No markdown file found; committing JSON only."
+            MD_PATH=""
+          fi
+
+          if ! git diff --quiet -- "$JSON_PATH" ${MD_PATH:+$MD_PATH}; then
+            git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add "$OUT"
+            git add "$JSON_PATH"
+            if [ -n "$MD_PATH" ]; then
+              git add "$MD_PATH"
+            fi
             git commit -m "Update issue comments [skip ci]"
             git push
           else
             echo "No changes to commit."
           fi
-
