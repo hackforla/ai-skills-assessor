@@ -28,9 +28,8 @@ def build_session():
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 # set up
-
-script_dir = os.path.dirname(os.path.abspath(__file__))
-CONFIG_FILE = os.path.join(script_dir, "poc_target_repo.json")
+REPO_ROOT = os.getcwd()
+CONFIG_FILE = os.path.join(REPO_ROOT, "config/contribution_summary_fetcher/poc_target_repo.json")
 
 
 # set in bash using: export GH_TOKEN="<your token>"
@@ -157,7 +156,7 @@ def repo_fetcher(repo, users):
         logging.info(f"Found {len(all_results)} issues/PRs.")
 
     # OUTPUT CSV
-    output_file = os.path.join(script_dir, "poc_repo_fetcher_results.csv")
+    output_file = os.path.join(REPO_ROOT, "data/contribution_summary_fetcher/poc_repo_fetcher_results.csv")
     with open(output_file, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=["user", "repo", "number", "type"])
         writer.writeheader()
